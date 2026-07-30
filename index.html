@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — BTS SIO SISR</title>
+<meta name="description" content="Portfolio d'un étudiant BTS SIO option SISR : parcours, compétences, projets et veilles technologiques.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◍</span>
+    <span class="brand-text">portfolio<em>.sisr</em></span>
+  </div>
+
+  <nav class="tabs" id="tabs" aria-label="Navigation principale">
+    <button class="tab-btn is-active" data-tab="accueil">Accueil</button>
+    <button class="tab-btn" data-tab="profil">Profil</button>
+    <button class="tab-btn" data-tab="competences">Compétences</button>
+    <button class="tab-btn" data-tab="projets">Projets</button>
+    <button class="tab-btn" data-tab="veilles">Mes veilles</button>
+    <button class="tab-btn" data-tab="contact">Contact</button>
+  </nav>
+
+  <button class="edit-toggle" id="editToggle" title="Modifier mes informations">
+    <span>✎</span> Éditer
+  </button>
+</header>
+
+<main>
+
+  <!-- ONGLET ACCUEIL -->
+  <section class="panel is-active" id="panel-accueil" data-panel="accueil">
+    <div class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Étudiant BTS SIO — option SISR</p>
+        <h1 id="hero-name">Prénom Nom</h1>
+        <p class="hero-tagline" id="hero-tagline">
+          Futur administrateur systèmes &amp; réseaux — j'installe, je sécurise et je documente les infrastructures qui font tourner les organisations.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary" id="cvLink">Télécharger mon CV</a>
+          <button class="btn btn-ghost" data-goto="contact">Me contacter</button>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <div class="figure-frame">
+          <img id="heroPhoto" src="images/avatar-placeholder.svg" alt="Photo de profil">
+        </div>
+        <svg class="figure-deco" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="20" cy="20" r="3"></circle>
+          <circle cx="20" cy="60" r="3"></circle>
+          <circle cx="20" cy="100" r="3"></circle>
+          <line x1="20" y1="20" x2="20" y2="100"></line>
+          <line x1="20" y1="60" x2="60" y2="60"></line>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-row" id="statRow">
+      <div class="stat"><span class="stat-num">2</span><span class="stat-label">ans de BTS SIO</span></div>
+      <div class="stat"><span class="stat-num">SISR</span><span class="stat-label">Systèmes &amp; réseaux</span></div>
+      <div class="stat"><span class="stat-num" id="statVeilles">0</span><span class="stat-label">veilles publiées</span></div>
+    </div>
+  </section>
+
+  <!-- ONGLET PROFIL -->
+  <section class="panel" id="panel-profil" data-panel="profil">
+    <h2 class="panel-title">Profil</h2>
+    <div class="grid-2">
+      <div>
+        <h3 class="block-title">À propos</h3>
+        <p id="aboutText" class="prose">
+          Renseigne cette section via le bouton « Éditer » en haut de page : parcours, motivations,
+          ce qui te distingue. Parle de ton alternance ou stage, de ton établissement, de tes centres d'intérêt liés à l'IT.
+        </p>
+      </div>
+      <div>
+        <h3 class="block-title">Formation</h3>
+        <ul class="timeline" id="formationList">
+          <li class="timeline-item">
+            <span class="timeline-date">2024 — 2026</span>
+            <span class="timeline-content"><strong>BTS SIO option SISR</strong><br>Nom de l'établissement</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="contact-mini">
+      <h3 class="block-title">Coordonnées</h3>
+      <ul class="contact-list" id="contactMini">
+        <li>✉️ <span id="miniEmail">contact@example.com</span></li>
+        <li>📍 <span id="miniVille">Ville, France</span></li>
+        <li>🔗 <a id="miniLinkedin" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li>💻 <a id="miniGithub" href="#" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ONGLET COMPETENCES -->
+  <section class="panel" id="panel-competences" data-panel="competences">
+    <h2 class="panel-title">Compétences</h2>
+    <p class="panel-lead">Techniques et outils travaillés en cours, en TP et en entreprise.</p>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </section>
+
+  <!-- ONGLET PROJETS -->
+  <section class="panel" id="panel-projets" data-panel="projets">
+    <h2 class="panel-title">Projets &amp; missions</h2>
+    <p class="panel-lead">Travaux réalisés en cours, en TP ou en entreprise (BTS SIO SISR).</p>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </section>
+
+  <!-- ONGLET MES VEILLES -->
+  <section class="panel" id="panel-veilles" data-panel="veilles">
+    <div class="panel-head-row">
+      <div>
+        <h2 class="panel-title">Mes veilles technologiques</h2>
+        <p class="panel-lead">Documents PDF rédigés dans le cadre de la veille technologique du BTS SIO.</p>
+      </div>
+      <button class="btn btn-primary" id="addVeilleBtn">+ Ajouter une veille</button>
+    </div>
+
+    <div class="veille-filters" id="veilleFilters"></div>
+
+    <div class="veilles-list" id="veillesList">
+      <!-- injecté par script.js -->
+    </div>
+
+    <p class="empty-state" id="veillesEmpty" hidden>
+      Aucune veille pour le moment. Clique sur « Ajouter une veille » pour déposer ton premier PDF.
+    </p>
+  </section>
+
+  <!-- ONGLET CONTACT -->
+  <section class="panel" id="panel-contact" data-panel="contact">
+    <h2 class="panel-title">Contact</h2>
+    <div class="grid-2">
+      <div>
+        <p class="prose">
+          Une question, une opportunité de stage ou d'alternance ? N'hésite pas à me contacter directement par e-mail
+          ou via LinkedIn.
+        </p>
+        <ul class="contact-list contact-list-big">
+          <li>✉️ <a id="contactEmail" href="mailto:contact@example.com">contact@example.com</a></li>
+          <li>🔗 <a id="contactLinkedin" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li>💻 <a id="contactGithub" href="#" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <label>Nom
+          <input type="text" name="nom" required>
+        </label>
+        <label>E-mail
+          <input type="email" name="email" required>
+        </label>
+        <label>Message
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <p class="form-hint">Ouvre ton client mail avec le message pré-rempli (site statique, pas de serveur).</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Réalisé par <span id="footerName">Prénom Nom</span> — BTS SIO option SISR · <span id="footerYear"></span></p>
+</footer>
+
+<!-- MODALE : éditer mes informations -->
+<div class="modal-overlay" id="editModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+    <div class="modal-header">
+      <h3 id="editModalTitle">Modifier mes informations</h3>
+      <button class="modal-close" id="closeEditModal" aria-label="Fermer">✕</button>
+    </div>
+    <form id="editForm" class="edit-form">
+      <fieldset>
+        <legend>Identité</legend>
+        <label>Prénom Nom
+          <input type="text" name="fullName" placeholder="Ex : Camille Dupont">
+        </label>
+        <label>Accroche (sous le nom)
+          <input type="text" name="tagline" placeholder="Ex : Futur administrateur systèmes & réseaux…">
+        </label>
+        <label>À propos
+          <textarea name="about" rows="4" placeholder="Quelques phrases sur ton parcours…"></textarea>
+        </label>
+        <label>Photo de profil (URL ou fichier dans images/)
+          <input type="text" name="photo" placeholder="images/ma-photo.jpg">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Coordonnées</legend>
+        <label>E-mail
+          <input type="email" name="email" placeholder="prenom.nom@example.com">
+        </label>
+        <label>Ville
+          <input type="text" name="ville" placeholder="Ex : Lyon, France">
+        </label>
+        <label>LinkedIn (URL)
+          <input type="url" name="linkedin" placeholder="https://linkedin.com/in/...">
+        </label>
+        <label>GitHub (URL)
+          <input type="url" name="github" placeholder="https://github.com/...">
+        </label>
+        <label>Lien vers ton CV (PDF)
+          <input type="text" name="cv" placeholder="images/cv.pdf">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Formation (une ligne par formation)</legend>
+        <label>
+          <textarea name="formation" rows="3" placeholder="2024-2026 | BTS SIO option SISR | Nom de l'établissement"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Compétences (séparées par des virgules)</legend>
+        <label>
+          <textarea name="competences" rows="3" placeholder="Windows Server, Active Directory, Linux, Réseaux Cisco, Virtualisation, Sécurité..."></textarea>
+        </label>
+      </fieldset>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="resetForm">Réinitialiser</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+      <p class="form-hint">
+        Ces informations sont enregistrées dans ton navigateur (localStorage) pour prévisualiser le rendu.
+        Pour qu'elles s'affichent chez <strong>tous</strong> les visiteurs une fois le site publié sur GitHub Pages,
+        reporte-les ensuite dans l'objet <code>SITE_DATA</code> en haut du fichier <code>script.js</code>.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE : ajouter une veille -->
+<div class="modal-overlay" id="veilleModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="veilleModalTitle">
+    <div class="modal-header">
+      <h3 id="veilleModalTitle">Ajouter une veille</h3>
+      <button class="modal-close" id="closeVeilleModal" aria-label="Fermer">✕</button>
+    </div>
+    <form id="veilleForm" class="edit-form">
+      <label>Titre
+        <input type="text" name="titre" required placeholder="Ex : La sécurité des réseaux Wi-Fi d'entreprise">
+      </label>
+      <label>Date
+        <input type="date" name="date" required>
+      </label>
+      <label>Thème
+        <select name="theme">
+          <option value="Sécurité">Sécurité</option>
+          <option value="Réseaux">Réseaux</option>
+          <option value="Systèmes">Systèmes</option>
+          <option value="Cloud">Cloud</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </label>
+      <label>Résumé
+        <textarea name="resume" rows="3" placeholder="En quelques lignes, le sujet de ta veille..."></textarea>
+      </label>
+      <label>Fichier PDF
+        <input type="file" name="fichier" accept="application/pdf">
+      </label>
+      <p class="form-hint">
+        Le PDF choisi est prévisualisé et gardé dans ton navigateur (localStorage). Pour le publier sur GitHub Pages,
+        place le fichier dans <code>images/veilles/</code> et ajoute l'entrée correspondante dans le tableau
+        <code>SITE_DATA.veilles</code> de <code>script.js</code> (indique le chemin du fichier à la place).
+      </p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelVeille">Annuler</button>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
