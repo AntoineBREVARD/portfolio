@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil — Antoine Brévard</title>
+<meta name="description" content="Profil et expérience d'Antoine Brévard, alternant Technicien Systèmes & Réseaux à l'Automobile Club de l'Ouest.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="profil">
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="telemetry" id="telemetry">
+  <div class="telemetry-inner">
+    <a href="index.html" class="telemetry-id">
+      <span class="telemetry-dot" aria-hidden="true"></span>
+      AB<span class="telemetry-id-full">·BRÉVARD</span>
+    </a>
+    <nav class="telemetry-nav" aria-label="Navigation principale">
+      <a href="index.html" data-nav="accueil">Accueil</a>
+      <a href="profil.html" data-nav="profil">Profil</a>
+      <a href="competences.html" data-nav="competences">Compétences</a>
+      <a href="projets.html" data-nav="projets">Projets</a>
+      <a href="contact.html" data-nav="contact">Contact</a>
+    </nav>
+    <div class="telemetry-readout" aria-hidden="true">
+      <span id="clock">--:--:--</span>
+      <span class="telemetry-sep">/</span>
+      <span>LE MANS, FR</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- À PROPOS -->
+  <section class="section" id="apropos">
+    <div class="section-head">
+      <p class="eyebrow mono">01 — Profil</p>
+      <h2>Sur le terrain plutôt que sur la théorie.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="images/antoine-brevard.jpg" alt="Portrait d'Antoine Brévard">
+        <span class="about-photo-tag mono">EN&nbsp;POSTE</span>
+      </div>
+      <div class="about-text">
+        <p class="lede">
+          Actuellement alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest,
+          en BTS SIO option SISR (Fab Academy, Le Mans).
+        </p>
+        <p>
+          J'y interviens sur le support utilisateurs, des projets d'infrastructure et l'administration
+          d'un environnement Windows hybride, aux côtés de serveurs Linux et de l'administration réseau —
+          au sein d'une organisation dont le système d'information doit encaisser, une fois par an,
+          la charge d'un événement mondial.
+        </p>
+        <div class="facts">
+          <div class="fact">
+            <span class="fact-label mono">Formation</span>
+            <span class="fact-value">BTS SIO — option SISR<br><span class="fact-sub">Fab Academy, Le Mans · 2025—2027</span></span>
+          </div>
+          <div class="fact">
+            <span class="fact-label mono">Certification</span>
+            <span class="fact-value">MOOC de l'ANSSI<br><span class="fact-sub">Sensibilisation à la cybersécurité</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPÉRIENCE -->
+  <section class="section section-dark" id="experience">
+    <div class="section-head">
+      <p class="eyebrow mono">02 — Poste</p>
+      <h2>Technicien Systèmes &amp; Réseaux, en production.</h2>
+    </div>
+    <div class="exp-card">
+      <div class="exp-card-head">
+        <div>
+          <h3>Alternance — Automobile Club de l'Ouest</h3>
+          <p class="exp-place">Le Mans, France</p>
+        </div>
+        <span class="exp-period mono">2025 — 2027</span>
+      </div>
+      <p class="exp-context">
+        L'ACO organise, entre autres, les <strong>24&nbsp;Heures du Mans</strong> : le temps d'un week-end,
+        son système d'information doit tenir une charge et une exigence hors normes — un terrain
+        d'apprentissage particulièrement concret pour un technicien systèmes &amp; réseaux.
+      </p>
+      <ul class="exp-missions">
+        <li>Support technique</li>
+        <li>Projets d'infrastructure</li>
+        <li>Administration Windows (infra hybride)</li>
+        <li>Administration Linux</li>
+        <li>Réseaux</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
+  <p class="mono">Site statique, sans traceur ni serveur.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -3,402 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Antoine Brévard — Technicien Systèmes & Réseaux</title>
-<meta name="description" content="Portfolio d'Antoine Brévard, étudiant BTS SIO option SISR, alternant Technicien Systèmes & Réseaux à l'Automobile Club de l'Ouest.">
+<title>Antoine Brévard — Technicien Systèmes &amp; Réseaux</title>
+<meta name="description" content="Portfolio d'Antoine Brévard, étudiant BTS SIO option SISR, alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="accueil">
 
-<header class="topbar">
-  <span class="brand" id="footerName2">Antoine Brévard</span>
-  <nav class="navlinks" id="tabs" aria-label="Navigation principale">
-    <button class="navlink is-active" data-tab="accueil">Accueil</button>
-    <button class="navlink" data-tab="profil">Profil</button>
-    <button class="navlink" data-tab="competences">Compétences</button>
-    <button class="navlink" data-tab="projets">Projets</button>
-    <button class="navlink" data-tab="veilles">Veilles</button>
-  </nav>
-  <div class="topbar-tools">
-    <button class="tool-btn" id="searchToggle" title="Recherche rapide"><kbd>Ctrl</kbd><kbd>K</kbd></button>
-    <button class="tool-btn" id="editToggle" title="Modifier mes informations">Éditer</button>
-    <button class="btn btn-primary btn-sm" data-goto="contact">Contact</button>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Feux de départ — l'écran d'entrée du site, une seule fois par session -->
+<div class="start-lights" id="startLights" aria-hidden="true">
+  <div class="start-lights-rig">
+    <div class="start-lights-row">
+      <span class="light"></span>
+      <span class="light"></span>
+      <span class="light"></span>
+      <span class="light"></span>
+      <span class="light"></span>
+    </div>
+  </div>
+  <button class="start-lights-skip mono" id="skipIntro" type="button">Passer ↦</button>
+</div>
+
+<header class="telemetry" id="telemetry">
+  <div class="telemetry-inner">
+    <a href="index.html" class="telemetry-id">
+      <span class="telemetry-dot" aria-hidden="true"></span>
+      AB<span class="telemetry-id-full">·BRÉVARD</span>
+    </a>
+    <nav class="telemetry-nav" aria-label="Navigation principale">
+      <a href="index.html" data-nav="accueil">Accueil</a>
+      <a href="profil.html" data-nav="profil">Profil</a>
+      <a href="competences.html" data-nav="competences">Compétences</a>
+      <a href="projets.html" data-nav="projets">Projets</a>
+      <a href="contact.html" data-nav="contact">Contact</a>
+    </nav>
+    <div class="telemetry-readout" aria-hidden="true">
+      <span id="clock">--:--:--</span>
+      <span class="telemetry-sep">/</span>
+      <span>LE MANS, FR</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
 <main>
 
-  <!-- ONGLET ACCUEIL -->
-  <section class="panel is-active" id="panel-accueil" data-panel="accueil">
-
-    <div class="hero-dark">
-      <div class="hero-dark-inner">
-        <div class="hero-text-col">
-          <p class="eyebrow">Étudiant BTS SIO — option SISR</p>
-          <h1 id="hero-name">Antoine Brévard</h1>
-          <p class="hero-tagline" id="hero-tagline"></p>
-          <div class="hero-actions">
-            <a href="#" class="btn btn-primary" id="cvLink">Télécharger mon CV</a>
-            <button class="btn btn-ghost-dark" data-goto="contact">Me contacter</button>
-          </div>
-        </div>
-        <div class="hero-photo-col">
-          <svg class="hero-graphic" viewBox="0 0 300 320" aria-hidden="true">
-            <rect class="hg-shape" x="0" y="0" width="300" height="36" rx="3" fill="#0d64ff"/>
-            <rect class="hg-shape" x="0" y="48" width="220" height="36" rx="3" fill="#4a5fd6"/>
-            <rect class="hg-shape" x="0" y="96" width="260" height="36" rx="3" fill="#0d64ff"/>
-            <rect class="hg-shape" x="0" y="144" width="180" height="36" rx="3" fill="#3d8bff"/>
-            <rect class="hg-shape" x="0" y="192" width="300" height="36" rx="3" fill="#4a5fd6"/>
-            <rect class="hg-shape" x="0" y="240" width="240" height="36" rx="3" fill="#0d64ff"/>
-          </svg>
-          <div class="hero-photo-frame">
-            <img id="heroPhoto" src="images/antoine-brevard.jpg" alt="Photo de profil">
-          </div>
-        </div>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="images/scenes/pitlane.png" alt="">
+      <div class="hero-media-scrim"></div>
     </div>
-
-    <div class="stat-row reveal" id="statRow">
-      <div class="stat"><span class="stat-num">ACO</span><span class="stat-label">Automobile Club de l'Ouest</span></div>
-      <div class="stat"><span class="stat-num">SISR</span><span class="stat-label">Systèmes &amp; réseaux</span></div>
-      <div class="stat"><span class="stat-num" id="statVeilles">0</span><span class="stat-label">veilles publiées</span></div>
-    </div>
-
-    <div class="employer-note reveal">
-      <h3 class="block-title">Un mot sur l'ACO</h3>
-      <p class="prose">
-        L'Automobile Club de l'Ouest est l'organisation qui pilote, entre autres, les
-        <strong>24 Heures du Mans</strong>. Le temps d'un week-end, son système d'information doit tenir
-        une charge et une exigence hors normes — un terrain d'apprentissage particulièrement concret pour
-        un technicien systèmes &amp; réseaux.
+    <div class="hero-grid">
+      <p class="eyebrow mono">SISR · Alternance · Automobile Club de l'Ouest</p>
+      <h1 class="hero-title">
+        <span class="reveal-line">ANTOINE</span>
+        <span class="reveal-line">BRÉVARD</span>
+      </h1>
+      <p class="hero-tagline">
+        Je maintiens des systèmes qui n'ont pas le droit de tomber le jour J —
+        ceux de l'organisation qui pilote les <strong>24&nbsp;Heures du Mans</strong>.
       </p>
-    </div>
-
-    <div class="tier-row reveal">
-      <p class="section-kicker">Envie d'échanger ?</p>
-      <div class="tier-grid">
-        <div class="tier">
-          <span class="tier-num">01</span>
-          <h4>Regarde mes projets</h4>
-          <p>Comment j'aborde un problème, pas juste le résultat final.</p>
-          <button class="tier-link" data-goto="projets">Voir les projets →</button>
-        </div>
-        <div class="tier">
-          <span class="tier-num">02</span>
-          <h4>Télécharge mon CV</h4>
-          <p>Format classique, pensé pour passer les filtres de recrutement.</p>
-          <a class="tier-link" id="cvLinkTier" href="images/cv.pdf">Télécharger →</a>
-        </div>
-        <div class="tier">
-          <span class="tier-num">03</span>
-          <h4>Écris-moi</h4>
-          <p>Une question, une opportunité de stage ou d'alternance.</p>
-          <button class="tier-link" data-goto="contact">Contact →</button>
-        </div>
+      <div class="hero-actions">
+        <a href="CV_Antoine_Brevard.docx" class="btn btn-signal" download>Télécharger le CV</a>
+        <a href="projets.html" class="btn btn-ghost">Voir les missions</a>
       </div>
     </div>
   </section>
 
-  <!-- ONGLET PROFIL -->
-  <section class="panel" id="panel-profil" data-panel="profil">
-    <h2 class="panel-title">Profil</h2>
-
-    <div class="grid-2">
-      <div>
-        <h3 class="block-title">À propos</h3>
-        <p id="aboutText" class="prose"></p>
+  <!-- REPÈRES RAPIDES -->
+  <section class="section">
+    <div class="section-head">
+      <p class="eyebrow mono">Repères</p>
+      <h2>Le terrain, en un coup d'œil.</h2>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <span class="fact-label mono">Structure</span>
+        <span class="fact-value">Automobile Club de l'Ouest<br><span class="fact-sub">Organisateur des 24 Heures du Mans</span></span>
       </div>
-      <div>
-        <h3 class="block-title">Formation</h3>
-        <ul class="timeline" id="formationList"></ul>
-        <h3 class="block-title" id="certifTitle" style="margin-top:28px;" hidden>Certifications</h3>
-        <ul class="timeline" id="certifList"></ul>
+      <div class="fact">
+        <span class="fact-label mono">Formation</span>
+        <span class="fact-value">BTS SIO — option SISR<br><span class="fact-sub">Fab Academy, Le Mans · 2025—2027</span></span>
       </div>
     </div>
-
-    <div class="experience-block">
-      <h3 class="block-title">Expérience en cours</h3>
-      <div class="experience-card" id="experienceCard"></div>
-    </div>
-
-    <div class="contact-mini">
-      <h3 class="block-title">Coordonnées</h3>
-      <ul class="contact-list" id="contactMini">
-        <li>✉ <span id="miniEmail">contact@example.com</span></li>
-        <li>◎ <span id="miniVille">Ville, France</span></li>
-        <li>↗ <a id="miniLinkedin" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li>↗ <a id="miniGithub" href="#" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ONGLET COMPETENCES -->
-  <section class="panel" id="panel-competences" data-panel="competences">
-    <h2 class="panel-title">Compétences</h2>
-    <p class="panel-lead">
-      Chaque compétence est reliée à une situation concrète — pas un mur de tags, une trace de ce qui l'a forgée.
-    </p>
-    <div class="skills-list" id="skillsList"></div>
-  </section>
-
-  <!-- ONGLET PROJETS -->
-  <section class="panel" id="panel-projets" data-panel="projets">
-    <h2 class="panel-title">Projets &amp; décisions</h2>
-    <p class="panel-lead">
-      Pas une liste de réalisations : le raisonnement derrière — la situation, les options envisagées, le choix retenu et pourquoi.
-    </p>
-    <div class="projects-list" id="projectsList"></div>
-  </section>
-
-  <!-- ONGLET MES VEILLES -->
-  <section class="panel" id="panel-veilles" data-panel="veilles">
-    <div class="panel-head-row">
-      <div>
-        <h2 class="panel-title">Mes veilles technologiques</h2>
-        <p class="panel-lead">Documents PDF rédigés dans le cadre de la veille technologique du BTS SIO — et la question qui m'a lancé dessus.</p>
-      </div>
-      <button class="btn btn-primary" id="addVeilleBtn">+ Ajouter une veille</button>
-    </div>
-
-    <div class="veille-filters" id="veilleFilters"></div>
-
-    <div class="veilles-list" id="veillesList"></div>
-
-    <p class="empty-state" id="veillesEmpty" hidden>
-      Aucune veille pour le moment. Clique sur « Ajouter une veille » pour déposer ton premier PDF.
-    </p>
-  </section>
-
-  <!-- ONGLET CONTACT -->
-  <section class="panel" id="panel-contact" data-panel="contact">
-    <h2 class="panel-title">Contact</h2>
-    <div class="grid-2">
-      <div>
-        <p class="prose">
-          Une question, une opportunité de stage ou d'alternance ? N'hésite pas à me contacter directement par e-mail
-          ou via LinkedIn.
-        </p>
-        <ul class="contact-list contact-list-big">
-          <li>✉ <a id="contactEmail" href="mailto:contact@example.com">contact@example.com</a></li>
-          <li>↗ <a id="contactLinkedin" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li>↗ <a id="contactGithub" href="#" target="_blank" rel="noopener">GitHub</a></li>
-        </ul>
-      </div>
-      <form class="contact-form" id="contactForm">
-        <label>Nom
-          <input type="text" name="nom" required>
-        </label>
-        <label>E-mail
-          <input type="email" name="email" required>
-        </label>
-        <label>Message
-          <textarea name="message" rows="5" required></textarea>
-        </label>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-        <p class="form-hint">Ouvre ton client mail avec le message pré-rempli (site statique, pas de serveur).</p>
-      </form>
+    <div class="hero-actions" style="margin-top:36px;">
+      <a href="profil.html" class="btn btn-ghost" style="border-color:var(--line-soft); color:var(--ink);">Découvrir mon profil</a>
+      <a href="competences.html" class="btn btn-ghost" style="border-color:var(--line-soft); color:var(--ink);">Voir mes compétences</a>
     </div>
   </section>
 
 </main>
 
-<div class="kerb-band" role="img" aria-label="Vibreur de virage, jaune et bleu — clin d'œil aux 24 Heures du Mans"></div>
-
 <footer class="site-footer">
-  <p>Réalisé par <span id="footerName">Antoine Brévard</span> — BTS SIO option SISR · <span id="footerYear"></span></p>
-  <p class="footer-links"><button class="footer-links-btn" id="privacyToggle">Confidentialité &amp; données</button></p>
+  <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
+  <p class="mono">Site statique, sans traceur ni serveur.</p>
 </footer>
-
-<!-- MODALE : confidentialité -->
-<div class="modal-overlay" id="privacyModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
-    <div class="modal-header">
-      <h3 id="privacyModalTitle">Confidentialité &amp; données</h3>
-      <button class="modal-close" id="closePrivacyModal" aria-label="Fermer">✕</button>
-    </div>
-    <div class="edit-form">
-      <p class="prose">Ce site est statique : il n'y a pas de serveur, pas de base de données, pas de traceur publicitaire ni d'outil d'analyse d'audience.</p>
-      <ul class="privacy-list">
-        <li><strong>Aucun cookie</strong> n'est déposé.</li>
-        <li>Les boutons « Éditer » et « Ajouter une veille » écrivent uniquement dans le <strong>stockage local de ton navigateur</strong> (localStorage) — ces données restent sur ton appareil et ne sont jamais transmises.</li>
-        <li>Le formulaire de contact <strong>n'envoie rien à un serveur</strong> : il ouvre ton propre client mail avec un message pré-rempli, c'est toi qui l'envoies.</li>
-        <li>L'hébergement (GitHub Pages) peut journaliser des informations techniques standards (adresse IP, navigateur) selon la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">politique de confidentialité de GitHub</a>, indépendamment de ce site.</li>
-      </ul>
-      <p class="form-hint">Une question sur tes données ? Écris à <span id="privacyEmail">contact@example.com</span>.</p>
-    </div>
-  </div>
-</div>
-
-<!-- PALETTE DE RECHERCHE RAPIDE -->
-<div class="modal-overlay search-overlay" id="searchModal" hidden>
-  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Recherche rapide">
-    <div class="search-input-row">
-      <span>⌕</span>
-      <input type="text" id="searchInput" placeholder="Chercher une section, une compétence, un projet, une question…" autocomplete="off">
-      <kbd>Esc</kbd>
-    </div>
-    <div class="search-results" id="searchResults"></div>
-    <p class="search-footnote">Recherche 100% locale — aucune IA, aucune donnée envoyée à un serveur.</p>
-  </div>
-</div>
-
-<!-- MODALE : éditer mes informations -->
-<div class="modal-overlay" id="editModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
-    <div class="modal-header">
-      <h3 id="editModalTitle">Modifier mes informations</h3>
-      <button class="modal-close" id="closeEditModal" aria-label="Fermer">✕</button>
-    </div>
-    <form id="editForm" class="edit-form">
-      <fieldset>
-        <legend>Identité</legend>
-        <label>Prénom Nom
-          <input type="text" name="fullName" placeholder="Antoine Brévard">
-        </label>
-        <label>Accroche
-          <input type="text" name="tagline" placeholder="Accroche générale…">
-        </label>
-        <label>À propos
-          <textarea name="about" rows="4" placeholder="Quelques phrases sur ton parcours…"></textarea>
-        </label>
-        <label>Photo de profil (URL ou fichier dans images/)
-          <input type="text" name="photo" placeholder="images/ma-photo.jpg">
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Coordonnées</legend>
-        <label>E-mail
-          <input type="email" name="email" placeholder="prenom.nom@example.com">
-        </label>
-        <label>Ville
-          <input type="text" name="ville" placeholder="Ex : Le Mans, France">
-        </label>
-        <label>LinkedIn (URL)
-          <input type="url" name="linkedin" placeholder="https://linkedin.com/in/...">
-        </label>
-        <label>GitHub (URL)
-          <input type="url" name="github" placeholder="https://github.com/...">
-        </label>
-        <label>Lien vers ton CV (PDF)
-          <input type="text" name="cv" placeholder="images/cv.pdf">
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Formation (une ligne par formation : période | titre | établissement)</legend>
-        <label>
-          <textarea name="formation" rows="3" placeholder="2024-2026 | BTS SIO option SISR | Nom de l'établissement"></textarea>
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Compétences (une ligne par compétence : nom | contexte)</legend>
-        <label>
-          <textarea name="competences" rows="5" placeholder="Administration Linux | Maintien et configuration de serveurs Linux."></textarea>
-        </label>
-      </fieldset>
-
-      <div class="modal-actions">
-        <button type="button" class="btn btn-ghost" id="resetForm">Réinitialiser</button>
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-      </div>
-      <p class="form-hint">
-        Ces informations sont enregistrées dans ton navigateur (localStorage) pour prévisualiser le rendu.
-        Pour qu'elles s'affichent chez <strong>tous</strong> les visiteurs une fois le site publié sur GitHub Pages,
-        reporte-les ensuite dans l'objet <code>SITE_DATA</code> en haut du fichier <code>script.js</code>.
-        Les projets (arbres de décision) s'éditent depuis l'onglet Projets, avec le bouton « Éditer » sur chaque carte.
-      </p>
-    </form>
-  </div>
-</div>
-
-<!-- MODALE : éditer un projet -->
-<div class="modal-overlay" id="projetModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="projetModalTitle">
-    <div class="modal-header">
-      <h3 id="projetModalTitle">Détailler le projet</h3>
-      <button class="modal-close" id="closeProjetModal" aria-label="Fermer">✕</button>
-    </div>
-    <form id="projetForm" class="edit-form">
-      <input type="hidden" name="idx">
-      <label>Titre
-        <input type="text" name="titre" required>
-      </label>
-      <label>Étiquette (catégorie courte)
-        <input type="text" name="tag" placeholder="Ex : Automatisation">
-      </label>
-      <label>Situation de départ
-        <textarea name="situation" rows="3" placeholder="Le contexte, la contrainte, pourquoi c'était un problème à résoudre."></textarea>
-      </label>
-      <label>Options envisagées (une ligne par option : intitulé | raison | retenue ou écartée)
-        <textarea name="options" rows="4" placeholder="Solution A | Trop coûteuse à maintenir | écartée&#10;Solution B | Le meilleur compromis fiabilité / délai | retenue"></textarea>
-      </label>
-      <label>Résultat
-        <textarea name="resultat" rows="2" placeholder="Ce qui a été mis en place et le résultat obtenu."></textarea>
-      </label>
-      <label>Ce que j'en retiens
-        <input type="text" name="apprentissage" placeholder="La phrase que tu dirais en entretien.">
-      </label>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-ghost" id="cancelProjet">Annuler</button>
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-      </div>
-      <p class="form-hint">
-        Enregistré dans ton navigateur (localStorage) pour prévisualiser. Pour publier sur GitHub Pages,
-        reporte ensuite ce contenu dans le tableau <code>SITE_DATA.projets</code> de <code>script.js</code>.
-      </p>
-    </form>
-  </div>
-</div>
-
-<!-- MODALE : ajouter une veille -->
-<div class="modal-overlay" id="veilleModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="veilleModalTitle">
-    <div class="modal-header">
-      <h3 id="veilleModalTitle">Ajouter une veille</h3>
-      <button class="modal-close" id="closeVeilleModal" aria-label="Fermer">✕</button>
-    </div>
-    <form id="veilleForm" class="edit-form">
-      <label>Titre
-        <input type="text" name="titre" required placeholder="Ex : La sécurité des réseaux Wi-Fi d'entreprise">
-      </label>
-      <label>Date
-        <input type="date" name="date" required>
-      </label>
-      <label>Thème
-        <select name="theme">
-          <option value="Sécurité">Sécurité</option>
-          <option value="Réseaux">Réseaux</option>
-          <option value="Systèmes">Systèmes</option>
-          <option value="Cloud">Cloud</option>
-          <option value="Autre">Autre</option>
-        </select>
-      </label>
-      <label>La question qui t'a lancé dessus
-        <input type="text" name="question" placeholder="Ex : Pourquoi le Wi-Fi d'entreprise reste-t-il souvent mal sécurisé ?">
-      </label>
-      <label>Résumé
-        <textarea name="resume" rows="3" placeholder="En quelques lignes, le sujet de ta veille..."></textarea>
-      </label>
-      <label>Fichier PDF
-        <input type="file" name="fichier" accept="application/pdf">
-      </label>
-      <p class="form-hint">
-        Le PDF choisi est prévisualisé et gardé dans ton navigateur (localStorage). Pour le publier sur GitHub Pages,
-        place le fichier dans <code>images/veilles/</code> et ajoute l'entrée correspondante dans le tableau
-        <code>SITE_DATA.veilles</code> de <code>script.js</code> (indique le chemin du fichier à la place).
-      </p>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-ghost" id="cancelVeille">Annuler</button>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <script src="script.js"></script>
 </body>
