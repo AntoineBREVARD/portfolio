@@ -1,0 +1,117 @@
+# Configuration de Decap CMS pour le portfolio.
+# Voir SETUP-CMS.md à la racine du repo pour les étapes de mise en route
+# (créer l'app OAuth GitHub, déployer le petit worker d'authentification,
+# puis remplacer base_url ci-dessous par son adresse).
+
+backend:
+  name: github
+  repo: AntoineBREVARD/portfolio
+  branch: main
+  base_url: https://REMPLACE-MOI.workers.dev
+  auth_endpoint: auth
+
+# Permet de tester/éditer en local avec `npx decap-server`, sans passer par
+# GitHub — ne s'active automatiquement que quand le site tourne sur
+# localhost, donc ça ne change rien une fois publié.
+local_backend: true
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "home"
+    label: "Accueil"
+    files:
+      - file: "content/home.json"
+        label: "Page d'accueil"
+        name: "home"
+        fields:
+          - { label: "Accroche (au-dessus du titre)", name: "eyebrow", widget: "string" }
+          - { label: "Prénom (1ère ligne du titre)", name: "heroTitleLine1", widget: "string" }
+          - { label: "Nom (2ème ligne du titre)", name: "heroTitleLine2", widget: "string" }
+          - label: "Phrase d'accroche"
+            name: "heroTagline"
+            widget: "text"
+            hint: "Tu peux entourer un mot de <strong>...</strong> pour le mettre en gras."
+          - { label: "Photo de fond du hero", name: "heroImage", widget: "image" }
+          - { label: "Fichier du CV", name: "cvFile", widget: "file" }
+          - { label: "Titre de la section repères", name: "reperesTitle", widget: "string" }
+          - { label: "Structure — titre", name: "structureLabel", widget: "string" }
+          - { label: "Structure — sous-texte", name: "structureSub", widget: "string" }
+          - { label: "Formation — titre", name: "formationLabel", widget: "string" }
+          - { label: "Formation — sous-texte", name: "formationSub", widget: "string" }
+
+  - name: "profil"
+    label: "Profil"
+    files:
+      - file: "content/profil.json"
+        label: "Page profil"
+        name: "profil"
+        fields:
+          - { label: "Introduction", name: "aboutIntro", widget: "text" }
+          - { label: "Paragraphe principal", name: "aboutBody", widget: "text" }
+          - { label: "Photo", name: "photo", widget: "image" }
+          - { label: "Étiquette sur la photo", name: "photoTag", widget: "string" }
+          - { label: "Formation — titre", name: "formationLabel", widget: "string" }
+          - { label: "Formation — sous-texte", name: "formationSub", widget: "string" }
+          - { label: "Certification — titre", name: "certificationLabel", widget: "string" }
+          - { label: "Certification — sous-texte", name: "certificationSub", widget: "string" }
+          - { label: "Expérience — intitulé du poste", name: "expTitle", widget: "string" }
+          - { label: "Expérience — lieu", name: "expPlace", widget: "string" }
+          - { label: "Expérience — période", name: "expPeriod", widget: "string" }
+          - { label: "Expérience — contexte", name: "expContext", widget: "text" }
+          - label: "Missions (mots-clés)"
+            name: "expMissions"
+            widget: "list"
+            field: { label: "Mission", name: "mission", widget: "string" }
+
+  - name: "competences"
+    label: "Compétences"
+    files:
+      - file: "content/competences.json"
+        label: "Liste des compétences"
+        name: "competences"
+        fields:
+          - label: "Compétences"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Nom de la compétence", name: "name", widget: "string" }
+              - { label: "Contexte concret", name: "context", widget: "text" }
+
+  - name: "projets"
+    label: "Projets"
+    files:
+      - file: "content/projets.json"
+        label: "Missions & terrain"
+        name: "projets"
+        fields:
+          - label: "Missions"
+            name: "missions"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Étiquette", name: "tag", widget: "string" }
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Photos du terrain"
+            name: "terrain"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Légende", name: "caption", widget: "string" }
+
+  - name: "contact"
+    label: "Contact"
+    files:
+      - file: "content/contact.json"
+        label: "Page contact"
+        name: "contact"
+        fields:
+          - { label: "Texte d'introduction", name: "intro", widget: "string" }
+          - { label: "E-mail", name: "email", widget: "string" }
+          - { label: "LinkedIn (URL)", name: "linkedin", widget: "string" }
+          - { label: "GitHub (URL)", name: "github", widget: "string" }
+          - { label: "Ville", name: "city", widget: "string" }

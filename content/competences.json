@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "name": "Support technique", "context": "Diagnostic et accompagnement des utilisateurs au quotidien, à l'ACO." },
+    { "name": "Gestion de projets IT", "context": "Participation à des projets d'infrastructure au sein du service informatique de l'ACO." },
+    { "name": "Administration Windows", "context": "Gestion d'un environnement Windows hybride (on-premise / cloud) en production." },
+    { "name": "Administration Linux", "context": "Maintien et configuration de serveurs Linux." },
+    { "name": "Réseaux", "context": "Configuration et maintien d'infrastructures réseau." }
+  ]
+}

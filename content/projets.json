@@ -1,0 +1,14 @@
+{
+  "missions": [
+    { "tag": "Automatisation", "title": "Automatisation HPIA", "description": "Déploiement automatisé de HP Image Assistant (mises à jour drivers/BIOS) sur le parc de postes HP de l'ACO." },
+    { "tag": "Annuaire & synchronisation", "title": "Synchronisation des contacts ACO", "description": "Mise en cohérence des communes associées aux contacts de l'organisation, à travers l'annuaire." },
+    { "tag": "Supervision", "title": "Alerte boîtes mails pleines", "description": "Mise en place d'une supervision automatique pour détecter les boîtes mails proches de la saturation." },
+    { "tag": "Support & productivité", "title": "Fonds Teams packagés", "description": "Déploiement automatique d'un pack de fonds d'écran Teams pour les utilisateurs de l'ACO." }
+  ],
+  "terrain": [
+    { "image": "/images/scenes/direction-course.png", "caption": "Direction de course" },
+    { "image": "/images/scenes/garage-standf.png", "caption": "Garage / stand" },
+    { "image": "/images/scenes/tour-module-sportif.png", "caption": "Module sportif" },
+    { "image": "/images/scenes/musee.png", "caption": "Musée des 24H" }
+  ]
+}

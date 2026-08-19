@@ -6,6 +6,29 @@
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
+function escapeHtml(str = ""){
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+function setText(id, value){
+  const el = document.getElementById(id);
+  if (el && value != null) el.textContent = value;
+}
+function setHTML(id, value){
+  // Champs qui autorisent volontairement un peu de balisage (ex: <strong>),
+  // saisi tel quel dans le CMS — l'auteur est le seul éditeur du site.
+  const el = document.getElementById(id);
+  if (el && value != null) el.innerHTML = value;
+}
+function setSrc(id, value){
+  const el = document.getElementById(id);
+  if (el && value) el.src = value;
+}
+
 /* ---------- Horloge (bandeau télémétrie) ---------- */
 function tickClock(){
   const el = $("#clock");
@@ -64,8 +87,104 @@ function initContactForm(){
     const email = fd.get("email") || "";
     const message = fd.get("message") || "";
     const body = `De : ${nom} (${email})\n\n${message}`;
-    window.location.href = `mailto:antoinebrevard8@gmail.com?subject=${encodeURIComponent("Contact via portfolio")}&body=${encodeURIComponent(body)}`;
+    const target = $("#contactEmail");
+    const to = target ? target.textContent.trim() : "antoinebrevard8@gmail.com";
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent("Contact via portfolio")}&body=${encodeURIComponent(body)}`;
   });
+}
+
+/* ---------- Contenu éditable via le CMS (content/*.json) ----------
+   Chaque page garde son texte d'origine dans le HTML (secours si le fetch
+   échoue ou si JS est désactivé) ; ces fonctions le remplacent par la
+   dernière version publiée via l'admin dès que le JSON correspondant est
+   chargé. */
+function renderHome(d){
+  setText("heroEyebrow", d.eyebrow);
+  if (d.heroTitleLine1) setText("heroLine1", d.heroTitleLine1.toUpperCase());
+  if (d.heroTitleLine2) setText("heroLine2", d.heroTitleLine2.toUpperCase());
+  setHTML("heroTagline", d.heroTagline);
+  setSrc("heroImage", d.heroImage);
+  const cv = document.getElementById("cvLink");
+  if (cv && d.cvFile) cv.href = d.cvFile;
+  setText("reperesTitle", d.reperesTitle);
+  setHTML("structureValue", `${escapeHtml(d.structureLabel)}<br><span class="fact-sub">${escapeHtml(d.structureSub)}</span>`);
+  setHTML("formationValue", `${escapeHtml(d.formationLabel)}<br><span class="fact-sub">${escapeHtml(d.formationSub)}</span>`);
+}
+
+function renderProfil(d){
+  setHTML("aboutIntro", d.aboutIntro);
+  setHTML("aboutBody", d.aboutBody);
+  setSrc("aboutPhoto", d.photo);
+  setHTML("aboutPhotoTag", d.photoTag);
+  setHTML("formationValue", `${escapeHtml(d.formationLabel)}<br><span class="fact-sub">${escapeHtml(d.formationSub)}</span>`);
+  setHTML("certificationValue", `${escapeHtml(d.certificationLabel)}<br><span class="fact-sub">${escapeHtml(d.certificationSub)}</span>`);
+  setText("expTitle", d.expTitle);
+  setText("expPlace", d.expPlace);
+  setText("expPeriod", d.expPeriod);
+  setHTML("expContext", d.expContext);
+  const list = document.getElementById("expMissions");
+  if (list && Array.isArray(d.expMissions)){
+    list.innerHTML = d.expMissions.map(m => `<li>${escapeHtml(m)}</li>`).join("");
+  }
+}
+
+function renderCompetences(d){
+  const board = document.getElementById("skillsBoard");
+  if (!board || !Array.isArray(d.items)) return;
+  board.innerHTML = d.items.map(item => `
+    <div class="skill-row">
+      <span class="skill-status mono">ACTIF</span>
+      <span class="skill-name">${escapeHtml(item.name)}</span>
+      <span class="skill-context">${escapeHtml(item.context)}</span>
+    </div>
+  `).join("");
+}
+
+function renderProjets(d){
+  const grid = document.getElementById("missionsGrid");
+  if (grid && Array.isArray(d.missions)){
+    grid.innerHTML = d.missions.map(m => `
+      <article class="mission-card">
+        <span class="mission-tag mono">${escapeHtml(m.tag)}</span>
+        <h3>${escapeHtml(m.title)}</h3>
+        <p>${escapeHtml(m.description)}</p>
+      </article>
+    `).join("");
+  }
+  const strip = document.getElementById("terrainStrip");
+  if (strip && Array.isArray(d.terrain)){
+    strip.innerHTML = d.terrain.map(t => `
+      <figure><img src="${escapeHtml(t.image)}" alt="${escapeHtml(t.caption)}"><figcaption class="mono">${escapeHtml(t.caption)}</figcaption></figure>
+    `).join("");
+  }
+}
+
+function renderContact(d){
+  setText("contactIntro", d.intro);
+  const email = document.getElementById("contactEmail");
+  if (email && d.email){ email.href = "mailto:" + d.email; email.textContent = d.email; }
+  const li = document.getElementById("contactLinkedin");
+  if (li && d.linkedin) li.href = d.linkedin;
+  const gh = document.getElementById("contactGithub");
+  if (gh && d.github) gh.href = d.github;
+  setText("contactCity", d.city);
+}
+
+function initContent(){
+  const page = document.body.dataset.page;
+  const map = {
+    accueil: { file: "content/home.json", render: renderHome },
+    profil: { file: "content/profil.json", render: renderProfil },
+    competences: { file: "content/competences.json", render: renderCompetences },
+    projets: { file: "content/projets.json", render: renderProjets },
+    contact: { file: "content/contact.json", render: renderContact }
+  };
+  const entry = map[page];
+  if (!entry) return Promise.resolve();
+  return fetch(entry.file, { cache: "no-store" })
+    .then(res => (res.ok ? res.json() : null))
+    .then(data => { if (data) entry.render(data); })
+    .catch(() => {}); // le texte déjà présent dans le HTML sert de secours
 }
 
 /* ---------- Année du footer ---------- */
@@ -129,8 +248,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(tickClock, 1000);
   initNavToggle();
   initNavActive();
-  initReveal();
   initContactForm();
   initFooterYear();
   initStartLights();
+  // Le contenu (content/*.json) doit être injecté avant d'attacher les
+  // observateurs de révélation au scroll, sinon les blocs reconstruits
+  // (compétences, missions, terrain) démarrent sans l'animation.
+  initContent().finally(initReveal);
 });

@@ -1,0 +1,21 @@
+{
+  "aboutIntro": "Actuellement alternant Technicien Systèmes & Réseaux à l'Automobile Club de l'Ouest, en BTS SIO option SISR (Fab Academy, Le Mans).",
+  "aboutBody": "J'y interviens sur le support utilisateurs, des projets d'infrastructure et l'administration d'un environnement Windows hybride, aux côtés de serveurs Linux et de l'administration réseau — au sein d'une organisation dont le système d'information doit encaisser, une fois par an, la charge d'un événement mondial.",
+  "photo": "/images/antoine-brevard.jpg",
+  "photoTag": "En poste",
+  "formationLabel": "BTS SIO — option SISR",
+  "formationSub": "Fab Academy, Le Mans · 2025—2027",
+  "certificationLabel": "MOOC de l'ANSSI",
+  "certificationSub": "Sensibilisation à la cybersécurité",
+  "expTitle": "Alternance — Automobile Club de l'Ouest",
+  "expPlace": "Le Mans, France",
+  "expPeriod": "2025 — 2027",
+  "expContext": "L'ACO organise, entre autres, les <strong>24 Heures du Mans</strong> : le temps d'un week-end, son système d'information doit tenir une charge et une exigence hors normes — un terrain d'apprentissage particulièrement concret pour un technicien systèmes & réseaux.",
+  "expMissions": [
+    "Support technique",
+    "Projets d'infrastructure",
+    "Administration Windows (infra hybride)",
+    "Administration Linux",
+    "Réseaux"
+  ]
+}
