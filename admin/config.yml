@@ -16,7 +16,7 @@ backend:
 local_backend: true
 
 media_folder: "images/uploads"
-public_folder: "/images/uploads"
+public_folder: "images/uploads"
 
 collections:
   - name: "settings"
