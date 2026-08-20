@@ -7,7 +7,7 @@ backend:
   name: github
   repo: AntoineBREVARD/portfolio
   branch: main
-  base_url: https://REMPLACE-MOI.workers.dev
+  base_url: https://lively-bush-9b8e.antoinebrevard8.workers.dev
   auth_endpoint: auth
 
 # Permet de tester/éditer en local avec `npx decap-server`, sans passer par
