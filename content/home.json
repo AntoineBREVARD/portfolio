@@ -1,13 +1,13 @@
 {
-  "eyebrow": "SISR · Alternance · Automobile Club de l'Ouest",
-  "heroTitleLine1": "Antoine",
-  "heroTitleLine2": "Brévard",
-  "heroTagline": "Je maintiens des systèmes qui n'ont pas le droit de tomber le jour J — ceux de l'organisation qui pilote les <strong>24 Heures du Mans</strong>.",
-  "heroImage": "/images/scenes/pitlane.png",
-  "cvFile": "/CV_Antoine_Brevard.docx",
   "reperesTitle": "Le terrain, en un coup d'œil.",
+  "heroTitleLine2": "Brévard",
   "structureLabel": "Automobile Club de l'Ouest",
-  "structureSub": "Organisateur des 24 Heures du Mans",
+  "heroImage": "/images/scenes/pitlane.png",
   "formationLabel": "BTS SIO — option SISR",
-  "formationSub": "Fab Academy, Le Mans · 2025—2027"
+  "eyebrow": "BTS SIO · Alternance · Automobile Club de l'Ouest",
+  "structureSub": "Organisateur des 24 Heures du Mans",
+  "cvFile": "/CV_Antoine_Brevard.docx",
+  "formationSub": "Fab Academy, Le Mans · 2025—2027",
+  "heroTagline": "Je maintiens des systèmes qui n'ont pas le droit de tomber le jour J — ceux de l'organisation qui pilote les <strong>24 Heures du Mans</strong>.",
+  "heroTitleLine1": "Antoine"
 }
