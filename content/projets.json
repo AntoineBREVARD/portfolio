@@ -6,9 +6,9 @@
     { "tag": "Support & productivité", "title": "Fonds Teams packagés", "description": "Déploiement automatique d'un pack de fonds d'écran Teams pour les utilisateurs de l'ACO." }
   ],
   "terrain": [
-    { "image": "images/scenes/direction-course.png", "caption": "Direction de course" },
-    { "image": "images/scenes/garage-standf.png", "caption": "Garage / stand" },
-    { "image": "images/scenes/tour-module-sportif.png", "caption": "Module sportif" },
-    { "image": "images/scenes/musee.png", "caption": "Musée des 24H" }
+    { "imageReelle": "images/scenes/direction-course.png", "imageIa": "images/scenes/direction-course.png", "caption": "Direction de course" },
+    { "imageReelle": "images/scenes/garage-standf.png", "imageIa": "images/scenes/garage-standf.png", "caption": "Garage / stand" },
+    { "imageReelle": "images/scenes/tour-module-sportif.png", "imageIa": "images/scenes/tour-module-sportif.png", "caption": "Module sportif" },
+    { "imageReelle": "images/scenes/musee.png", "imageIa": "images/scenes/musee.png", "caption": "Musée des 24H" }
   ]
 }

@@ -19,6 +19,21 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "settings"
+    label: "Réglages"
+    files:
+      - file: "content/settings.json"
+        label: "Réglages du site"
+        name: "settings"
+        fields:
+          - label: "Style des photos (hero + terrain)"
+            name: "photoMode"
+            widget: "select"
+            hint: "Ne change pas ta photo perso sur la page Profil — seulement le hero de l'accueil et les 4 photos du terrain."
+            options:
+              - { label: "Photos réelles", value: "reelle" }
+              - { label: "Photos générées par IA", value: "ia" }
+
   - name: "home"
     label: "Accueil"
     files:
@@ -33,7 +48,8 @@ collections:
             name: "heroTagline"
             widget: "text"
             hint: "Tu peux entourer un mot de <strong>...</strong> pour le mettre en gras."
-          - { label: "Photo de fond du hero", name: "heroImage", widget: "image" }
+          - { label: "Photo de fond du hero — version réelle", name: "heroImageReelle", widget: "image" }
+          - { label: "Photo de fond du hero — version IA", name: "heroImageIa", widget: "image", required: false, hint: "Utilisée seulement si le mode IA est choisi dans Réglages." }
           - { label: "Fichier du CV", name: "cvFile", widget: "file" }
           - { label: "Titre de la section repères", name: "reperesTitle", widget: "string" }
           - { label: "Structure — titre", name: "structureLabel", widget: "string" }
@@ -100,7 +116,8 @@ collections:
             widget: "list"
             summary: "{{fields.caption}}"
             fields:
-              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image — version réelle", name: "imageReelle", widget: "image" }
+              - { label: "Image — version IA", name: "imageIa", widget: "image", required: false, hint: "Utilisée seulement si le mode IA est choisi dans Réglages." }
               - { label: "Légende", name: "caption", widget: "string" }
 
   - name: "contact"

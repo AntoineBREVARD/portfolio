@@ -103,7 +103,10 @@ function renderHome(d){
   if (d.heroTitleLine1) setText("heroLine1", d.heroTitleLine1.toUpperCase());
   if (d.heroTitleLine2) setText("heroLine2", d.heroTitleLine2.toUpperCase());
   setHTML("heroTagline", d.heroTagline);
-  setSrc("heroImage", d.heroImage);
+  // "photoMode" vient de content/settings.json (réglage global IA/réelle) :
+  // repli sur la version réelle si la version IA n'a pas été renseignée.
+  const heroImg = (d.photoMode === "ia" && d.heroImageIa) ? d.heroImageIa : d.heroImageReelle;
+  setSrc("heroImage", heroImg);
   const cv = document.getElementById("cvLink");
   if (cv && d.cvFile) cv.href = d.cvFile;
   setText("reperesTitle", d.reperesTitle);
@@ -153,9 +156,10 @@ function renderProjets(d){
   }
   const strip = document.getElementById("terrainStrip");
   if (strip && Array.isArray(d.terrain)){
-    strip.innerHTML = d.terrain.map(t => `
-      <figure><img src="${escapeHtml(t.image)}" alt="${escapeHtml(t.caption)}"><figcaption class="mono">${escapeHtml(t.caption)}</figcaption></figure>
-    `).join("");
+    strip.innerHTML = d.terrain.map(t => {
+      const img = (d.photoMode === "ia" && t.imageIa) ? t.imageIa : t.imageReelle;
+      return `<figure><img src="${escapeHtml(img)}" alt="${escapeHtml(t.caption)}"><figcaption class="mono">${escapeHtml(t.caption)}</figcaption></figure>`;
+    }).join("");
   }
 }
 
@@ -181,10 +185,18 @@ function initContent(){
   };
   const entry = map[page];
   if (!entry) return Promise.resolve();
-  return fetch(entry.file, { cache: "no-store" })
-    .then(res => (res.ok ? res.json() : null))
-    .then(data => { if (data) entry.render(data); })
-    .catch(() => {}); // le texte déjà présent dans le HTML sert de secours
+
+  const fetchJson = (file) => fetch(file, { cache: "no-store" }).then(res => (res.ok ? res.json() : null)).catch(() => null);
+
+  // content/settings.json porte le réglage global "photo IA / réelle" utilisé
+  // par le hero et le terrain — on le charge à côté du contenu de la page,
+  // sans bloquer le rendu si jamais ce fichier manque.
+  return Promise.all([fetchJson(entry.file), fetchJson("content/settings.json")])
+    .then(([data, settings]) => {
+      if (!data) return;
+      if (settings && settings.photoMode) data.photoMode = settings.photoMode;
+      entry.render(data);
+    });
 }
 
 /* ---------- Année du footer ---------- */
