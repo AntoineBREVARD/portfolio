@@ -2,8 +2,8 @@
   "missions": [
     {
       "tag": "Automatisation",
-      "title": "Automatisation HPIA",
-      "description": "Déploiement automatisé de HP Image Assistant (mises à jour drivers/BIOS) sur le parc de postes HP de l'ACO."
+      "title": "Automatisation mise à jour constructeurs",
+      "description": "Déploiement automatisé de HP Image Assistant ou Dell Command Update(mises à jour drivers/BIOS) sur le parc de postes HP et Dell de l'ACO."
     },
     {
       "tag": "Annuaire & synchronisation",
