@@ -1,14 +1,46 @@
 {
   "missions": [
-    { "tag": "Automatisation", "title": "Automatisation HPIA", "description": "Déploiement automatisé de HP Image Assistant (mises à jour drivers/BIOS) sur le parc de postes HP de l'ACO." },
-    { "tag": "Annuaire & synchronisation", "title": "Synchronisation des contacts ACO", "description": "Mise en cohérence des communes associées aux contacts de l'organisation, à travers l'annuaire." },
-    { "tag": "Supervision", "title": "Alerte boîtes mails pleines", "description": "Mise en place d'une supervision automatique pour détecter les boîtes mails proches de la saturation." },
-    { "tag": "Support & productivité", "title": "Fonds Teams packagés", "description": "Déploiement automatique d'un pack de fonds d'écran Teams pour les utilisateurs de l'ACO." }
+    {
+      "tag": "Automatisation",
+      "title": "Automatisation HPIA",
+      "description": "Déploiement automatisé de HP Image Assistant (mises à jour drivers/BIOS) sur le parc de postes HP de l'ACO."
+    },
+    {
+      "tag": "Annuaire & synchronisation",
+      "title": "Synchronisation des contacts ACO",
+      "description": "Mise en cohérence des communes associées aux contacts de l'organisation, à travers l'annuaire."
+    },
+    {
+      "tag": "Supervision",
+      "title": "Alerte boîtes mails pleines",
+      "description": "Mise en place d'une supervision automatique pour détecter les boîtes mails proches de la saturation."
+    },
+    {
+      "tag": "Support & productivité",
+      "title": "Fonds Teams packagés",
+      "description": "Déploiement automatique d'un pack de fonds d'écran Teams pour les utilisateurs de l'ACO."
+    }
   ],
   "terrain": [
-    { "imageReelle": "images/uploads/hq720.jpg", "imageIa": "images/scenes/direction-course.png", "caption": "Direction de course" },
-    { "imageReelle": "images/uploads/img_9655-2-scaled.jpg", "imageIa": "images/scenes/garage-standf.png", "caption": "Garage / stand" },
-    { "imageReelle": "images/uploads/43dc99fa7d17-7-circuit-24-le-mans-240325-56.jpg", "imageIa": "images/scenes/tour-module-sportif.png", "caption": "Départ des 24 Heures" },
-    { "imageReelle": "images/scenes/musee.png", "imageIa": "images/scenes/musee.png", "caption": "Musée des 24H" }
+    {
+      "imageReelle": "images/uploads/shared-image-1-.jpg",
+      "imageIa": "images/scenes/direction-course.png",
+      "caption": "Direction de course"
+    },
+    {
+      "imageReelle": "images/uploads/hq720.jpg",
+      "imageIa": "images/uploads/img_9655-2-scaled.jpg",
+      "caption": "Les Paddocks"
+    },
+    {
+      "imageReelle": "images/uploads/hq720.jpg",
+      "imageIa": "images/scenes/tour-module-sportif.png",
+      "caption": "Départ des 24 Heures"
+    },
+    {
+      "imageReelle": "images/uploads/shared-image-2-.jpg",
+      "imageIa": "images/scenes/musee.png",
+      "caption": "Musée des 24H"
+    }
   ]
 }
