@@ -209,16 +209,15 @@ function initFooterYear(){
    Séquence façon départ F1 / 24H du Mans : 5 feux qui s'allument un par un,
    une pause (durée volontairement aléatoire, comme un vrai départ, pour
    qu'on ne puisse pas anticiper), puis extinction simultanée = display du site.
-   Ne joue qu'une fois par session (sessionStorage) et jamais si l'utilisateur
-   a demandé moins d'animations (le CSS le masque déjà, on sécurise en JS aussi). */
+   Rejoue à chaque chargement de la page (pas juste une fois par session) —
+   seule prefers-reduced-motion la désactive, pour l'accessibilité. */
 function initStartLights(){
   const overlay = $("#startLights");
   if (!overlay) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const alreadyPlayed = sessionStorage.getItem("psio_intro_played");
 
-  if (reduceMotion || alreadyPlayed){
+  if (reduceMotion){
     overlay.remove();
     return;
   }
@@ -228,7 +227,6 @@ function initStartLights(){
   const skipBtn = $("#skipIntro", overlay);
 
   function finish(){
-    sessionStorage.setItem("psio_intro_played", "1");
     overlay.classList.add("is-out");
     document.body.classList.remove("intro-lock");
     setTimeout(() => overlay.remove(), 700);

@@ -108,7 +108,7 @@ img{ max-width: 100%; display: block; }
 .eyebrow{ color: var(--amber); margin: 0 0 18px; }
 .hero-title{
   font-family: var(--display); font-weight: 800; text-transform: uppercase;
-  font-size: clamp(3.4rem, 12vw, 9.5rem); line-height: .86; letter-spacing: -.01em; margin: 0 0 28px;
+  font-size: clamp(3.4rem, 12vw, 9.5rem); line-height: .98; letter-spacing: -.01em; margin: 0 0 28px;
   display: flex; flex-direction: column; overflow: hidden;
 }
 .reveal-line{ display: inline-block; transform: translateY(110%); animation: lineUp .8s var(--ease) forwards; }
