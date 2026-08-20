@@ -9,5 +9,191 @@
 <body>
 <!-- Decap CMS lit admin/config.yml et construit toute l'interface d'édition à partir de là. -->
 <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<!--
+  Sans ça, la colonne "Preview" à droite se contente d'afficher les champs
+  en texte brut (c'est ce que tu voyais). Ici on lui donne le vrai CSS du
+  site + de petits gabarits qui réutilisent les mêmes classes que les pages
+  réelles, pour que l'aperçu ressemble vraiment au rendu final.
+  "h" et "createClass" sont fournis par decap-cms.js, exprès pour écrire ces
+  aperçus sans étape de build.
+-->
+<script>
+CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+CMS.registerPreviewStyle("../style.css");
+
+function resolveImg(getAsset, value){
+  if (!value) return "";
+  var asset = getAsset(value);
+  return asset ? asset.toString() : value;
+}
+
+var HomePreview = createClass({
+  render: function(){
+    var e = this.props.entry.get("data");
+    var getAsset = this.props.getAsset;
+    var heroImg = resolveImg(getAsset, e.get("heroImageReelle"));
+    return h("div", { style: { background: "#0b0c0f" } },
+      h("section", { className: "hero", style: { minHeight: "70vh" } },
+        h("div", { className: "hero-media" },
+          heroImg ? h("img", { src: heroImg }) : null,
+          h("div", { className: "hero-media-scrim" })
+        ),
+        h("div", { className: "hero-grid" },
+          h("p", { className: "eyebrow mono" }, e.get("eyebrow")),
+          h("h1", { className: "hero-title" },
+            h("span", { className: "reveal-line", style: { transform: "none" } }, (e.get("heroTitleLine1") || "").toUpperCase()),
+            h("span", { className: "reveal-line", style: { transform: "none" } }, (e.get("heroTitleLine2") || "").toUpperCase())
+          ),
+          h("p", { className: "hero-tagline", dangerouslySetInnerHTML: { __html: e.get("heroTagline") || "" } }),
+          h("div", { className: "hero-actions" },
+            h("span", { className: "btn btn-signal" }, "Télécharger le CV"),
+            h("span", { className: "btn btn-ghost" }, "Voir les missions")
+          )
+        )
+      ),
+      h("section", { className: "section" },
+        h("div", { className: "section-head" },
+          h("p", { className: "eyebrow mono" }, "Repères"),
+          h("h2", {}, e.get("reperesTitle"))
+        ),
+        h("div", { className: "facts" },
+          h("div", { className: "fact" },
+            h("span", { className: "fact-label mono" }, "Structure"),
+            h("span", { className: "fact-value" }, e.get("structureLabel"), h("br"), h("span", { className: "fact-sub" }, e.get("structureSub")))
+          ),
+          h("div", { className: "fact" },
+            h("span", { className: "fact-label mono" }, "Formation"),
+            h("span", { className: "fact-value" }, e.get("formationLabel"), h("br"), h("span", { className: "fact-sub" }, e.get("formationSub")))
+          )
+        )
+      )
+    );
+  }
+});
+
+var ProfilPreview = createClass({
+  render: function(){
+    var e = this.props.entry.get("data");
+    var getAsset = this.props.getAsset;
+    var photo = resolveImg(getAsset, e.get("photo"));
+    var missions = (e.get("expMissions") || []).toJS ? e.get("expMissions").toJS() : [];
+    return h("div", { style: { background: "#f4f2ec", padding: "0" } },
+      h("section", { className: "section" },
+        h("div", { className: "about-grid" },
+          h("div", { className: "about-photo" },
+            photo ? h("img", { src: photo }) : null,
+            h("span", { className: "about-photo-tag mono" }, e.get("photoTag"))
+          ),
+          h("div", { className: "about-text" },
+            h("p", { className: "lede", dangerouslySetInnerHTML: { __html: e.get("aboutIntro") || "" } }),
+            h("p", { dangerouslySetInnerHTML: { __html: e.get("aboutBody") || "" } }),
+            h("div", { className: "facts" },
+              h("div", { className: "fact" },
+                h("span", { className: "fact-label mono" }, "Formation"),
+                h("span", { className: "fact-value" }, e.get("formationLabel"), h("br"), h("span", { className: "fact-sub" }, e.get("formationSub")))
+              ),
+              h("div", { className: "fact" },
+                h("span", { className: "fact-label mono" }, "Certification"),
+                h("span", { className: "fact-value" }, e.get("certificationLabel"), h("br"), h("span", { className: "fact-sub" }, e.get("certificationSub")))
+              )
+            )
+          )
+        )
+      ),
+      h("section", { className: "section section-dark" },
+        h("div", { className: "exp-card" },
+          h("div", { className: "exp-card-head" },
+            h("div", {},
+              h("h3", {}, e.get("expTitle")),
+              h("p", { className: "exp-place" }, e.get("expPlace"))
+            ),
+            h("span", { className: "exp-period mono" }, e.get("expPeriod"))
+          ),
+          h("p", { className: "exp-context", dangerouslySetInnerHTML: { __html: e.get("expContext") || "" } }),
+          h("ul", { className: "exp-missions" }, missions.map(function(m, i){ return h("li", { key: i }, m); }))
+        )
+      )
+    );
+  }
+});
+
+var CompetencesPreview = createClass({
+  render: function(){
+    var items = this.props.entry.getIn(["data", "items"]);
+    items = items && items.toJS ? items.toJS() : [];
+    return h("section", { className: "section" },
+      h("div", { className: "skills-board" },
+        items.map(function(it, i){
+          return h("div", { className: "skill-row", key: i },
+            h("span", { className: "skill-status mono" }, "ACTIF"),
+            h("span", { className: "skill-name" }, it.name),
+            h("span", { className: "skill-context" }, it.context)
+          );
+        })
+      )
+    );
+  }
+});
+
+var ProjetsPreview = createClass({
+  render: function(){
+    var e = this.props.entry.get("data");
+    var getAsset = this.props.getAsset;
+    var missions = e.get("missions"); missions = missions && missions.toJS ? missions.toJS() : [];
+    var terrain = e.get("terrain"); terrain = terrain && terrain.toJS ? terrain.toJS() : [];
+    return h("div", {},
+      h("section", { className: "section section-dark" },
+        h("div", { className: "missions-grid" },
+          missions.map(function(m, i){
+            return h("article", { className: "mission-card", key: i },
+              h("span", { className: "mission-tag mono" }, m.tag),
+              h("h3", {}, m.title),
+              h("p", {}, m.description)
+            );
+          })
+        )
+      ),
+      h("section", { className: "section terrain" },
+        h("div", { className: "terrain-strip" },
+          terrain.map(function(t, i){
+            var img = resolveImg(getAsset, t.imageReelle);
+            return h("figure", { key: i },
+              img ? h("img", { src: img }) : null,
+              h("figcaption", { className: "mono" }, t.caption)
+            );
+          })
+        )
+      )
+    );
+  }
+});
+
+var ContactPreview = createClass({
+  render: function(){
+    var e = this.props.entry.get("data");
+    return h("section", { className: "section contact" },
+      h("div", { className: "contact-grid" },
+        h("div", { className: "contact-info" },
+          h("p", { className: "lede" }, e.get("intro")),
+          h("ul", { className: "contact-list" },
+            h("li", {}, e.get("email")),
+            h("li", {}, e.get("linkedin")),
+            h("li", {}, e.get("github")),
+            h("li", { className: "mono" }, e.get("city"))
+          )
+        )
+      )
+    );
+  }
+});
+
+CMS.registerPreviewTemplate("home", HomePreview);
+CMS.registerPreviewTemplate("profil", ProfilPreview);
+CMS.registerPreviewTemplate("competences", CompetencesPreview);
+CMS.registerPreviewTemplate("projets", ProjetsPreview);
+CMS.registerPreviewTemplate("contact", ContactPreview);
+</script>
+
 </body>
 </html>
