@@ -425,71 +425,6 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
 }
 
 /* =========================================================================
-   TRAVELLING ENTRE LES PAGES
-   API View Transitions en navigation multi-pages : aucune bibliotheque,
-   aucun JS. La page sortante part vers l'avant comme une voiture qu'on
-   double, l'entrante arrive du fond. Sur un navigateur qui ne la supporte
-   pas encore, la navigation reste simplement normale.
-   ========================================================================= */
-@view-transition{ navigation:auto }
-
-/* Le navigateur fond les deux captures en "plus-lighter" : les luminosites
-   s'additionnent et l'ecran sature vers le blanc. Sur deux pages qui ont des
-   zones claires, on ne voyait qu'un flash et plus du tout le mouvement.
-   On repasse en fusion normale et on empile les deux plans explicitement. */
-::view-transition-image-pair(root){ isolation:auto }
-::view-transition-old(root),
-::view-transition-new(root){ mix-blend-mode:normal }
-
-/* la sortante passe DEVANT : c'est elle qu'on regarde s'echapper, et elle
-   decouvre la nouvelle page en partant */
-::view-transition-old(root){
-  animation:travelling-sortie .48s cubic-bezier(.5,0,.24,1) both;
-  transform-origin:82% 50%;
-  z-index:2;
-}
-::view-transition-new(root){
-  animation:travelling-entree .54s cubic-bezier(.12,.86,.26,1) .24s both;
-  transform-origin:18% 50%;
-  z-index:1;
-}
-/* le groupe doit durer au moins aussi longtemps que ce qu'il contient,
-   sinon il coupe l'animation avant la fin */
-::view-transition-group(root){ animation-duration:.82s }
-
-/* Prise de virage. La sortante braque, prend du roulis et s'echappe sur le
-   cote — le mouvement d'une voiture qu'on double. Elle reste opaque pendant
-   l'essentiel du trajet : si elle s'efface tout de suite, on ne voit pas
-   qu'elle bouge. */
-@keyframes travelling-sortie{
-  0%   { transform:none; opacity:1 }
-  58%  { opacity:1 }
-  100% {
-    transform:perspective(900px) rotateY(-30deg) rotateZ(2.6deg)
-              translateZ(340px) translateX(-56%);
-    opacity:0;
-  }
-}
-/* L'entrante sort du virage, braquee dans l'autre sens, et se redresse. */
-@keyframes travelling-entree{
-  0%   {
-    transform:perspective(900px) rotateY(24deg) rotateZ(-2deg)
-              translateZ(-320px) translateX(36%);
-    opacity:0;
-  }
-  26%  { opacity:1 }
-  100% { transform:none; opacity:1 }
-}
-
-/* le bandeau ne doit pas voyager avec la page : il reste le point fixe */
-.telemetry{ view-transition-name:telemetry }
-::view-transition-old(telemetry),::view-transition-new(telemetry){ animation:none }
-
-@media (prefers-reduced-motion:reduce){
-  ::view-transition-old(root),::view-transition-new(root){ animation:none }
-}
-
-/* =========================================================================
    AVANT / APRES
    Chaque realisation a un "avant" tres concret. Le curseur fait glisser
    l'un vers l'autre — meme grammaire que le hero (reveler ce qui est
@@ -570,40 +505,127 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
 
 
 /* =========================================================================
-   SORTIE DE VIRAGE
-   Joue a l'arrivee sur la nouvelle page, une fois le travelling termine :
-   des trainees de vitesse balaient l'ecran et un eclat de vibreur rouge et
-   blanc traverse. C'est le moment ou l'on deboule sur la ligne droite.
-   Cree par script.js, jamais present au repos.
+   LA COURSE — transition entre les pages
+   Vue camera arriere, de nuit. Un seul plan de bitume porte la chaussee, la
+   ligne centrale ET les deux vibreurs comme couches de fond : dessines
+   separement, ils se desolidarisaient de la route des que la perspective
+   changeait. Par-dessus : glissieres, feux de bord de piste, cone de phares,
+   vignette et un leger tremblement de camera.
+   Environ une seconde, moitie au depart, moitie a l'arrivee. Transformations
+   3D CSS uniquement, aucune bibliotheque.
    ========================================================================= */
-.vitesse{
-  position:fixed;inset:0;z-index:95;pointer-events:none;overflow:hidden;
-  contain:strict;
+.course{
+  position:fixed;inset:0;z-index:998;pointer-events:none;overflow:hidden;
+  perspective:290px;perspective-origin:50% 43%;
+  background:linear-gradient(to bottom,#04060A 0%,#070A0F 38%,#04060A 100%);
+  opacity:0;transition:opacity .2s ease;
 }
-.vitesse-trait{
-  position:absolute;left:0;height:2px;width:42vw;
-  background:linear-gradient(90deg,transparent,#35E0C8,transparent);
-  transform:translate3d(-60vw,0,0);opacity:0;
-  will-change:transform,opacity;
+.course.is-on{ opacity:1 }
+.course.file{ animation:camera-secousse .42s steps(3,end) infinite }
+@keyframes camera-secousse{
+  0%,100%{ transform:translate3d(0,0,0) }
+  33%    { transform:translate3d(-1.5px,1px,0) }
+  66%    { transform:translate3d(1px,-1.5px,0) }
 }
-.vitesse-trait.pale{ background:linear-gradient(90deg,transparent,#F2F5F7,transparent);height:1px }
-@keyframes filer{
-  0%   { transform:translate3d(-60vw,0,0); opacity:0 }
-  12%  { opacity:.85 }
-  100% { transform:translate3d(150vw,0,0); opacity:0 }
+
+/* --- le bitume, la ligne centrale et les vibreurs : un seul plan --- */
+.course-route{
+  position:absolute;left:-40%;right:-40%;top:43%;bottom:-170%;
+  transform:rotateX(77deg);transform-origin:50% 0;
+  background:
+    repeating-linear-gradient(to bottom,
+      rgba(242,245,247,.9) 0 56px, transparent 56px 170px) 50% 0 / 4px 170px repeat-y,
+    /* vibreurs jaune et bleu : ce sont les couleurs du circuit des 24 Heures,
+       pas le rouge et blanc generique des autres circuits.
+       Places pres du bord de chaussee, pas au loin sur les cotes. */
+    repeating-linear-gradient(to bottom,
+      #F5C518 0 28px, #17509E 28px 56px) 39% 0 / 22px 56px repeat-y,
+    repeating-linear-gradient(to bottom,
+      #F5C518 0 28px, #17509E 28px 56px) 61% 0 / 22px 56px repeat-y,
+    /* lignes de rive */
+    linear-gradient(#E8EBEE,#E8EBEE) 41.5% 0 / 3px 100% repeat-y,
+    linear-gradient(#E8EBEE,#E8EBEE) 58.5% 0 / 3px 100% repeat-y,
+    repeating-linear-gradient(to bottom, #1B2027 0 44px, #161A21 44px 88px);
+  /* la route se dissout dans la brume au lieu de s'arreter net a l'horizon */
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 100%);
 }
-/* vibreur : la bande rouge et blanche des bords de piste */
-.vitesse-vibreur{
-  position:absolute;top:-30%;bottom:-30%;width:120px;
-  transform:translate3d(-30vw,0,0) skewX(-14deg);opacity:0;
-  background:repeating-linear-gradient(180deg,#FF2D20 0 26px,#F2F5F7 26px 52px);
-  will-change:transform,opacity;
+.course.file .course-route{ animation:bitume .8s linear infinite }
+@keyframes bitume{ to{ background-position-y:170px,56px,56px,0,0,88px } }
+
+/* --- glissieres : deux rubans clairs qui filent de part et d'autre --- */
+.course-rail{
+  position:absolute;top:43%;bottom:-170%;width:3px;
+  transform:rotateX(77deg);transform-origin:50% 0;
+  background:repeating-linear-gradient(to bottom,
+    rgba(242,245,247,.5) 0 26px, rgba(242,245,247,.08) 26px 78px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 100%);
 }
-@keyframes vibreur-passe{
-  0%   { transform:translate3d(-30vw,0,0) skewX(-14deg); opacity:0 }
-  18%  { opacity:.5 }
-  100% { transform:translate3d(130vw,0,0) skewX(-14deg); opacity:0 }
+.course-rail.g{ left:31% }
+.course-rail.d{ right:31% }
+.course.file .course-rail{ animation:bitume .8s linear infinite }
+
+/* --- feux de bord de piste : la rangee de points qui defile --- */
+.course-feux{
+  position:absolute;top:43%;bottom:-170%;left:26%;right:26%;
+  transform:rotateX(77deg);transform-origin:50% 0;
+  background:
+    repeating-linear-gradient(to bottom,
+      rgba(255,176,60,.85) 0 7px, transparent 7px 150px) 2% 0 / 7px 150px repeat-y,
+    repeating-linear-gradient(to bottom,
+      rgba(255,176,60,.85) 0 7px, transparent 7px 150px) 98% 0 / 7px 150px repeat-y;
+  filter:blur(.4px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 100%);
 }
+.course.file .course-feux{ animation:feux .8s linear infinite }
+@keyframes feux{ to{ background-position-y:150px,150px } }
+
+/* --- cone de phares pose sur la chaussee --- */
+.course-phares{
+  position:absolute;left:50%;bottom:-6%;width:126%;height:62%;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse 42% 100% at 50% 100%,
+    rgba(255,248,230,.20), rgba(255,248,230,.07) 42%, transparent 70%);
+  mix-blend-mode:screen;
+}
+/* --- halo a l'horizon : la lumiere vers laquelle on roule --- */
+.course-horizon{
+  position:absolute;left:0;right:0;top:0;height:50%;
+  background:radial-gradient(ellipse 40% 74% at 50% 100%,
+    rgba(53,224,200,.30), rgba(53,224,200,.07) 44%, transparent 70%);
+}
+/* --- vignette : on resserre le regard vers le point de fuite --- */
+.course-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 72% 62% at 50% 46%, transparent 40%, rgba(2,3,5,.86) 100%);
+}
+
+/* --- trainees jaillissant du point de fuite --- */
+.course-strie{
+  position:absolute;left:50%;top:43%;height:2px;width:13vw;
+  background:linear-gradient(90deg,transparent,#8FF5E4,transparent);
+  transform-origin:0 50%;opacity:0;
+}
+@keyframes jaillir{
+  0%   { opacity:0; transform:translate(-50%,-50%) rotate(var(--a)) scaleX(.04) }
+  22%  { opacity:.85 }
+  100% { opacity:0; transform:translate(-50%,-50%) rotate(var(--a)) scaleX(3.4) }
+}
+
+/* --- la page recule vers le point de fuite, puis en revient --- */
+body.en-course main{ will-change:transform,opacity }
+body.course-partir main{ animation:page-recule .46s cubic-bezier(.55,0,.35,1) both }
+body.course-arrive main{ animation:page-revient .5s cubic-bezier(.12,.85,.28,1) both }
+@keyframes page-recule{
+  to{ transform:perspective(900px) translateZ(-340px) rotateX(7deg); opacity:0 }
+}
+@keyframes page-revient{
+  from{ transform:perspective(900px) translateZ(-420px) rotateX(-6deg); opacity:0 }
+}
+
 @media (prefers-reduced-motion:reduce){
-  .vitesse{ display:none }
+  .course{ display:none }
+  body.course-partir main,body.course-arrive main{ animation:none }
 }

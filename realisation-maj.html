@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mises à jour constructeurs — Antoine Brévard</title>
+<meta name="description" content="Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu'on ne mettait à jour qu'une fois le problème arrivé.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://antoinebrevard.github.io/portfolio/realisation-maj.html">
+<meta property="og:title" content="Mises à jour constructeurs — Antoine Brévard">
+<meta property="og:description" content="Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu'on ne mettait à jour qu'une fois le problème arrivé.">
+<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/uploads/666f02ef21a56.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0A0C0F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body data-page="realisations">
+
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="telemetry" id="telemetry">
+  <div class="telemetry-inner">
+    <a href="index.html" class="telemetry-id">
+      <span class="telemetry-dot" aria-hidden="true"></span>
+      AB<span class="telemetry-id-full">·BRÉVARD</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="telemetry-nav" aria-label="Navigation principale">
+      <a href="index.html" data-nav="accueil">Accueil</a>
+      <a href="profil.html" data-nav="profil">Profil</a>
+      <a href="realisations.html" data-nav="realisations">Réalisations</a>
+      <a href="competences.html" data-nav="competences">Compétences</a>
+      <a href="veille.html" data-nav="veille">Veille</a>
+      <a href="contact.html" data-nav="contact">Contact</a>
+    </nav>
+    <div class="telemetry-readout" aria-hidden="true">
+      <span id="clock">--:--:--</span>
+      <span class="telemetry-sep">/</span>
+      <span>LE MANS, FR</span>
+    </div>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <!-- ==================== ACCROCHE ==================== -->
+  <section class="section case-hero">
+    <div class="shell">
+      <p class="eyebrow"><a href="realisations.html" style="color:inherit;text-decoration:none">← Réalisations</a> <b>—</b> 04 · Gestion de parc</p>
+      <h1 class="display">Poste par poste,<br>à la main.</h1>
+      <p class="lede" style="margin-top:24px;font-size:clamp(18px,2.4vw,25px);color:var(--ink)">
+        Pilotes, firmware, BIOS, stations d'accueil. On les mettait à jour
+        quand quelque chose avait déjà cassé.
+      </p>
+      <div class="case-meta">
+        <span>Automobile Club de l'Ouest</span>
+        <span>Parc mixte HP et Dell</span>
+        <span>Codes retour <b>0 / 10 / 20 / 50 / 3010</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LE PROBLEME ==================== -->
+  <section class="section section--doc">
+    <div class="shell">
+
+      <div class="case-step" style="border-top:0;padding-top:0">
+        <h2>Ce qui n'allait pas</h2>
+        <p>
+          La mise à jour d'un poste demandait un technicien devant ce poste.
+          Ouvrir l'outil du constructeur, lancer l'analyse, attendre, redémarrer.
+          Multiplié par un parc entier, ce n'est plus une tâche : c'est une activité.
+        </p>
+        <p>
+          Alors on ne le faisait pas systématiquement. On le faisait quand un poste
+          posait problème, pendant une opération de prévention, ou au moment de
+          préparer une machine neuve.
+        </p>
+        <p>
+          <strong>Autrement dit : on réparait, on n'entretenait pas.</strong>
+          Et personne ne savait dire ce qui avait été mis à jour, ni où.
+        </p>
+      </div>
+
+      <!-- ==================== LE POINT DE BASCULE ==================== -->
+      <div class="case-step">
+        <h2>Les deux contraintes qui ont tout décidé</h2>
+        <p>
+          La première, c'est le parc lui-même. Deux constructeurs, deux outils
+          différents, et derrière chacun des dizaines de modèles et de générations
+          qui ne se comportent pas de la même façon. Un script ne pouvait pas se
+          contenter d'une seule recette.
+        </p>
+        <p>
+          La seconde tenait en une phrase du besoin : <strong>empêcher qu'un poste
+          s'éteigne au milieu d'une opération sensible.</strong> Une mise à jour de
+          firmware interrompue ne se rattrape pas d'un clic.
+        </p>
+        <p>
+          Or pendant l'installation, l'écran clignote, le son se coupe, le réseau
+          tombe un instant. Tout ce qu'il faut pour qu'un utilisateur croie à une
+          panne — et appuie sur le bouton.
+        </p>
+      </div>
+
+      <!-- ==================== LES CHEMINS POSSIBLES ==================== -->
+      <div class="case-step">
+        <h2>Les chemins possibles</h2>
+        <p>Deux approches. La différence tenait à qui décide, et à qui garde la trace.</p>
+
+        <div class="solutions">
+          <div class="solution">
+            <span class="solution-verdict">Écartée</span>
+            <h4>Un raccourci sur le bureau, l'utilisateur se lance quand il veut</h4>
+            <ul>
+              <li class="pour">À première vue, très peu de charge pour le service</li>
+              <li class="pour">Aucune infrastructure supplémentaire</li>
+              <li class="contre">Tout repose sur la bonne volonté de chacun</li>
+              <li class="contre">Rien n'empêche d'interrompre une mise à jour en cours</li>
+              <li class="contre">Risque de mauvaise manipulation, et parc toujours hétérogène</li>
+              <li class="contre">Aucune traçabilité : on ne sait pas qui a fait quoi</li>
+            </ul>
+          </div>
+          <div class="solution is-retenue">
+            <span class="solution-verdict">Retenue</span>
+            <h4>Le traitement côté machine, l'information côté utilisateur</h4>
+            <ul>
+              <li class="pour">Le poste reconnaît sa propre marque et choisit le bon outil</li>
+              <li class="pour">Une fenêtre prévient l'utilisateur, et seulement quand il y a lieu</li>
+              <li class="pour">Plus besoin d'être devant la machine</li>
+              <li class="pour">Chaque exécution laisse un journal exploitable</li>
+              <li class="contre">Du développement, puis de la maintenance</li>
+              <li class="contre">Autant de cas à tester que de comportements constructeurs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== AVANT / APRES ==================== -->
+      <div class="case-step">
+        <h2>Ce que ça change</h2>
+        <div class="ba" data-ba>
+          <div class="ba-stage">
+            <div class="ba-panel ba-avant">
+              <span class="ba-tag">Avant</span>
+              <h4>Un technicien, un poste, une fois.</h4>
+              <p>
+                On intervenait machine par machine, le plus souvent après la panne.
+                Rien ne disait ensuite ce qui avait été installé, ni sur quels postes,
+                ni si l'opération était allée jusqu'au bout.
+              </p>
+            </div>
+            <div class="ba-panel ba-apres">
+              <span class="ba-tag">Après</span>
+              <h4>Le poste s'en charge, et le dit.</h4>
+              <p>
+                La machine détecte sa marque, analyse, installe. S'il n'y a rien à faire,
+                l'utilisateur ne voit rien. Sinon, une fenêtre l'informe qu'une opération
+                système est en cours et qu'il ne doit pas éteindre. Le journal, lui,
+                raconte ce qui s'est passé.
+              </p>
+            </div>
+            <div class="ba-sep" aria-hidden="true"></div>
+            <input class="ba-range" type="range" min="0" max="100" value="50"
+                   id="baMaj" aria-label="Comparer la situation avant et après">
+          </div>
+          <p class="ba-hint">Faites glisser pour comparer</p>
+        </div>
+      </div>
+
+      <!-- ==================== RECUL ==================== -->
+      <div class="case-step">
+        <h2>Ce que je referais autrement</h2>
+        <div class="recul">
+          <h3>La fenêtre censée rassurer est devenue le point faible</h3>
+          <p>
+            En production, l'interface qui informe l'utilisateur s'est bloquée
+            ponctuellement sur certains postes. Le principe de la solution n'est pas
+            en cause — mais une fenêtre figée, pour la personne qui la regarde,
+            ressemble exactement à ce qu'on voulait éviter.
+          </p>
+          <p>
+            <strong>J'ai sous-estimé la partie la plus visible.</strong> J'avais mis la
+            rigueur sur l'orchestration des outils constructeurs et sur les codes retour,
+            beaucoup moins sur la robustesse de l'écran que l'utilisateur a sous les yeux.
+          </p>
+          <p>
+            Trois évolutions sont sur la table : une temporisation, une fermeture
+            contrôlée après une inactivité prolongée, et une centralisation des rapports
+            d'exécution — pour ne plus avoir à aller chercher les journaux poste par poste.
+          </p>
+        </div>
+      </div>
+
+      <!-- ==================== COMPETENCES ==================== -->
+      <div class="case-step">
+        <h2>Ce que cette mission démontre</h2>
+        <p>Chaque étiquette renvoie à la compétence correspondante du référentiel.</p>
+        <div class="preuves">
+          <a class="preuve-lien" href="competences.html#b21">Élaborer un dossier de choix d'une solution d'infrastructure</a>
+          <a class="preuve-lien" href="competences.html#b22">Remplacer ou mettre à jour des éléments défectueux ou obsolètes</a>
+          <a class="preuve-lien" href="competences.html#b23">Automatiser des tâches d'administration</a>
+          <a class="preuve-lien" href="competences.html#b23">Administrer sur site et à distance des éléments d'une infrastructure</a>
+          <a class="preuve-lien" href="competences.html#b23">Gérer des indicateurs et des fichiers d'activité</a>
+          <a class="preuve-lien" href="competences.html#b11">Recenser et identifier les ressources numériques</a>
+          <a class="preuve-lien" href="competences.html#b15">Accompagner les utilisateurs dans la mise en place d'un service</a>
+        </div>
+      </div>
+
+      <!-- ==================== RENVOI DOSSIER ==================== -->
+      <div class="case-step">
+        <div class="renvoi">
+          <p>
+            <strong>Le détail est dans le dossier professionnel :</strong>
+            l'orchestration des outils HP et Dell, le mécanisme de secours quand
+            l'outil constructeur échoue, la signification de chaque code retour et
+            la campagne de tests menée sur les deux marques.
+          </p>
+          <a class="btn btn-cyan" href="realisations.html">Autres réalisations</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
+    <p class="mono">Site statique, sans traceur ni serveur</p>
+  </div>
+</footer>
+
+<script src="script.js?v=4"></script>
+</body>
+</html>

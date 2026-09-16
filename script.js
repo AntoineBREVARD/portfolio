@@ -295,46 +295,85 @@ function initBeforeAfter(){
   });
 }
 
-/* ---------- Sortie de virage ----------
-   Pendant une transition entre pages, les deux pages sont des captures : rien
-   d'anime sur le DOM n'y apparait. On joue donc les trainees APRES, quand la
-   nouvelle page reprend la main — ce qui tombe juste, c'est le moment ou l'on
-   deboule sur la ligne droite.
-   pagereveal n'existe que la ou les transitions multi-pages existent : ailleurs
-   il ne se passe rien, et la navigation reste normale. */
-function lancerSortieDeVirage(){
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+/* ---------- La course : transition entre les pages ----------
+   On n'anime plus les deux pages l'une vers l'autre : on fait passer une
+   route en perspective entre elles. La moitie du trajet se joue au depart,
+   l'autre a l'arrivee, ce qui donne environ une seconde de bout en bout.
 
-  const couche = document.createElement("div");
-  couche.className = "vitesse";
-  couche.setAttribute("aria-hidden", "true");
-
-  const N = 14;
-  for (let i = 0; i < N; i++){
-    const t = document.createElement("span");
-    t.className = "vitesse-trait" + (i % 3 === 0 ? " pale" : "");
-    t.style.top = (Math.random() * 100).toFixed(1) + "%";
-    t.style.width = (26 + Math.random() * 38).toFixed(0) + "vw";
-    t.style.animation = `filer ${(340 + Math.random() * 260).toFixed(0)}ms cubic-bezier(.3,0,.2,1) ${(Math.random() * 180).toFixed(0)}ms both`;
-    couche.appendChild(t);
+   On intercepte le clic plutot que d'utiliser les transitions natives :
+   c'est le seul moyen de tenir une vraie scene entre les deux pages, et ca
+   marche partout de la meme facon. Tout ce qui n'est pas un clic simple sur
+   un lien interne est laisse au navigateur. */
+function construireScene(){
+  const scene = document.createElement("div");
+  scene.className = "course";
+  scene.setAttribute("aria-hidden", "true");
+  scene.innerHTML =
+    '<div class="course-horizon"></div>' +
+    '<div class="course-feux"></div>' +
+    '<div class="course-route"></div>' +
+    '<div class="course-rail g"></div>' +
+    '<div class="course-rail d"></div>' +
+    '<div class="course-phares"></div>' +
+    '<div class="course-vignette"></div>';
+  // trainees jaillissant du point de fuite, reparties tout autour
+  for (let i = 0; i < 18; i++){
+    const st = document.createElement("span");
+    st.className = "course-strie";
+    st.style.setProperty("--a", (i * 20 + Math.random() * 12).toFixed(0) + "deg");
+    st.style.animation = `jaillir ${(420 + Math.random() * 320).toFixed(0)}ms cubic-bezier(.25,0,.3,1) ${(Math.random() * 260).toFixed(0)}ms both`;
+    scene.appendChild(st);
   }
-
-  const vibreur = document.createElement("div");
-  vibreur.className = "vitesse-vibreur";
-  vibreur.style.animation = "vibreur-passe 520ms cubic-bezier(.35,0,.2,1) 40ms both";
-  couche.appendChild(vibreur);
-
-  document.body.appendChild(couche);
-  // on retire la couche des qu'elle a fini : elle ne doit jamais rester
-  // au-dessus de la page une fois l'effet joue
-  setTimeout(() => couche.remove(), 1100);
+  return scene;
 }
 
-function initTransitions(){
-  if (!("onpagereveal" in window)) return;
-  window.addEventListener("pagereveal", e => {
-    if (!e.viewTransition) return;              // arrivee sans transition
-    e.viewTransition.finished.then(lancerSortieDeVirage).catch(() => {});
+function initCourse(){
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  /* ---- arrivee : on sort de la scene et la page revient du point de fuite ---- */
+  if (sessionStorage.getItem("ab_course") === "1"){
+    try { sessionStorage.removeItem("ab_course"); } catch {}
+    const scene = construireScene();
+    scene.classList.add("is-on", "file");
+    document.body.appendChild(scene);
+    document.body.classList.add("en-course", "course-arrive");
+    requestAnimationFrame(() => {
+      setTimeout(() => scene.classList.remove("is-on"), 190);
+      setTimeout(() => {
+        scene.remove();
+        document.body.classList.remove("en-course", "course-arrive");
+      }, 520);
+    });
+  }
+
+  /* ---- depart : on entre dans la scene, puis on navigue ---- */
+  document.addEventListener("click", e => {
+    if (e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    const lien = e.target.closest("a[href]");
+    if (!lien) return;
+    if (lien.target && lien.target !== "_self") return;
+    if (lien.hasAttribute("download")) return;
+
+    const url = new URL(lien.href, location.href);
+    if (url.origin !== location.origin) return;                 // lien externe
+    if (url.pathname === location.pathname && url.hash) return; // ancre interne
+    if (!/\.html?$/.test(url.pathname) && url.pathname !== "/") return;
+
+    e.preventDefault();
+    const scene = construireScene();
+    document.body.appendChild(scene);
+    document.body.classList.add("en-course");
+
+    requestAnimationFrame(() => {
+      scene.classList.add("is-on", "file");
+      document.body.classList.add("course-partir");
+    });
+
+    try { sessionStorage.setItem("ab_course", "1"); } catch {}
+    // on part une fois la scene installee, pas avant : sinon on ne voit rien
+    setTimeout(() => { location.href = url.href; }, 470);
   });
 }
 
@@ -403,10 +442,6 @@ function initContent(){
 }
 
 /* ---------- Démarrage ---------- */
-// pagereveal se declenche avant le premier rendu : on s'abonne tout de
-// suite, pas au DOMContentLoaded qui arrive trop tard.
-initTransitions();
-
 document.addEventListener("DOMContentLoaded", () => {
   tickClock();
   setInterval(tickClock, 1000);
@@ -419,6 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPlot();
   initReveal3D();
   initBeforeAfter();
+  initCourse();
   // Le contenu du CMS est injecté avant d'attacher les observateurs de scroll,
   // sinon les blocs reconstruits démarrent sans animation.
   initContent().finally(initReveal);

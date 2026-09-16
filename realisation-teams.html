@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonds Teams déployés — Antoine Brévard</title>
+<meta name="description" content="La communication voulait le même arrière-plan pour tout le monde en visioconférence. Microsoft vendait la fonctionnalité. Nous ne l'avons pas achetée.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://antoinebrevard.github.io/portfolio/realisation-teams.html">
+<meta property="og:title" content="Fonds Teams déployés — Antoine Brévard">
+<meta property="og:description" content="La communication voulait le même arrière-plan pour tout le monde en visioconférence. Microsoft vendait la fonctionnalité. Nous ne l'avons pas achetée.">
+<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/uploads/666f02ef21a56.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0A0C0F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body data-page="realisations">
+
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="telemetry" id="telemetry">
+  <div class="telemetry-inner">
+    <a href="index.html" class="telemetry-id">
+      <span class="telemetry-dot" aria-hidden="true"></span>
+      AB<span class="telemetry-id-full">·BRÉVARD</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="telemetry-nav" aria-label="Navigation principale">
+      <a href="index.html" data-nav="accueil">Accueil</a>
+      <a href="profil.html" data-nav="profil">Profil</a>
+      <a href="realisations.html" data-nav="realisations">Réalisations</a>
+      <a href="competences.html" data-nav="competences">Compétences</a>
+      <a href="veille.html" data-nav="veille">Veille</a>
+      <a href="contact.html" data-nav="contact">Contact</a>
+    </nav>
+    <div class="telemetry-readout" aria-hidden="true">
+      <span id="clock">--:--:--</span>
+      <span class="telemetry-sep">/</span>
+      <span>LE MANS, FR</span>
+    </div>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <!-- ==================== ACCROCHE ==================== -->
+  <section class="section case-hero">
+    <div class="shell">
+      <p class="eyebrow"><a href="realisations.html" style="color:inherit;text-decoration:none">← Réalisations</a> <b>—</b> 03 · Déploiement</p>
+      <h1 class="display">Une image de marque,<br>300 écrans.</h1>
+      <p class="lede" style="margin-top:24px;font-size:clamp(18px,2.4vw,25px);color:var(--ink)">
+        La communication avait dessiné les arrière-plans. Restait à les poser
+        sur l'écran de chacun — sans demander quoi que ce soit à personne.
+      </p>
+      <div class="case-meta">
+        <span>Automobile Club de l'Ouest</span>
+        <span>Stratégie de groupe, à l'ouverture de session</span>
+        <span>Postes <b>Windows 10 et 11</b>, nouveau client Teams</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LE PROBLEME ==================== -->
+  <section class="section section--doc">
+    <div class="shell">
+
+      <div class="case-step" style="border-top:0;padding-top:0">
+        <h2>Ce qui n'allait pas</h2>
+        <p>
+          Une réunion Teams avec un partenaire, un journaliste, un prestataire.
+          À l'écran, dix personnes de la même organisation — et dix décors différents.
+        </p>
+        <p>
+          Ce n'est la faute de personne. Un arrière-plan, on l'installe soi-même,
+          quand on y pense, si on sait où cliquer. La plupart n'y pensent pas.
+        </p>
+        <p>
+          <strong>Le pack existait. Il n'arrivait simplement jamais jusqu'aux écrans.</strong>
+        </p>
+      </div>
+
+      <!-- ==================== LE POINT DE BASCULE ==================== -->
+      <div class="case-step">
+        <h2>Le détail qui a tout compliqué</h2>
+        <p>
+          L'idée paraissait simple : copier les images au bon endroit sur chaque poste.
+          Sauf que le nouveau client Teams ne se contente pas d'un dossier d'images.
+        </p>
+        <p>
+          Il attend une structure bien précise : chaque visuel doit porter un nom
+          technique généré — un <strong>GUID</strong> — et être <strong>accompagné de sa
+          propre miniature</strong>. Sans cela, le fichier est bien là, sur le disque,
+          mais l'utilisateur ne le voit nulle part.
+        </p>
+        <p>
+          C'est cette contrainte qui a transformé une copie de fichiers en vrai
+          développement : le script ne copie pas, il fabrique — les noms, les miniatures,
+          l'arborescence attendue.
+        </p>
+      </div>
+
+      <!-- ==================== LES CHEMINS POSSIBLES ==================== -->
+      <div class="case-step">
+        <h2>Les chemins possibles</h2>
+        <p>Trois façons d'y arriver. Deux qui reposaient sur quelqu'un d'autre.</p>
+
+        <div class="solutions">
+          <div class="solution">
+            <span class="solution-verdict">Écartée</span>
+            <h4>Mettre le pack à disposition, chacun l'importe</h4>
+            <ul>
+              <li class="pour">Rien à développer, rien à installer</li>
+              <li class="contre">Le déploiement dépend entièrement de l'utilisateur</li>
+              <li class="contre">Très long, et jamais vraiment terminé</li>
+              <li class="contre">Des anciennes versions survivent sur certains postes</li>
+              <li class="contre">Aucune homogénéité : c'est précisément ce qu'on voulait corriger</li>
+            </ul>
+          </div>
+          <div class="solution">
+            <span class="solution-verdict">Écartée</span>
+            <h4>La gestion centralisée proposée par Microsoft</h4>
+            <ul>
+              <li class="pour">Solution officiellement supportée</li>
+              <li class="pour">Administration centralisée, gestion simplifiée</li>
+              <li class="contre">Impose des licences Teams Premium</li>
+              <li class="contre">Un coût récurrent pour poser des images sur des écrans</li>
+            </ul>
+          </div>
+          <div class="solution is-retenue">
+            <span class="solution-verdict">Retenue</span>
+            <h4>Un déploiement automatique par stratégie de groupe</h4>
+            <ul>
+              <li class="pour">Aucune action de l'utilisateur, jamais</li>
+              <li class="pour">Mise à jour centralisée : un fichier remplacé, tout le monde suit</li>
+              <li class="pour">S'appuie sur l'infrastructure existante, sans licence supplémentaire</li>
+              <li class="contre">Un script à écrire, puis à maintenir</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== AVANT / APRES ==================== -->
+      <div class="case-step">
+        <h2>Ce que ça change</h2>
+        <div class="ba" data-ba>
+          <div class="ba-stage">
+            <div class="ba-panel ba-avant">
+              <span class="ba-tag">Avant</span>
+              <h4>À la charge de chacun.</h4>
+              <p>
+                Télécharger l'archive, l'extraire, retrouver le bon réglage dans Teams,
+                importer les images une par une. Long, inégal — et rien ne garantissait
+                que tout le monde avait la dernière version.
+              </p>
+            </div>
+            <div class="ba-panel ba-apres">
+              <span class="ba-tag">Après</span>
+              <h4>C'est déjà là.</h4>
+              <p>
+                À l'ouverture de session, les arrière-plans officiels sont en place.
+                Personne n'a rien demandé, personne n'a rien fait. Et pour renouveler
+                les visuels, il suffit de remplacer une archive au bon endroit :
+                tout le parc la reçoit.
+              </p>
+            </div>
+            <div class="ba-sep" aria-hidden="true"></div>
+            <input class="ba-range" type="range" min="0" max="100" value="50"
+                   id="baTeams" aria-label="Comparer la situation avant et après">
+          </div>
+          <p class="ba-hint">Faites glisser pour comparer</p>
+        </div>
+      </div>
+
+      <!-- ==================== RECUL ==================== -->
+      <div class="case-step">
+        <h2>Ce que je referais autrement</h2>
+        <div class="recul">
+          <h3>La solution s'appuie sur une règle qui ne m'appartient pas</h3>
+          <p>
+            Le script écrit dans le format attendu par la version actuelle du client
+            Teams : noms en GUID, miniatures associées, arborescence imposée.
+            Ce format n'est écrit nulle part comme un engagement. Il appartient à
+            l'éditeur, qui peut le faire évoluer.
+          </p>
+          <p>
+            <strong>C'est la fragilité assumée du projet.</strong> Une mise à jour du
+            client, et les fichiers peuvent rester au même endroit sans plus jamais
+            s'afficher.
+          </p>
+          <p>
+            Ce que je mettrais en place aujourd'hui, c'est un contrôle qui ne se contente
+            pas de vérifier que les fichiers ont été copiés, mais que les fonds sont
+            effectivement proposés à l'utilisateur. Aujourd'hui, la copie est tracée ;
+            le résultat visible, lui, reste à mesurer.
+          </p>
+        </div>
+      </div>
+
+      <!-- ==================== COMPETENCES ==================== -->
+      <div class="case-step">
+        <h2>Ce que cette mission démontre</h2>
+        <p>Chaque étiquette renvoie à la compétence correspondante du référentiel.</p>
+        <div class="preuves">
+          <a class="preuve-lien" href="competences.html#b21">Élaborer un dossier de choix d'une solution d'infrastructure</a>
+          <a class="preuve-lien" href="competences.html#b22">Déployer un service</a>
+          <a class="preuve-lien" href="competences.html#b22">Vérifier et valider la solution d'infrastructure</a>
+          <a class="preuve-lien" href="competences.html#b23">Automatiser des tâches d'administration</a>
+          <a class="preuve-lien" href="competences.html#b15">Accompagner les utilisateurs dans la mise en place d'un service</a>
+          <a class="preuve-lien" href="competences.html#b11">Recenser et identifier les ressources numériques</a>
+        </div>
+      </div>
+
+      <!-- ==================== RENVOI DOSSIER ==================== -->
+      <div class="case-step">
+        <div class="renvoi">
+          <p>
+            <strong>Le détail est dans le dossier professionnel :</strong>
+            le comparatif complet des trois options, la distribution de l'archive depuis
+            le partage SYSVOL de l'entreprise, la génération des miniatures et les
+            garde-fous prévus quand l'archive est absente ou illisible.
+          </p>
+          <a class="btn btn-cyan" href="realisations.html">Autres réalisations</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
+    <p class="mono">Site statique, sans traceur ni serveur</p>
+  </div>
+</footer>
+
+<script src="script.js?v=4"></script>
+</body>
+</html>
