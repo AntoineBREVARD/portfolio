@@ -280,6 +280,21 @@ function initReveal3D(){
   })();
 }
 
+/* ---------- Comparateur avant / apres ----------
+   Un input range invisible superpose au bloc : on herite gratuitement du
+   clavier, du tactile et de l'accessibilite, plutot que de recoder un
+   glisser-deposer a la main. */
+function initBeforeAfter(){
+  $$("[data-ba]").forEach(bloc => {
+    const input = $(".ba-range", bloc);
+    const stage = $(".ba-stage", bloc);
+    if (!input || !stage) return;
+    const apply = () => stage.style.setProperty("--ba", input.value + "%");
+    input.addEventListener("input", apply);
+    apply();
+  });
+}
+
 /* ---------- Contenu éditable via le CMS (content/*.json) ----------
    Chaque page garde son texte d'origine dans le HTML : c'est le secours si le
    fetch échoue ou si JS est désactivé. Ces fonctions le remplacent par la
@@ -356,6 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initStartLights();
   initPlot();
   initReveal3D();
+  initBeforeAfter();
   // Le contenu du CMS est injecté avant d'attacher les observateurs de scroll,
   // sinon les blocs reconstruits démarrent sans animation.
   initContent().finally(initReveal);
