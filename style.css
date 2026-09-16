@@ -433,31 +433,54 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
    ========================================================================= */
 @view-transition{ navigation:auto }
 
+/* Le navigateur fond les deux captures en "plus-lighter" : les luminosites
+   s'additionnent et l'ecran sature vers le blanc. Sur deux pages qui ont des
+   zones claires, on ne voyait qu'un flash et plus du tout le mouvement.
+   On repasse en fusion normale et on empile les deux plans explicitement. */
+::view-transition-image-pair(root){ isolation:auto }
+::view-transition-old(root),
+::view-transition-new(root){ mix-blend-mode:normal }
+
+/* la sortante passe DEVANT : c'est elle qu'on regarde s'echapper, et elle
+   decouvre la nouvelle page en partant */
 ::view-transition-old(root){
-  animation:travelling-sortie .46s cubic-bezier(.55,0,.30,1) both;
-  transform-origin:70% 50%;
+  animation:travelling-sortie .48s cubic-bezier(.5,0,.24,1) both;
+  transform-origin:82% 50%;
+  z-index:2;
 }
 ::view-transition-new(root){
-  animation:travelling-entree .58s cubic-bezier(.14,.86,.28,1) both;
-  transform-origin:30% 50%;
+  animation:travelling-entree .54s cubic-bezier(.12,.86,.26,1) .24s both;
+  transform-origin:18% 50%;
+  z-index:1;
 }
-/* Prise de virage. La sortante pivote et s'echappe sur le cote comme une
-   voiture qu'on double — rotateY pour le braquage, rotateZ pour le roulis.
-   L'entrante sort du virage et se redresse. */
+/* le groupe doit durer au moins aussi longtemps que ce qu'il contient,
+   sinon il coupe l'animation avant la fin */
+::view-transition-group(root){ animation-duration:.82s }
+
+/* Prise de virage. La sortante braque, prend du roulis et s'echappe sur le
+   cote — le mouvement d'une voiture qu'on double. Elle reste opaque pendant
+   l'essentiel du trajet : si elle s'efface tout de suite, on ne voit pas
+   qu'elle bouge. */
 @keyframes travelling-sortie{
-  to{
-    transform:perspective(1150px) rotateY(-12deg) rotateZ(1.4deg)
-              translateZ(430px) translateX(-10%);
-    opacity:0; filter:blur(9px);
+  0%   { transform:none; opacity:1 }
+  58%  { opacity:1 }
+  100% {
+    transform:perspective(900px) rotateY(-30deg) rotateZ(2.6deg)
+              translateZ(340px) translateX(-56%);
+    opacity:0;
   }
 }
+/* L'entrante sort du virage, braquee dans l'autre sens, et se redresse. */
 @keyframes travelling-entree{
-  from{
-    transform:perspective(1150px) rotateY(10deg) rotateZ(-1.1deg)
-              translateZ(-540px) translateX(8%);
-    opacity:0; filter:blur(13px);
+  0%   {
+    transform:perspective(900px) rotateY(24deg) rotateZ(-2deg)
+              translateZ(-320px) translateX(36%);
+    opacity:0;
   }
+  26%  { opacity:1 }
+  100% { transform:none; opacity:1 }
 }
+
 /* le bandeau ne doit pas voyager avec la page : il reste le point fixe */
 .telemetry{ view-transition-name:telemetry }
 ::view-transition-old(telemetry),::view-transition-new(telemetry){ animation:none }
