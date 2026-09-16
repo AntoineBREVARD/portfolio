@@ -295,6 +295,49 @@ function initBeforeAfter(){
   });
 }
 
+/* ---------- Sortie de virage ----------
+   Pendant une transition entre pages, les deux pages sont des captures : rien
+   d'anime sur le DOM n'y apparait. On joue donc les trainees APRES, quand la
+   nouvelle page reprend la main — ce qui tombe juste, c'est le moment ou l'on
+   deboule sur la ligne droite.
+   pagereveal n'existe que la ou les transitions multi-pages existent : ailleurs
+   il ne se passe rien, et la navigation reste normale. */
+function lancerSortieDeVirage(){
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const couche = document.createElement("div");
+  couche.className = "vitesse";
+  couche.setAttribute("aria-hidden", "true");
+
+  const N = 14;
+  for (let i = 0; i < N; i++){
+    const t = document.createElement("span");
+    t.className = "vitesse-trait" + (i % 3 === 0 ? " pale" : "");
+    t.style.top = (Math.random() * 100).toFixed(1) + "%";
+    t.style.width = (26 + Math.random() * 38).toFixed(0) + "vw";
+    t.style.animation = `filer ${(340 + Math.random() * 260).toFixed(0)}ms cubic-bezier(.3,0,.2,1) ${(Math.random() * 180).toFixed(0)}ms both`;
+    couche.appendChild(t);
+  }
+
+  const vibreur = document.createElement("div");
+  vibreur.className = "vitesse-vibreur";
+  vibreur.style.animation = "vibreur-passe 520ms cubic-bezier(.35,0,.2,1) 40ms both";
+  couche.appendChild(vibreur);
+
+  document.body.appendChild(couche);
+  // on retire la couche des qu'elle a fini : elle ne doit jamais rester
+  // au-dessus de la page une fois l'effet joue
+  setTimeout(() => couche.remove(), 1100);
+}
+
+function initTransitions(){
+  if (!("onpagereveal" in window)) return;
+  window.addEventListener("pagereveal", e => {
+    if (!e.viewTransition) return;              // arrivee sans transition
+    e.viewTransition.finished.then(lancerSortieDeVirage).catch(() => {});
+  });
+}
+
 /* ---------- Contenu éditable via le CMS (content/*.json) ----------
    Chaque page garde son texte d'origine dans le HTML : c'est le secours si le
    fetch échoue ou si JS est désactivé. Ces fonctions le remplacent par la
@@ -360,6 +403,10 @@ function initContent(){
 }
 
 /* ---------- Démarrage ---------- */
+// pagereveal se declenche avant le premier rendu : on s'abonne tout de
+// suite, pas au DOMContentLoaded qui arrive trop tard.
+initTransitions();
+
 document.addEventListener("DOMContentLoaded", () => {
   tickClock();
   setInterval(tickClock, 1000);

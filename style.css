@@ -434,16 +434,29 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
 @view-transition{ navigation:auto }
 
 ::view-transition-old(root){
-  animation:travelling-sortie .42s cubic-bezier(.65,0,.35,1) both;
+  animation:travelling-sortie .46s cubic-bezier(.55,0,.30,1) both;
+  transform-origin:70% 50%;
 }
 ::view-transition-new(root){
-  animation:travelling-entree .52s cubic-bezier(.16,.84,.30,1) both;
+  animation:travelling-entree .58s cubic-bezier(.14,.86,.28,1) both;
+  transform-origin:30% 50%;
 }
+/* Prise de virage. La sortante pivote et s'echappe sur le cote comme une
+   voiture qu'on double — rotateY pour le braquage, rotateZ pour le roulis.
+   L'entrante sort du virage et se redresse. */
 @keyframes travelling-sortie{
-  to{ transform:perspective(1400px) translateZ(300px) translateY(-1.5%); opacity:0; filter:blur(6px) }
+  to{
+    transform:perspective(1150px) rotateY(-12deg) rotateZ(1.4deg)
+              translateZ(430px) translateX(-10%);
+    opacity:0; filter:blur(9px);
+  }
 }
 @keyframes travelling-entree{
-  from{ transform:perspective(1400px) translateZ(-380px); opacity:0; filter:blur(9px) }
+  from{
+    transform:perspective(1150px) rotateY(10deg) rotateZ(-1.1deg)
+              translateZ(-540px) translateX(8%);
+    opacity:0; filter:blur(13px);
+  }
 }
 /* le bandeau ne doit pas voyager avec la page : il reste le point fixe */
 .telemetry{ view-transition-name:telemetry }
@@ -530,4 +543,44 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
 @media (max-width:700px){
   .ba-stage{ min-height:0 }
   .ba-apres{ clip-path:inset(0 0 0 var(--ba,50%)) }
+}
+
+
+/* =========================================================================
+   SORTIE DE VIRAGE
+   Joue a l'arrivee sur la nouvelle page, une fois le travelling termine :
+   des trainees de vitesse balaient l'ecran et un eclat de vibreur rouge et
+   blanc traverse. C'est le moment ou l'on deboule sur la ligne droite.
+   Cree par script.js, jamais present au repos.
+   ========================================================================= */
+.vitesse{
+  position:fixed;inset:0;z-index:95;pointer-events:none;overflow:hidden;
+  contain:strict;
+}
+.vitesse-trait{
+  position:absolute;left:0;height:2px;width:42vw;
+  background:linear-gradient(90deg,transparent,#35E0C8,transparent);
+  transform:translate3d(-60vw,0,0);opacity:0;
+  will-change:transform,opacity;
+}
+.vitesse-trait.pale{ background:linear-gradient(90deg,transparent,#F2F5F7,transparent);height:1px }
+@keyframes filer{
+  0%   { transform:translate3d(-60vw,0,0); opacity:0 }
+  12%  { opacity:.85 }
+  100% { transform:translate3d(150vw,0,0); opacity:0 }
+}
+/* vibreur : la bande rouge et blanche des bords de piste */
+.vitesse-vibreur{
+  position:absolute;top:-30%;bottom:-30%;width:120px;
+  transform:translate3d(-30vw,0,0) skewX(-14deg);opacity:0;
+  background:repeating-linear-gradient(180deg,#FF2D20 0 26px,#F2F5F7 26px 52px);
+  will-change:transform,opacity;
+}
+@keyframes vibreur-passe{
+  0%   { transform:translate3d(-30vw,0,0) skewX(-14deg); opacity:0 }
+  18%  { opacity:.5 }
+  100% { transform:translate3d(130vw,0,0) skewX(-14deg); opacity:0 }
+}
+@media (prefers-reduced-motion:reduce){
+  .vitesse{ display:none }
 }
