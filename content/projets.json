@@ -23,23 +23,23 @@
   ],
   "terrain": [
     {
-      "imageReelle": "images/uploads/shared-image-1-.jpg",
-      "imageIa": "images/scenes/direction-course.png",
+      "imageReelle": "images/uploads/shared-image-1-.webp",
+      "imageIa": "images/scenes/direction-course.webp",
       "caption": "Direction de course"
     },
     {
-      "imageReelle": "images/uploads/img_9655-2-scaled.jpg",
+      "imageReelle": "images/uploads/img_9655-2-scaled.webp",
       "imageIa": "",
       "caption": "Les Paddocks"
     },
     {
-      "imageReelle": "images/uploads/hq720.jpg",
-      "imageIa": "images/scenes/tour-module-sportif.png",
+      "imageReelle": "images/uploads/hq720.webp",
+      "imageIa": "images/scenes/tour-module-sportif.webp",
       "caption": "Départ des 24 Heures"
     },
     {
-      "imageReelle": "images/uploads/shared-image-2-.jpg",
-      "imageIa": "images/scenes/musee.png",
+      "imageReelle": "images/uploads/shared-image-2-.webp",
+      "imageIa": "images/scenes/musee.webp",
       "caption": "Musée des 24H"
     }
   ]
