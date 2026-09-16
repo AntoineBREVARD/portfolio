@@ -93,6 +93,55 @@ function initContactForm(){
   });
 }
 
+/* ---------- Copier l'adresse mail ----------
+   Le formulaire ci-dessus part en mailto: ; sur un poste sans client mail
+   configuré, le clic ne produit rien et le visiteur n'en sait rien. L'adresse
+   reste donc affichée en clair, avec un bouton qui la met dans le
+   presse-papiers et confirme brièvement. Aucun service tiers. */
+function initCopyEmail(){
+  const btn = $("#copyEmail");
+  const target = $("#contactEmail");
+  if (!btn || !target) return;
+
+  const idleLabel = btn.textContent;
+  let resetTimer;
+
+  async function copy(text){
+    // navigator.clipboard n'existe qu'en contexte sécurisé (https ou
+    // localhost), et même là il peut être refusé (permission, iframe sans
+    // clipboard-write). Dans tous ces cas on retombe sur execCommand, qui
+    // marche aussi sur un fichier ouvert en local.
+    if (navigator.clipboard && window.isSecureContext){
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch { /* on continue avec le repli ci-dessous */ }
+    }
+    const tmp = document.createElement("textarea");
+    tmp.value = text;
+    tmp.setAttribute("readonly", "");
+    tmp.style.position = "fixed";
+    tmp.style.top = "-1000px";
+    document.body.appendChild(tmp);
+    tmp.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(tmp);
+    return ok;
+  }
+
+  btn.addEventListener("click", async () => {
+    let ok = false;
+    try { ok = await copy(target.textContent.trim()); } catch { ok = false; }
+    btn.textContent = ok ? "Adresse copiée" : "Copie impossible";
+    btn.classList.toggle("is-copied", ok);
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => {
+      btn.textContent = idleLabel;
+      btn.classList.remove("is-copied");
+    }, 2000);
+  });
+}
+
 /* ---------- Contenu éditable via le CMS (content/*.json) ----------
    Chaque page garde son texte d'origine dans le HTML (secours si le fetch
    échoue ou si JS est désactivé) ; ces fonctions le remplacent par la
@@ -264,6 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
   initNavActive();
   initContactForm();
+  initCopyEmail();
   initFooterYear();
   initStartLights();
   // Le contenu (content/*.json) doit être injecté avant d'attacher les

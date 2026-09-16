@@ -60,7 +60,12 @@
       <div class="contact-info">
         <p class="lede" id="contactIntro">Écris-moi directement, ou passe par LinkedIn.</p>
         <ul class="contact-list">
-          <li><a href="mailto:antoinebrevard8@gmail.com" id="contactEmail">antoinebrevard8@gmail.com</a></li>
+          <li class="contact-line">
+            <a href="mailto:antoinebrevard8@gmail.com" id="contactEmail">antoinebrevard8@gmail.com</a>
+            <!-- Repli quand aucun client mail n'est configure : le mailto ne fait rien,
+                 mais l'adresse reste lisible et copiable en un clic. -->
+            <button type="button" class="btn-copy mono" id="copyEmail" aria-live="polite">Copier l'adresse</button>
+          </li>
           <li><a href="https://www.linkedin.com/in/antoine-br%C3%A9vard-20b483303/" target="_blank" rel="noopener" id="contactLinkedin">LinkedIn ↗</a></li>
           <li><a href="https://github.com/AntoineBREVARD" target="_blank" rel="noopener" id="contactGithub">GitHub ↗</a></li>
           <li><span class="mono" id="contactCity">Le Mans, France</span></li>

@@ -237,6 +237,18 @@ body.intro-lock{ overflow: hidden; }
 .contact-list a{ text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--line-soft); padding-bottom: 2px; }
 .contact-list a:hover{ border-color: var(--signal); color: var(--signal); }
 
+/* Bouton "copier l'adresse" : seul ajout de style de ce lot, volontairement
+   discret et construit uniquement avec les variables deja definies plus haut. */
+.contact-line{ display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.btn-copy{
+  font-size: .68rem; padding: 4px 10px; cursor: pointer;
+  background: none; color: var(--ink-soft);
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.btn-copy:hover{ color: var(--signal); border-color: var(--signal); }
+.btn-copy.is-copied{ color: var(--armed); border-color: var(--armed); }
+
 .contact-form{ display: flex; flex-direction: column; gap: 18px; }
 .contact-form label{ display: flex; flex-direction: column; gap: 8px; font-family: var(--mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 .contact-form input, .contact-form textarea{
