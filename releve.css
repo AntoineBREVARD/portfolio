@@ -1,0 +1,379 @@
+/* =========================================================================
+   LE RELEVÉ — Portfolio Antoine Brévard
+   BTS SIO option SISR · alternance Automobile Club de l'Ouest
+
+   Parti pris : une feuille de chronos, pas une brochure.
+   Le Mans est present en typographie et en donnees, pas en photos de
+   voitures — c'est plus juste, et ca evite d'emprunter des images qui ne
+   nous appartiennent pas.
+
+   Trois idees portent tout :
+     1. la typo EST l'image — echelle du viewport, bord a bord
+     2. le titre se deforme sous la charge du defilement : le propos du site
+        (un systeme qui encaisse) rendu physique
+     3. le vibreur jaune et bleu du circuit sert de filet structurel
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- jetons */
+:root{
+  /* papier froid, pas creme : le creme + serif est devenu le tic visuel
+     qu'on voit sur la moitie des sites generes */
+  --papier:#F1F1EC;
+  --papier-2:#E6E6E0;
+  --papier-3:#DCDCD5;
+  --encre:#0E0F11;
+  --encre-2:#494C52;
+  --encre-3:#888B91;
+  --trait:rgba(14,15,17,.13);
+  --trait-fort:rgba(14,15,17,.30);
+
+  /* les deux couleurs des vibreurs du circuit des 24 Heures */
+  --jaune:#F5C518;
+  --bleu:#17509E;
+
+  /* statuts du referentiel — semantiques, distincts de l'identite */
+  --prouve:#0F6B4F;
+  --partiel:#96610F;
+  --absent:#8A8D93;
+
+  --rail:76px;
+  --gouttiere:clamp(20px,4vw,52px);
+  --largeur:1320px;
+  --mesure:64ch;
+
+  --display:"Bricolage Grotesque","Arial Narrow",sans-serif;
+  --texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,.84,.28,1);
+
+  /* pilotees par le script : la charge du defilement */
+  --wght:760;
+  --wdth:100;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papier);color:var(--encre);
+  font-family:var(--texte);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--bleu);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.evite{
+  position:absolute;top:-70px;left:var(--gouttiere);z-index:200;
+  background:var(--encre);color:var(--papier);padding:12px 20px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;transition:top .2s;
+}
+.evite:focus{top:14px}
+
+/* ------------------------------------------------------------ typographie */
+.mono{
+  font-family:var(--mono);font-size:11px;letter-spacing:.02em;
+  text-transform:uppercase;font-variation-settings:"wdth" 87,"wght" 400;
+}
+.geant{
+  font-family:var(--display);margin:0;line-height:.82;
+  letter-spacing:-.022em;text-transform:uppercase;
+  font-variation-settings:"wght" var(--wght),"wdth" var(--wdth),"opsz" 96;
+}
+h1.geant{font-size:clamp(58px,15.5vw,236px)}
+h2.geant{font-size:clamp(38px,7vw,104px)}
+h3{
+  font-family:var(--display);font-size:clamp(21px,2.4vw,32px);margin:0;
+  line-height:1.05;letter-spacing:-.017em;
+  font-variation-settings:"wght" 620,"wdth" 92,"opsz" 32;
+}
+
+.etiquette{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--encre-3);margin:0 0 18px;font-variation-settings:"wdth" 87,"wght" 400;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.etiquette b{color:var(--encre);font-weight:400}
+.chapeau{
+  font-size:clamp(18px,2.1vw,25px);line-height:1.42;color:var(--encre-2);
+  max-width:var(--mesure);margin:0;letter-spacing:-.011em;
+}
+.chapeau strong{color:var(--encre);font-weight:600}
+p{margin:0 0 17px}
+p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------- filet « vibreur »
+   La bande jaune et bleu des bords de piste du Mans. Elle separe les
+   sections : c'est un element de structure, pas un ornement.             */
+.vibreur{
+  height:5px;border:0;margin:0;
+  background:repeating-linear-gradient(90deg,
+    var(--jaune) 0 17px, var(--bleu) 17px 34px);
+}
+.vibreur--fin{height:3px}
+
+/* ---------------------------------------------------------- rail lateral */
+.rail{
+  position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:60;
+  border-right:1px solid var(--trait);background:var(--papier);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:space-between;padding:22px 0 20px;
+}
+.rail-id{
+  font-family:var(--display);font-variation-settings:"wght" 800,"wdth" 78;
+  font-size:22px;letter-spacing:.02em;text-decoration:none;line-height:1;
+}
+.rail-secteurs{display:flex;flex-direction:column;gap:14px;align-items:center}
+.rail-secteur{
+  width:9px;height:9px;border:1.5px solid var(--trait-fort);border-radius:50%;
+  background:none;padding:0;cursor:pointer;transition:background .25s,border-color .25s,transform .25s;
+}
+.rail-secteur:hover{border-color:var(--encre);transform:scale(1.25)}
+.rail-secteur.is-on{background:var(--encre);border-color:var(--encre)}
+.rail-position{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--encre-3);
+  writing-mode:vertical-rl;text-orientation:mixed;font-variation-settings:"wdth" 87;
+}
+.rail-chrono{
+  font-family:var(--mono);font-size:10px;color:var(--encre-3);
+  writing-mode:vertical-rl;font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
+}
+
+/* --------------------------------------------------------------- gabarit */
+.page{margin-left:var(--rail)}
+.coque{max-width:var(--largeur);margin:0 auto;padding-inline:var(--gouttiere)}
+.bloc{padding-block:clamp(64px,9vw,140px);position:relative}
+.bloc--serre{padding-block:clamp(44px,5.5vw,80px)}
+.bloc--sombre{background:var(--encre);color:var(--papier)}
+.bloc--sombre .chapeau{color:rgba(241,241,236,.72)}
+.bloc--sombre .chapeau strong{color:var(--papier)}
+.bloc--sombre .etiquette{color:rgba(241,241,236,.5)}
+.bloc--sombre .etiquette b{color:var(--papier)}
+.bloc--papier2{background:var(--papier-2)}
+.tete{max-width:var(--mesure);margin-bottom:clamp(30px,4vw,56px)}
+.tete .chapeau{margin-top:20px}
+
+/* ------------------------------------------------------------------ hero
+   Pas de photo. Le nom occupe l'ecran, bord a bord, et se comprime au
+   defilement. C'est la seule chose a voir en arrivant.                  */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;
+  padding-block:clamp(84px,11vh,130px) clamp(30px,4vw,52px);
+}
+.hero-nom{width:100%}
+.hero-nom span{display:block}
+/* la deuxieme ligne en contour : le nom devient une structure, pas un aplat */
+.hero-nom .creux{
+  -webkit-text-stroke:1.4px var(--encre);color:transparent;
+}
+.hero-bas{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px 44px;align-items:end;
+}
+.hero-these{
+  font-size:clamp(19px,2.3vw,28px);line-height:1.34;max-width:32ch;
+  letter-spacing:-.014em;margin:0;
+}
+.hero-these strong{
+  font-weight:600;
+  box-shadow:inset 0 -.36em 0 rgba(245,197,24,.45);
+}
+.hero-actions{display:flex;gap:11px;flex-wrap:wrap}
+/* grille fixe plutot qu'un flex : en flex, le quatrieme releve retombait
+   seul sur une deuxieme ligne des que la place manquait */
+.hero-releves{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--trait);margin-top:34px;max-width:560px;
+}
+.hero-releve{padding:16px 18px 0 0;border-right:1px solid var(--trait)}
+.hero-releve:last-child{border-right:0;padding-right:0}
+.hero-releve dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:6px;font-variation-settings:"wdth" 87;
+}
+.hero-releve dd{
+  margin:0;font-family:var(--display);font-size:25px;line-height:1;
+  font-variation-settings:"wght" 700,"wdth" 85;font-variant-numeric:tabular-nums;
+}
+
+/* --------------------------------------------------------------- boutons */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+  padding:14px 22px;border:1px solid var(--encre);cursor:pointer;background:none;
+  font-variation-settings:"wdth" 87,"wght" 500;
+  transition:background .2s,color .2s,transform .3s var(--ease);
+}
+.btn:hover{background:var(--encre);color:var(--papier)}
+.btn--plein{background:var(--encre);color:var(--papier)}
+.btn--plein:hover{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.bloc--sombre .btn{border-color:rgba(241,241,236,.4);color:var(--papier)}
+.bloc--sombre .btn:hover{background:var(--papier);color:var(--encre)}
+
+/* ----------------------------------------------- realisations, en journal
+   Des lignes editoriales, pas des cartes. Une grille de cartes toutes
+   identiques est le tic visuel d'un gabarit ; une liste numerotee dit un
+   ordre et laisse la typographie respirer.                              */
+.journal{border-top:1px solid var(--trait)}
+.entree{
+  display:grid;grid-template-columns:78px minmax(0,1fr) minmax(0,30ch) auto;
+  gap:0 clamp(20px,3vw,48px);align-items:start;
+  padding:clamp(24px,3.2vw,40px) 0;border-bottom:1px solid var(--trait);
+  text-decoration:none;color:inherit;position:relative;
+  transition:padding-left .35s var(--ease);
+}
+.entree::before{
+  content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;
+  background:var(--papier-2);opacity:0;transition:opacity .3s;
+}
+.entree:hover::before{opacity:1}
+.entree:hover{padding-left:16px}
+.entree-num{
+  font-family:var(--mono);font-size:11px;color:var(--encre-3);padding-top:6px;
+  font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
+}
+.entree-titre{max-width:24ch}
+.entree-mot{
+  font-size:15px;line-height:1.5;color:var(--encre-2);margin:0;
+}
+.entree-comp{display:flex;flex-wrap:wrap;gap:5px;align-items:flex-start;padding-top:5px}
+.puce{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;
+  padding:4px 8px;border:1px solid var(--trait);color:var(--encre-3);white-space:nowrap;
+  font-variation-settings:"wdth" 87;
+}
+.entree-fleche{
+  align-self:center;font-family:var(--mono);font-size:15px;color:var(--encre-3);
+  transition:transform .35s var(--ease),color .2s;
+}
+.entree:hover .entree-fleche{transform:translateX(7px);color:var(--encre)}
+
+/* ---------------------------------------------- matrice de competences
+   La piece interactive du site : survoler une competence allume les
+   realisations qui la prouvent, et inversement.                        */
+.matrice{border-top:1px solid var(--trait)}
+.matrice-bloc{margin-bottom:38px}
+.matrice-bloc:last-child{margin-bottom:0}
+.matrice-tete{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding:14px 0 11px;border-bottom:1.5px solid var(--trait-fort);
+}
+.matrice-code{
+  font-family:var(--mono);font-size:10.5px;color:var(--bleu);flex:none;
+  font-variation-settings:"wdth" 87,"wght" 500;letter-spacing:.04em;
+}
+.matrice-nom{font-weight:600;font-size:16px;letter-spacing:-.012em}
+.matrice-epreuve{
+  margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--encre-3);font-variation-settings:"wdth" 87;
+}
+.ligne{
+  display:grid;grid-template-columns:3px minmax(0,1fr) auto;gap:0 15px;align-items:start;
+  padding:12px 0;border-bottom:1px solid var(--trait);transition:background .2s;
+}
+.ligne:hover,.ligne.is-lie{background:var(--papier-2)}
+.ligne-barre{align-self:stretch;min-height:20px}
+.est-prouve  .ligne-barre{background:var(--prouve)}
+.est-partiel .ligne-barre{background:var(--partiel)}
+.est-absent  .ligne-barre{background:var(--absent)}
+.ligne-intitule{font-size:14.5px;line-height:1.45}
+.ligne-preuves{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.preuve{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:3px 8px;
+  border:1px solid var(--trait);color:var(--encre-2);text-decoration:none;
+  font-variation-settings:"wdth" 87;transition:border-color .2s,color .2s,background .2s;
+}
+.preuve:hover,.preuve.is-lie{border-color:var(--bleu);color:var(--bleu);background:rgba(23,80,158,.06)}
+.ligne-statut{
+  font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;white-space:nowrap;align-self:start;font-variation-settings:"wdth" 87;
+}
+.est-prouve  .ligne-statut{background:rgba(15,107,79,.12);color:var(--prouve)}
+.est-partiel .ligne-statut{background:rgba(150,97,15,.12);color:var(--partiel)}
+.est-absent  .ligne-statut{background:rgba(138,141,147,.16);color:var(--absent)}
+
+/* ------------------------------------------------------------ accès jury */
+.jury{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:1px;background:var(--trait);border:1px solid var(--trait);
+}
+.jury-case{background:var(--papier);padding:24px 22px 26px;display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.bloc--sombre .jury-case{background:var(--encre)}
+.jury-case dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--bleu);font-variation-settings:"wdth" 87;
+}
+.bloc--sombre .jury-case dt{color:var(--jaune)}
+.jury-case dd{margin:0;font-size:14.5px;color:var(--encre-2);line-height:1.5}
+.bloc--sombre .jury-case dd{color:rgba(241,241,236,.7)}
+.jury-case a{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+  text-decoration:none;border-bottom:1px solid var(--trait-fort);padding-bottom:2px;
+  font-variation-settings:"wdth" 87;margin-top:4px;
+}
+.jury-case a:hover{border-bottom-color:var(--encre)}
+.bloc--sombre .jury-case a{border-bottom-color:rgba(241,241,236,.35)}
+
+/* -------------------------------------------------------------- révélation */
+.leve{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.leve.est-vu{opacity:1;transform:none}
+
+/* -------------------------------------------------------------------- pied */
+.pied{
+  border-top:1px solid var(--trait);padding-block:36px;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--encre-3);font-variation-settings:"wdth" 87;
+}
+.pied a{text-decoration:none;border-bottom:1px solid var(--trait)}
+.pied a:hover{color:var(--encre);border-bottom-color:var(--encre)}
+
+/* -------------------------------------------------------------- responsive */
+@media (max-width:900px){
+  :root{--rail:0px}
+  .rail{
+    left:0;right:0;bottom:auto;top:0;width:auto;height:52px;
+    flex-direction:row;padding:0 var(--gouttiere);
+    border-right:0;border-bottom:1px solid var(--trait);
+  }
+  .rail-position,.rail-chrono{writing-mode:horizontal-tb}
+  .rail-secteurs{flex-direction:row;gap:11px}
+  .page{margin-left:0;padding-top:52px}
+  .hero{min-height:calc(100svh - 52px)}
+  .hero-bas{grid-template-columns:1fr}
+  .entree{grid-template-columns:52px minmax(0,1fr) auto;gap:0 16px}
+  .entree-mot{grid-column:2;margin-top:10px}
+  .entree-comp{grid-column:2;margin-top:12px}
+  .ligne{grid-template-columns:3px minmax(0,1fr)}
+  .ligne-statut{grid-column:2;justify-self:start;margin-top:9px}
+}
+@media (max-width:560px){
+  .hero-releves{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-releve:nth-child(2n){border-right:0;padding-right:0}
+  .hero-releve:nth-child(n+3){border-top:1px solid var(--trait);margin-top:14px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .leve{opacity:1;transform:none}
+}
+
+/* -------------------------------------------------------------- impression
+   Le portfolio est une piece d'examen : il sera imprime ou exporte en PDF. */
+@media print{
+  :root{--rail:0px}
+  body{background:#fff;font-size:11pt}
+  .rail,.evite,.hero-actions,.entree-fleche{display:none!important}
+  .page{margin-left:0}
+  .hero{min-height:auto;padding-block:0 18pt}
+  .hero-nom .creux{-webkit-text-stroke:0;color:#000}
+  .bloc,.bloc--serre{padding-block:12pt;break-inside:avoid}
+  .bloc--sombre{background:#fff!important;color:#000!important}
+  .bloc--sombre .chapeau,.bloc--sombre .jury-case dd{color:#333!important}
+  .bloc--papier2,.jury-case{background:#fff!important}
+  .vibreur{height:2px;background:#000}
+  .entree,.ligne,.jury-case{break-inside:avoid}
+  .leve{opacity:1!important;transform:none!important}
+  h1,h2,h3{break-after:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#666}
+}

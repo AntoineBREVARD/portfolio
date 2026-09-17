@@ -4,323 +4,387 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Antoine Brévard — Technicien Systèmes &amp; Réseaux</title>
-<meta name="description" content="Portfolio d'Antoine Brévard, étudiant BTS SIO option SISR, alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest.">
-<!-- Open Graph / Twitter : apercu du lien quand la page est partagee -->
+<meta name="description" content="Antoine Brévard, BTS SIO option SISR en alternance à l'Automobile Club de l'Ouest. Quatre réalisations en production, et la compétence du référentiel que chacune démontre.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://antoinebrevard.github.io/portfolio/">
 <meta property="og:title" content="Antoine Brévard — Technicien Systèmes &amp; Réseaux">
-<meta property="og:description" content="Portfolio d'Antoine Brévard, étudiant BTS SIO option SISR, alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest.">
-<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/uploads/666f02ef21a56.jpg">
+<meta property="og:description" content="BTS SIO option SISR en alternance à l'Automobile Club de l'Ouest. Quatre réalisations en production, et la compétence du référentiel que chacune démontre.">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0A0C0F">
+<meta name="theme-color" content="#F1F1EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@75..112.5,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="releve.css?v=1">
 </head>
-<body data-page="accueil">
+<body>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
-<div class="grain" aria-hidden="true"></div>
+<a class="evite" href="#contenu">Aller au contenu</a>
 
-<!-- Feux de départ — l'écran d'entrée du site, une seule fois par session -->
-<div class="start-lights" id="startLights" aria-hidden="true">
-  <div class="start-lights-rig">
-    <div class="start-lights-row">
-      <span class="light"></span>
-      <span class="light"></span>
-      <span class="light"></span>
-      <span class="light"></span>
-      <span class="light"></span>
-    </div>
+<!-- ===================== RAIL LATÉRAL ===================== -->
+<nav class="rail" aria-label="Repères de la page">
+  <a href="#contenu" class="rail-id">AB</a>
+  <div class="rail-secteurs">
+    <button class="rail-secteur is-on" data-vers="contenu"      data-nom="Entrée"      aria-label="Entrée"></button>
+    <button class="rail-secteur"       data-vers="realisations" data-nom="Réalisations" aria-label="Réalisations"></button>
+    <button class="rail-secteur"       data-vers="competences"  data-nom="Compétences"  aria-label="Compétences"></button>
+    <button class="rail-secteur"       data-vers="parcours"     data-nom="Parcours"     aria-label="Parcours"></button>
+    <button class="rail-secteur"       data-vers="jury"         data-nom="Jury"         aria-label="Accès jury"></button>
   </div>
-  <button class="start-lights-skip mono" id="skipIntro" type="button">Passer ↦</button>
-</div>
+  <p class="rail-position" id="position">Entrée</p>
+  <p class="rail-chrono" id="chrono">--:--:--</p>
+</nav>
 
-<!-- Masque liquide du hero : feTurbulence deforme le cercle pour que le bord
-     ondule au lieu de tracer une sphere, et l'animation le garde vivant a l'arret. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <filter id="liquidTurbulence" x="-80%" y="-80%" width="260%" height="260%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.010" numOctaves="2" seed="7" result="bigWaves">
-        <animate attributeName="baseFrequency" dur="11s" values="0.005 0.008;0.009 0.013;0.005 0.008" repeatCount="indefinite"/>
-      </feTurbulence>
-      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.05" numOctaves="2" seed="3" result="rippleDetail">
-        <animate attributeName="baseFrequency" dur="6s" values="0.035 0.045;0.05 0.06;0.035 0.045" repeatCount="indefinite"/>
-      </feTurbulence>
-      <feComposite in="bigWaves" in2="rippleDetail" operator="arithmetic" k1="0" k2="0.7" k3="0.3" k4="0" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="115" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
-      <feGaussianBlur in="displaced" stdDeviation="1.4"/>
-    </filter>
-    <mask id="liquidMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1" height="1">
-      <circle id="maskBlob" cx="0" cy="0" fill="#fff" filter="url(#liquidTurbulence)"/>
-    </mask>
-  </defs>
-</svg>
-
-<header class="telemetry" id="telemetry">
-  <div class="telemetry-inner">
-    <a href="index.html" class="telemetry-id">
-      <span class="telemetry-dot" aria-hidden="true"></span>
-      AB<span class="telemetry-id-full">·BRÉVARD</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="telemetry-nav" aria-label="Navigation principale">
-      <a href="index.html" data-nav="accueil">Accueil</a>
-      <a href="profil.html" data-nav="profil">Profil</a>
-      <a href="realisations.html" data-nav="realisations">Réalisations</a>
-      <a href="competences.html" data-nav="competences">Compétences</a>
-      <a href="veille.html" data-nav="veille">Veille</a>
-      <a href="contact.html" data-nav="contact">Contact</a>
-    </nav>
-    <div class="telemetry-readout" aria-hidden="true">
-      <span id="clock">--:--:--</span>
-      <span class="telemetry-sep">/</span>
-      <span>LE MANS, FR</span>
-    </div>
-  </div>
-</header>
-
+<div class="page">
 <main id="contenu">
 
-  <!-- ==================== HERO A REVELATION ==================== -->
-  <section class="hero">
-    <div class="stage" id="stage">
-      <img class="layer-base" id="heroImage" src="images/uploads/666f02ef21a56.webp"
-           alt="Depart des 24 Heures du Mans vu depuis la ligne de depart">
-
-      <div class="layer-systems" id="layerSystems" aria-hidden="true">
-        <img src="images/uploads/666f02ef21a56.webp" alt="">
-        <div class="systems-tint"></div>
-        <svg class="systems-plot" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <!-- trame et releves generes par script.js : la lentille ne doit
-               jamais tomber sur une zone vide -->
-          <g class="plot-grid" id="plotGrid"></g>
-          <g class="plot-tick" id="plotTicks"></g>
-          <g id="plotCells"></g>
-
-          <g class="plot-line-strong">
-            <path d="M720 430 L470 300 M720 430 L980 300 M720 430 L720 640 M470 300 L270 210 M470 300 L400 480 M980 300 L1190 215 M980 300 L1060 490 M720 640 L520 760 M720 640 L940 755"/>
-          </g>
-          <g class="plot-line">
-            <path d="M270 210 L150 300 M1190 215 L1320 305 M400 480 L300 610 M1060 490 L1180 615"/>
-          </g>
-          <g class="plot-node">
-            <circle cx="470" cy="300" r="7"/><circle cx="980" cy="300" r="7"/><circle cx="720" cy="640" r="7"/>
-            <circle cx="270" cy="210" r="5"/><circle cx="1190" cy="215" r="5"/><circle cx="400" cy="480" r="5"/>
-            <circle cx="1060" cy="490" r="5"/><circle cx="520" cy="760" r="5"/><circle cx="940" cy="755" r="5"/>
-            <circle cx="150" cy="300" r="3.5"/><circle cx="1320" cy="305" r="3.5"/>
-            <circle cx="300" cy="610" r="3.5"/><circle cx="1180" cy="615" r="3.5"/>
-          </g>
-          <circle class="plot-node plot-node-core" cx="720" cy="430" r="11"/>
-          <circle class="plot-line-strong" cx="720" cy="430" r="26" fill="none">
-            <animate attributeName="r" dur="3.6s" values="16;44;16" repeatCount="indefinite"/>
-            <animate attributeName="opacity" dur="3.6s" values=".9;0;.9" repeatCount="indefinite"/>
-          </circle>
-          <g class="plot-label">
-            <text x="742" y="424">Cœur réseau</text>
-            <text x="492" y="294">Distribution nord</text>
-            <text x="1002" y="294">Distribution sud</text>
-            <text x="742" y="662">Supervision</text>
-            <text x="288" y="204">Liaison FO</text>
-            <text x="1208" y="209">Liaison FO</text>
-            <text x="418" y="474">Wi-Fi épreuve</text>
-            <text x="1078" y="484">Wi-Fi épreuve</text>
-            <text x="538" y="782">Postes · parc</text>
-            <text x="958" y="777">Téléphonie</text>
-          </g>
-          <line x1="0" y1="0" x2="1440" y2="0" stroke="#35E0C8" stroke-width="1.4" opacity=".5">
-            <animate attributeName="y1" dur="7s" values="-10;910;-10" repeatCount="indefinite"/>
-            <animate attributeName="y2" dur="7s" values="-10;910;-10" repeatCount="indefinite"/>
-          </line>
-        </svg>
-      </div>
-
-      <div class="probe mono" id="probe">Vue systèmes</div>
-    </div>
-
-    <div class="scrim" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <p class="eyebrow" id="heroEyebrow">BTS SIO · option SISR <b>—</b> Alternance · Automobile Club de l'Ouest</p>
-      <h1 class="hero-title display">
-        <span id="heroLine1">Antoine</span>
-        <span class="l2" id="heroLine2">Brévard</span>
-      </h1>
-      <p class="hero-lede" id="heroTagline">
-        Une fois par an, le système d'information encaisse la charge d'un événement mondial.
-        <strong>Il n'a pas le droit de tomber.</strong> C'est là que je travaille.
+  <!-- ===================== HERO ===================== -->
+  <section class="bloc hero coque">
+    <div>
+      <p class="etiquette">
+        <span>BTS SIO · option A — SISR</span>
+        <b>/</b>
+        <span>Alternance 2025—2027</span>
+        <b>/</b>
+        <span>Le Mans</span>
       </p>
+      <h1 class="geant hero-nom">
+        <span>Antoine</span>
+        <span class="creux">Brévard</span>
+      </h1>
+    </div>
+
+    <div class="hero-bas">
+      <div>
+        <p class="hero-these">
+          Une fois par an, un système d'information encaisse la charge d'un
+          événement mondial. <strong>Il n'a pas le droit de tomber.</strong>
+          C'est là que je travaille.
+        </p>
+        <dl class="hero-releves">
+          <div class="hero-releve">
+            <dt>Structure</dt>
+            <dd>ACO</dd>
+          </div>
+          <div class="hero-releve">
+            <dt>Réalisations</dt>
+            <dd>04</dd>
+          </div>
+          <div class="hero-releve">
+            <dt>Fenêtre critique</dt>
+            <dd>24 h</dd>
+          </div>
+          <div class="hero-releve">
+            <dt>Reprise possible</dt>
+            <dd>00</dd>
+          </div>
+        </dl>
+      </div>
       <div class="hero-actions">
-        <a href="realisations.html" class="btn btn-signal">Voir les réalisations</a>
-        <a href="CV_Antoine_Brevard.pdf" class="btn btn-ghost" download id="cvLink">Télécharger le CV</a>
-      </div>
-    </div>
-
-    <p class="invite mono" id="invite">
-      Sous le spectacle, les systèmes<br>
-      <b>Promenez le curseur sur l'image<span class="invite-pulse"></span></b>
-    </p>
-  </section>
-
-  <!-- ==================== REPERES ==================== -->
-  <section class="section section--serre section--nuit">
-    <div class="shell">
-      <p class="rule">Repères</p>
-      <div class="facts">
-        <div class="fact">
-          <span class="fact-label">Alternance</span>
-          <span class="fact-value">2025—27</span>
-          <span class="fact-sub">Automobile Club de l'Ouest, organisateur des 24 Heures du Mans</span>
-        </div>
-        <div class="fact">
-          <span class="fact-label">Formation</span>
-          <span class="fact-value">SISR</span>
-          <span class="fact-sub">BTS SIO option A · FAB'Academy, Le Mans</span>
-        </div>
-        <div class="fact">
-          <span class="fact-label">Réalisations</span>
-          <span class="fact-value">4</span>
-          <span class="fact-sub">Documentées du besoin au résultat, solutions écartées comprises</span>
-        </div>
-        <div class="fact">
-          <span class="fact-label">Fenêtre critique</span>
-          <span class="fact-value">24 h</span>
-          <span class="fact-sub">L'épreuve ne s'interrompt pas : aucune reprise possible</span>
-        </div>
+        <a class="btn btn--plein" href="#realisations">Les réalisations</a>
+        <a class="btn" href="CV_Antoine_Brevard.pdf" download>CV — PDF</a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== REALISATIONS ==================== -->
-  <section class="section">
-    <div class="shell">
-      <div class="section-head">
-        <p class="eyebrow">Réalisations</p>
-        <h2 class="display">La situation, le choix, ce qu'il en reste.</h2>
-        <p class="lede">
-          Quatre projets menés en production, chacun documenté avec les solutions
-          <strong>écartées et la raison du rejet</strong> — c'est le raisonnement qui se défend
-          devant un jury, pas seulement le résultat.
+  <hr class="vibreur">
+
+  <!-- ===================== RÉALISATIONS ===================== -->
+  <section class="bloc" id="realisations">
+    <div class="coque">
+      <div class="tete">
+        <p class="etiquette"><span>01</span><b>/</b><span>Réalisations</span></p>
+        <h2 class="geant">La situation,<br>le choix,<br>ce qu'il en reste.</h2>
+        <p class="chapeau">
+          Quatre missions menées en production. Chacune documentée avec les
+          solutions <strong>écartées et la raison du rejet</strong> — c'est le
+          raisonnement qui se défend, pas seulement le résultat.
         </p>
       </div>
 
-      <div class="missions-grid" id="missionsGrid">
+      <div class="journal">
 
-        <a class="mission-card" href="realisation-contacts.html">
-          <span class="mission-tag">01 — Annuaire &amp; données personnelles</span>
-          <h3>Synchronisation des contacts</h3>
-          <p>
-            Le passage au nouvel Outlook condamnait les dossiers publics dont dépendaient
-            plus de 300 boîtes aux lettres. Solution interne bâtie sur Microsoft Graph,
-            architecture MASTER/CORE, principe de zéro perte de données : ce que le
-            collaborateur a saisi lui-même n'est jamais écrasé.
+        <a class="entree" href="realisation-contacts.html">
+          <span class="entree-num">01</span>
+          <h3 class="entree-titre">Microsoft allait fermer la porte</h3>
+          <p class="entree-mot">
+            Le carnet d'adresses de toute l'entreprise reposait sur une
+            fonctionnalité qu'Outlook s'apprêtait à abandonner. Sans effacer ce
+            que les collaborateurs y avaient ajouté eux-mêmes.
           </p>
-          <span class="mission-comp">
-            <span class="comp-chip">Dossier de choix</span>
-            <span class="comp-chip">Sauvegardes</span>
-            <span class="comp-chip">Automatisation</span>
-            <span class="comp-chip">Données personnelles</span>
+          <span class="entree-comp">
+            <span class="puce">Dossier de choix</span>
+            <span class="puce">Données personnelles</span>
+            <span class="puce">Sauvegardes</span>
           </span>
+          <span class="entree-fleche" aria-hidden="true">→</span>
         </a>
 
-        <a class="mission-card" href="realisation-quotas.html">
-          <span class="mission-tag">02 — Supervision</span>
-          <h3>Alerte sur boîtes saturées</h3>
-          <p>
-            Seuil d'alerte fixé à 95 % après avoir constaté les premiers dysfonctionnements
-            réels à 97 %. Le service est prévenu avant le blocage, plus après.
+        <a class="entree" href="realisation-quotas.html">
+          <span class="entree-num">02</span>
+          <h3 class="entree-titre">On l'apprenait toujours trop tard</h3>
+          <p class="entree-mot">
+            Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien —
+            et le service informatique qui le découvre quand il appelle.
           </p>
-          <span class="mission-comp">
-            <span class="comp-chip">Indicateurs</span>
-            <span class="comp-chip">Exchange Online</span>
-            <span class="comp-chip">Tâche planifiée</span>
+          <span class="entree-comp">
+            <span class="puce">Indicateurs</span>
+            <span class="puce">Seuil mesuré</span>
           </span>
+          <span class="entree-fleche" aria-hidden="true">→</span>
         </a>
 
-        <a class="mission-card" href="realisation-teams.html">
-          <span class="mission-tag">03 — Mise à disposition</span>
-          <h3>Déploiement des fonds Teams</h3>
-          <p>
-            Licences Teams Premium écartées au profit d'un déploiement par GPO. Contrainte
-            technique réelle : le nouveau client Teams exige des noms en GUID et une
-            miniature par image.
+        <a class="entree" href="realisation-teams.html">
+          <span class="entree-num">03</span>
+          <h3 class="entree-titre">Une image de marque, 300 écrans</h3>
+          <p class="entree-mot">
+            Microsoft vendait la fonctionnalité sous licence. Nous ne l'avons
+            pas achetée.
           </p>
-          <span class="mission-comp">
-            <span class="comp-chip">Déploiement</span>
-            <span class="comp-chip">GPO</span>
-            <span class="comp-chip">Accompagnement</span>
+          <span class="entree-comp">
+            <span class="puce">Déploiement</span>
+            <span class="puce">Sans licence</span>
           </span>
+          <span class="entree-fleche" aria-hidden="true">→</span>
         </a>
 
-        <a class="mission-card" href="realisation-maj.html">
-          <span class="mission-tag">04 — Gestion de parc</span>
-          <h3>Mises à jour constructeurs</h3>
-          <p>
-            Orchestration de HP Image Assistant et Dell Command Update par un script unique,
-            deux GPO, et une interface qui prévient l'utilisateur avant qu'il n'éteigne son
-            poste au mauvais moment.
+        <a class="entree" href="realisation-maj.html">
+          <span class="entree-num">04</span>
+          <h3 class="entree-titre">Poste par poste, à la main</h3>
+          <p class="entree-mot">
+            Deux constructeurs, deux outils, des dizaines de modèles — et des
+            pilotes qu'on ne mettait à jour qu'une fois le problème arrivé.
           </p>
-          <span class="mission-comp">
-            <span class="comp-chip">Patrimoine</span>
-            <span class="comp-chip">PowerShell</span>
-            <span class="comp-chip">Maintenance préventive</span>
+          <span class="entree-comp">
+            <span class="puce">Patrimoine</span>
+            <span class="puce">Automatisation</span>
           </span>
+          <span class="entree-fleche" aria-hidden="true">→</span>
         </a>
 
       </div>
     </div>
   </section>
 
-  <!-- ==================== ACCES JURY ==================== -->
-  <section class="section section--serre section--ardoise">
-    <div class="shell">
-      <div class="jury">
-        <div class="jury-intro">
-          <p class="eyebrow">Épreuves E4 et E5</p>
-          <h2>Accès direct</h2>
-          <p class="lede">
-            Si vous évaluez ce portfolio, voici les entrées utiles — sans avoir à
-            parcourir le site.
-          </p>
-        </div>
-        <div class="jury-item">
-          <span class="fact-label">Traçabilité</span>
-          <p>Chaque compétence du référentiel, et la réalisation qui la démontre.</p>
-          <a href="competences.html">Matrice de compétences</a>
-        </div>
-        <div class="jury-item">
-          <span class="fact-label">Situations</span>
-          <p>Les quatre réalisations, du contexte au résultat, tests compris.</p>
-          <a href="realisations.html">Voir les réalisations</a>
-        </div>
-        <div class="jury-item">
-          <span class="fact-label">Veille</span>
-          <p>Le journal de veille technologique, daté et sourcé.</p>
-          <a href="veille.html">Journal de veille</a>
-        </div>
-        <div class="jury-item">
-          <span class="fact-label">Parcours</span>
-          <p>Formation, contexte d'alternance et projet professionnel.</p>
-          <a href="profil.html">Profil</a>
-        </div>
+  <hr class="vibreur vibreur--fin">
+
+  <!-- ===================== MATRICE ===================== -->
+  <section class="bloc bloc--papier2" id="competences">
+    <div class="coque">
+      <div class="tete">
+        <p class="etiquette"><span>02</span><b>/</b><span>Référentiel</span></p>
+        <h2 class="geant">Ce que ça<br>démontre.</h2>
+        <p class="chapeau">
+          Les compétences du référentiel BTS SIO option A, et la réalisation qui
+          les prouve. <strong>Survolez une réalisation</strong> pour voir tout ce
+          qu'elle couvre.
+        </p>
       </div>
+
+      <div class="matrice">
+
+        <div class="matrice-bloc">
+          <div class="matrice-tete">
+            <span class="matrice-code">Bloc 1</span>
+            <span class="matrice-nom">Support et mise à disposition de services informatiques</span>
+            <span class="matrice-epreuve">Épreuve E4</span>
+          </div>
+
+          <div class="ligne est-partiel" data-preuves="p1 p4">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Gérer le patrimoine informatique</p>
+              <div class="ligne-preuves">
+                <a class="preuve" href="realisation-contacts.html" data-ref="p1">01 — Annuaire</a>
+                <a class="preuve" href="realisation-maj.html" data-ref="p4">04 — Parc</a>
+              </div>
+            </div>
+            <span class="ligne-statut">Partiel</span>
+          </div>
+
+          <div class="ligne est-absent" data-preuves="">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Répondre aux incidents et aux demandes d'assistance</p>
+              <div class="ligne-preuves">
+                <span class="preuve" style="border-style:dashed">Situation à documenter</span>
+              </div>
+            </div>
+            <span class="ligne-statut">Absent</span>
+          </div>
+
+          <div class="ligne est-absent" data-preuves="">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Développer la présence en ligne de l'organisation</p>
+            </div>
+            <span class="ligne-statut">Absent</span>
+          </div>
+
+          <div class="ligne est-partiel" data-preuves="p1 p2 p3 p4">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Travailler en mode projet</p>
+              <div class="ligne-preuves">
+                <a class="preuve" href="realisation-contacts.html" data-ref="p1">01</a>
+                <a class="preuve" href="realisation-quotas.html" data-ref="p2">02</a>
+                <a class="preuve" href="realisation-teams.html" data-ref="p3">03</a>
+                <a class="preuve" href="realisation-maj.html" data-ref="p4">04</a>
+              </div>
+            </div>
+            <span class="ligne-statut">Partiel</span>
+          </div>
+
+          <div class="ligne est-prouve" data-preuves="p1 p2 p3 p4">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Mettre à disposition des utilisateurs un service informatique</p>
+              <div class="ligne-preuves">
+                <a class="preuve" href="realisation-contacts.html" data-ref="p1">01</a>
+                <a class="preuve" href="realisation-quotas.html" data-ref="p2">02</a>
+                <a class="preuve" href="realisation-teams.html" data-ref="p3">03</a>
+                <a class="preuve" href="realisation-maj.html" data-ref="p4">04</a>
+              </div>
+            </div>
+            <span class="ligne-statut">Prouvé</span>
+          </div>
+
+          <div class="ligne est-absent" data-preuves="">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Organiser son développement professionnel</p>
+              <div class="ligne-preuves">
+                <span class="preuve" style="border-style:dashed">Veille à ouvrir</span>
+              </div>
+            </div>
+            <span class="ligne-statut">Absent</span>
+          </div>
+        </div>
+
+        <div class="matrice-bloc">
+          <div class="matrice-tete">
+            <span class="matrice-code">Bloc 2</span>
+            <span class="matrice-nom">Administration des systèmes et des réseaux</span>
+            <span class="matrice-epreuve">Épreuve E5 · SISR</span>
+          </div>
+
+          <div class="ligne est-prouve" data-preuves="p1 p2 p3 p4">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Concevoir une solution d'infrastructure réseau</p>
+              <div class="ligne-preuves">
+                <a class="preuve" href="realisation-contacts.html" data-ref="p1">01</a>
+                <a class="preuve" href="realisation-quotas.html" data-ref="p2">02</a>
+                <a class="preuve" href="realisation-teams.html" data-ref="p3">03</a>
+                <a class="preuve" href="realisation-maj.html" data-ref="p4">04</a>
+              </div>
+            </div>
+            <span class="ligne-statut">Prouvé</span>
+          </div>
+
+          <div class="ligne est-partiel" data-preuves="p1 p3 p4">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Installer, tester et déployer une solution d'infrastructure</p>
+              <div class="ligne-preuves">
+                <a class="preuve" href="realisation-contacts.html" data-ref="p1">01</a>
+                <a class="preuve" href="realisation-teams.html" data-ref="p3">03</a>
+                <a class="preuve" href="realisation-maj.html" data-ref="p4">04</a>
+              </div>
+            </div>
+            <span class="ligne-statut">Partiel</span>
+          </div>
+
+          <div class="ligne est-prouve" data-preuves="p1 p2 p4">
+            <span class="ligne-barre"></span>
+            <div>
+              <p class="ligne-intitule">Exploiter, dépanner et superviser une solution d'infrastructure</p>
+              <div class="ligne-preuves">
+                <a class="preuve" href="realisation-contacts.html" data-ref="p1">01</a>
+                <a class="preuve" href="realisation-quotas.html" data-ref="p2">02</a>
+                <a class="preuve" href="realisation-maj.html" data-ref="p4">04</a>
+              </div>
+            </div>
+            <span class="ligne-statut">Prouvé</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="vibreur vibreur--fin">
+
+  <!-- ===================== PARCOURS ===================== -->
+  <section class="bloc" id="parcours">
+    <div class="coque">
+      <div class="tete">
+        <p class="etiquette"><span>03</span><b>/</b><span>Parcours</span></p>
+        <h2 class="geant">Une PME onze mois<br>par an, une multi­nationale<br>le douzième.</h2>
+      </div>
+      <p class="chapeau" style="margin-bottom:22px">
+        Alternant technicien systèmes &amp; réseaux à l'Automobile Club de l'Ouest,
+        en BTS SIO option SISR à la FAB'Academy du Mans.
+      </p>
+      <p style="max-width:var(--mesure);color:var(--encre-2)">
+        J'y interviens sur le support utilisateurs, des projets d'infrastructure et
+        l'administration d'un environnement Microsoft 365 hybride, aux côtés de
+        serveurs Linux et de l'administration réseau. Le temps d'une épreuve, le
+        service se transforme en centre de commandement : l'infrastructure doit
+        encaisser une charge sans commune mesure avec le reste de l'année, sans
+        fenêtre de reprise, puisque la course ne s'interrompt pas.
+      </p>
+    </div>
+  </section>
+
+  <hr class="vibreur">
+
+  <!-- ===================== ACCÈS JURY ===================== -->
+  <section class="bloc bloc--serre bloc--sombre" id="jury">
+    <div class="coque">
+      <div class="tete">
+        <p class="etiquette"><span>04</span><b>/</b><span>Épreuves E4 et E5</span></p>
+        <h2 class="geant" style="font-variation-settings:'wght' 700,'wdth' 84">Accès direct</h2>
+      </div>
+      <dl class="jury">
+        <div class="jury-case">
+          <dt>Réalisations</dt>
+          <dd>Les quatre situations, du contexte au résultat.</dd>
+          <a href="#realisations">Y aller</a>
+        </div>
+        <div class="jury-case">
+          <dt>Traçabilité</dt>
+          <dd>Chaque compétence du référentiel et sa preuve.</dd>
+          <a href="#competences">Voir la matrice</a>
+        </div>
+        <div class="jury-case">
+          <dt>Dossier</dt>
+          <dd>L'architecture, les phases, les campagnes de test.</dd>
+          <a href="CV_Antoine_Brevard.pdf" download>CV en PDF</a>
+        </div>
+        <div class="jury-case">
+          <dt>Me joindre</dt>
+          <dd>antoinebrevard8@gmail.com</dd>
+          <a href="mailto:antoinebrevard8@gmail.com">Écrire</a>
+        </div>
+      </dl>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="shell">
-    <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
-    <p class="mono">Site statique, sans traceur ni serveur</p>
-  </div>
+<footer class="pied coque">
+  <span>Antoine Brévard — BTS SIO option SISR · <span id="annee"></span></span>
+  <span>Site statique, sans traceur ni serveur</span>
+  <span>
+    <a href="https://www.linkedin.com/in/antoine-br%C3%A9vard-20b483303/">LinkedIn</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/AntoineBREVARD">GitHub</a>
+  </span>
 </footer>
+</div>
 
-<script src="script.js?v=9"></script>
+<script src="releve.js?v=1"></script>
 </body>
 </html>
