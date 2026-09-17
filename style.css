@@ -360,6 +360,48 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
 .contact-form .btn{align-self:flex-start}
 .form-hint{font-size:13.5px;color:var(--ink-3);margin:0}
 
+/* ---------------------------------------------------------------- profil
+   Le portrait est borne en largeur ET en ratio. Sans ces deux bornes il
+   s'affichait a sa taille naturelle, soit enorme. */
+.profil-grid{
+  display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);
+  gap:clamp(30px,4.5vw,64px);align-items:start;
+}
+.profil-photo{position:relative;max-width:280px}
+.profil-photo img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 22%;
+  border:1px solid var(--ligne);
+}
+.profil-photo-tag{
+  position:absolute;left:-10px;bottom:20px;
+  background:var(--noir);color:var(--cyan);border:1px solid var(--ligne-forte);
+  padding:7px 13px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.profil-text > p{color:var(--ink-2);line-height:1.68;max-width:var(--mesure)}
+.profil-text > p.lede{color:var(--ink);margin-bottom:18px}
+.profil-text .facts{margin-top:32px}
+
+/* poste occupe */
+.poste{border:1px solid var(--ligne);background:var(--ardoise);padding:clamp(26px,3.6vw,44px)}
+.poste-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.poste-head h3{font-family:var(--titre);font-weight:800;text-transform:uppercase;font-size:clamp(21px,2.6vw,30px);letter-spacing:-.005em}
+.poste-lieu{margin:5px 0 0;color:var(--ink-3);font-size:14px}
+.poste-periode{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--cyan);white-space:nowrap}
+.poste-contexte{color:var(--ink-2);max-width:var(--mesure);margin:0 0 26px;line-height:1.65}
+.poste-contexte strong{color:var(--ink);font-weight:600}
+.poste-missions{display:flex;flex-wrap:wrap;gap:9px;list-style:none;padding:0;margin:0}
+.poste-missions li{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--ligne);padding:9px 14px;color:var(--ink-2);
+}
+
+@media (max-width:760px){
+  .profil-grid{grid-template-columns:1fr}
+  .profil-photo{max-width:220px}
+  .profil-photo-tag{left:0}
+}
+
 /* ------------------------------------------------------------ révélation */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .reveal.is-visible{opacity:1;transform:none}
@@ -431,16 +473,17 @@ a.matrix-preuve:hover{border-color:var(--cyan);color:var(--cyan)}
    cache), mecanique differente, jamais les deux sur le meme ecran.
    ========================================================================= */
 .ba{ margin:4px 0 0 }
+/* Les deux panneaux occupent la MEME cellule de grille : le plus haut fixe la
+   hauteur, l'autre la remplit. En positionnant "apres" en absolu, il debordait
+   de son cadre des que son texte etait plus long que celui d'"avant" — ce qui
+   arrivait des 400 px de large. */
 .ba-stage{
   position:relative;overflow:hidden;border:1px solid var(--ligne);
-  background:var(--papier-2);isolation:isolate;
+  background:var(--papier-2);display:grid;
 }
+.ba-avant,.ba-apres{ grid-area:1 / 1 }
 .ba-panel{ padding:clamp(26px,3.6vw,42px) clamp(22px,3vw,38px) }
-/* le panneau 'avant' est dans le flux et fixe la hauteur ; le panneau
-   'apres' se superpose, sinon les deux se decalent des que les textes
-   n'ont pas la meme longueur */
-.ba-avant{ position:relative }
-.ba-apres{ position:absolute;inset:0;background:var(--papier);clip-path:inset(0 0 0 var(--ba,50%)) }
+.ba-apres{ position:relative;background:var(--papier);clip-path:inset(0 0 0 var(--ba,50%)) }
 .ba-tag{
   display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
   text-transform:uppercase;padding:3px 9px;margin-bottom:14px;

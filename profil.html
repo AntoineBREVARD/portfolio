@@ -4,24 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profil — Antoine Brévard</title>
-<meta name="description" content="Profil et expérience d'Antoine Brévard, alternant Technicien Systèmes & Réseaux à l'Automobile Club de l'Ouest.">
+<meta name="description" content="Parcours d'Antoine Brévard, alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest, en BTS SIO option SISR.">
 <!-- Open Graph / Twitter : apercu du lien quand la page est partagee -->
-<meta property="og:type" content="website">
+<meta property="og:type" content="profile">
 <meta property="og:url" content="https://antoinebrevard.github.io/portfolio/profil.html">
 <meta property="og:title" content="Profil — Antoine Brévard">
-<meta property="og:description" content="Profil et expérience d'Antoine Brévard, alternant Technicien Systèmes & Réseaux à l'Automobile Club de l'Ouest.">
+<meta property="og:description" content="Parcours d'Antoine Brévard, alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest, en BTS SIO option SISR.">
 <meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/uploads/666f02ef21a56.jpg">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0b0c0f">
+<meta name="theme-color" content="#0A0C0F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body data-page="profil">
 
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="telemetry" id="telemetry">
@@ -30,11 +31,15 @@
       <span class="telemetry-dot" aria-hidden="true"></span>
       AB<span class="telemetry-id-full">·BRÉVARD</span>
     </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="telemetry-nav" aria-label="Navigation principale">
       <a href="index.html" data-nav="accueil">Accueil</a>
       <a href="profil.html" data-nav="profil">Profil</a>
+      <a href="realisations.html" data-nav="realisations">Réalisations</a>
       <a href="competences.html" data-nav="competences">Compétences</a>
-      <a href="projets.html" data-nav="projets">Projets</a>
+      <a href="veille.html" data-nav="veille">Veille</a>
       <a href="contact.html" data-nav="contact">Contact</a>
     </nav>
     <div class="telemetry-readout" aria-hidden="true">
@@ -42,86 +47,127 @@
       <span class="telemetry-sep">/</span>
       <span>LE MANS, FR</span>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
-<main>
+<main id="contenu">
 
-  <!-- À PROPOS -->
-  <section class="section" id="apropos">
-    <div class="section-head">
-      <p class="eyebrow mono">01 — Profil</p>
-      <h2>Sur le terrain plutôt que sur la théorie.</h2>
+  <!-- ==================== ACCROCHE ==================== -->
+  <section class="section case-hero">
+    <div class="shell">
+      <p class="eyebrow">Profil <b>—</b> BTS SIO option SISR</p>
+      <h1 class="display">Sur le terrain<br>plutôt que sur<br>la théorie.</h1>
     </div>
-    <div class="about-grid">
-      <div class="about-photo">
-        <img src="images/antoine-brevard.webp" alt="Portrait d'Antoine Brévard" id="aboutPhoto">
-        <span class="about-photo-tag mono" id="aboutPhotoTag">EN&nbsp;POSTE</span>
-      </div>
-      <div class="about-text">
-        <p class="lede" id="aboutIntro">
-          Actuellement alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest,
-          en BTS SIO option SISR (Fab Academy, Le Mans).
-        </p>
-        <p id="aboutBody">
-          J'y interviens sur le support utilisateurs, des projets d'infrastructure et l'administration
-          d'un environnement Windows hybride, aux côtés de serveurs Linux et de l'administration réseau —
-          au sein d'une organisation dont le système d'information doit encaisser, une fois par an,
-          la charge d'un événement mondial.
-        </p>
-        <div class="facts">
-          <div class="fact">
-            <span class="fact-label mono">Formation</span>
-            <span class="fact-value" id="formationValue">BTS SIO — option SISR<br><span class="fact-sub">Fab Academy, Le Mans · 2025—2027</span></span>
-          </div>
-          <div class="fact">
-            <span class="fact-label mono">Certification</span>
-            <span class="fact-value" id="certificationValue">MOOC de l'ANSSI<br><span class="fact-sub">Sensibilisation à la cybersécurité</span></span>
+  </section>
+
+  <!-- ==================== QUI ==================== -->
+  <section class="section section--serre section--nuit">
+    <div class="shell">
+      <div class="profil-grid">
+        <div class="profil-photo">
+          <img src="images/antoine-brevard.webp" alt="Portrait d'Antoine Brévard" id="aboutPhoto">
+          <span class="profil-photo-tag" id="aboutPhotoTag">En&nbsp;poste</span>
+        </div>
+        <div class="profil-text">
+          <p class="lede" id="aboutIntro">
+            Actuellement alternant Technicien Systèmes &amp; Réseaux à l'Automobile Club de l'Ouest,
+            en BTS SIO option SISR à la FAB'Academy du Mans.
+          </p>
+          <p id="aboutBody">
+            J'y interviens sur le support utilisateurs, des projets d'infrastructure et
+            l'administration d'un environnement Windows hybride, aux côtés de serveurs Linux et de
+            l'administration réseau — au sein d'une organisation dont le système d'information doit
+            encaisser, une fois par an, la charge d'un événement mondial.
+          </p>
+          <div class="facts">
+            <div class="fact">
+              <span class="fact-label">Formation</span>
+              <span class="fact-value">BTS SIO</span>
+              <span class="fact-sub">Option A — SISR · FAB'Academy, Le Mans · 2025—2027</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Certification</span>
+              <span class="fact-value">ANSSI</span>
+              <span class="fact-sub">MOOC — sensibilisation à la cybersécurité</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EXPÉRIENCE -->
-  <section class="section section-dark" id="experience">
-    <div class="section-head">
-      <p class="eyebrow mono">02 — Poste</p>
-      <h2>Technicien Systèmes &amp; Réseaux, en production.</h2>
-    </div>
-    <div class="exp-card">
-      <div class="exp-card-head">
-        <div>
-          <h3 id="expTitle">Alternance — Automobile Club de l'Ouest</h3>
-          <p class="exp-place" id="expPlace">Le Mans, France</p>
-        </div>
-        <span class="exp-period mono" id="expPeriod">2025 — 2027</span>
+  <!-- ==================== LE POSTE ==================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Le poste</p>
+        <h2 class="display">Une PME onze mois par an,<br>une multinationale le douzième.</h2>
       </div>
-      <p class="exp-context" id="expContext">
-        L'ACO organise, entre autres, les <strong>24&nbsp;Heures du Mans</strong> : le temps d'un week-end,
-        son système d'information doit tenir une charge et une exigence hors normes — un terrain
-        d'apprentissage particulièrement concret pour un technicien systèmes &amp; réseaux.
-      </p>
-      <ul class="exp-missions" id="expMissions">
-        <li>Support technique</li>
-        <li>Projets d'infrastructure</li>
-        <li>Administration Windows (infra hybride)</li>
-        <li>Administration Linux</li>
-        <li>Réseaux</li>
-      </ul>
+
+      <div class="poste">
+        <div class="poste-head">
+          <div>
+            <h3 id="expTitle">Alternance — Automobile Club de l'Ouest</h3>
+            <p class="poste-lieu" id="expPlace">Le Mans, France</p>
+          </div>
+          <span class="poste-periode" id="expPeriod">2025 — 2027</span>
+        </div>
+        <p class="poste-contexte" id="expContext">
+          L'ACO organise, entre autres, les <strong>24&nbsp;Heures du Mans</strong>. Le temps d'un
+          week-end, le service se transforme en centre de commandement et l'infrastructure doit
+          encaisser une charge sans commune mesure avec le reste de l'année — sans fenêtre de
+          reprise, puisque l'épreuve ne s'interrompt pas.
+        </p>
+        <ul class="poste-missions" id="expMissions">
+          <li>Support technique</li>
+          <li>Projets d'infrastructure</li>
+          <li>Administration Windows (infra hybride)</li>
+          <li>Administration Linux</li>
+          <li>Réseaux</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SUITE ==================== -->
+  <section class="section section--serre section--ardoise">
+    <div class="shell">
+      <div class="jury">
+        <div class="jury-intro">
+          <p class="eyebrow">Ce qui suit</p>
+          <h2>Ce que j'en ai fait</h2>
+          <p class="lede">
+            Le contexte donne la mesure ; les réalisations montrent les décisions.
+          </p>
+        </div>
+        <div class="jury-item">
+          <span class="fact-label">Réalisations</span>
+          <p>Quatre missions en production, avec les solutions écartées.</p>
+          <a href="realisations.html">Voir les réalisations</a>
+        </div>
+        <div class="jury-item">
+          <span class="fact-label">Traçabilité</span>
+          <p>Quelle réalisation démontre quelle compétence du référentiel.</p>
+          <a href="competences.html">Matrice de compétences</a>
+        </div>
+        <div class="jury-item">
+          <span class="fact-label">Me joindre</span>
+          <p>Adresse, LinkedIn, GitHub.</p>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
-  <p class="mono">Site statique, sans traceur ni serveur.</p>
+  <div class="shell">
+    <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
+    <p class="mono">Site statique, sans traceur ni serveur</p>
+  </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=10"></script>
 </body>
 </html>
