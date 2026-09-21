@@ -404,11 +404,19 @@ p:last-child{margin-bottom:0}
    Antoine au Mans Classic — donc aucune question de droits. Legerement
    rabattues pour qu'elles appartiennent au systeme au lieu de s'y poser. */
 .bande{position:relative;overflow:hidden;margin:0;background:var(--vert)}
+/* Les photos sont recadrees en panoramique a la source, sujet centre : le
+   cadre suit donc leur format au lieu de tailler dedans. Le plafond ne sert
+   qu'a eviter une bande de 1000 px de haut sur un tres grand ecran, et il
+   rabote des bords, jamais le sujet.
+   La version precedente enfermait des photos VERTICALES dans une bande
+   horizontale : on n'en voyait qu'une tranche, parfois a cote du sujet. */
 .bande img{
-  width:100%;height:clamp(230px,36vh,420px);object-fit:cover;display:block;
-  filter:saturate(.92) contrast(1.04);
+  width:100%;height:auto;display:block;
+  aspect-ratio:2.35;object-fit:cover;object-position:center;
+  max-height:clamp(210px,30vw,440px);
+  filter:saturate(.94) contrast(1.03);
 }
-.bande--haute img{height:clamp(300px,50vh,560px)}
+.bande--haute img{max-height:clamp(250px,36vw,540px)}
 .bande figcaption{
   position:absolute;left:0;bottom:0;
   font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
@@ -447,7 +455,12 @@ p:last-child{margin-bottom:0}
   text-decoration:none;font-variation-settings:"wdth" 87;
   border-bottom:1px solid currentColor;padding-bottom:2px;
 }
-.cas-titre{font-size:clamp(40px,8vw,120px)}
+/* Le nom a l'echelle de l'ecran n'a de sens que sur l'accueil : la, il EST
+   l'image. Sur une page interieure, un titre de 120 px ecrase le contenu
+   qu'on est venu lire. */
+/* h1.cas-titre, pas .cas-titre : h1.geant porte un element ET une classe,
+   donc il gagne contre une classe seule — la regle etait ecrasee. */
+h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
 .cas-amorce{
   font-size:clamp(19px,2.4vw,29px);line-height:1.34;max-width:34ch;
   margin:26px 0 0;letter-spacing:-.014em;
