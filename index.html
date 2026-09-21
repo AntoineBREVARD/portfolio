@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@75..112.5,100..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="releve.css?v=3">
+<link rel="stylesheet" href="releve.css?v=4">
 </head>
 <body>
 
@@ -49,10 +49,16 @@
         <b>/</b>
         <span>Le Mans</span>
       </p>
-      <h1 class="geant hero-nom">
+      <h1 class="geant hero-nom" id="heroNom">
         <span>Antoine</span>
         <span class="creux">Brévard</span>
+        <!-- seconde copie, remplie de la trame technique, decoupee au curseur -->
+        <span class="hero-nom-systemes" id="heroSystemes" aria-hidden="true">
+          <span>Antoine</span>
+          <span>Brévard</span>
+        </span>
       </h1>
+      <p class="hero-invite" id="heroInvite">Passez le curseur sur le nom</p>
     </div>
 
     <div class="hero-bas">
@@ -385,6 +391,6 @@
 </footer>
 </div>
 
-<script src="releve.js?v=3"></script>
+<script src="releve.js?v=4"></script>
 </body>
 </html>

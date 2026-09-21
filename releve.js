@@ -50,6 +50,74 @@ function typoSousCharge(){
   appliquer();
 }
 
+/* ---------- Révélation dans les lettres ----------
+   Le nom est le masque. On déplace le centre du cercle de découpe en suivant
+   le pointeur, avec un amortissement : viser directement la position de la
+   souris donne un mouvement sec, l'interpolation le rend fluide.
+   La zone sensible est le hero entier, pas seulement les lettres — sinon la
+   révélation ne s'amorce que lorsqu'on est déjà pile sur un glyphe, et on ne
+   découvre jamais l'effet. */
+function revelationLettres(){
+  const nom = $("#heroNom");
+  const couche = $("#heroSystemes");
+  const invite = $("#heroInvite");
+  const zone = nom && nom.closest(".hero");
+  if (!nom || !couche || !zone) return;
+
+  const tactile = window.matchMedia("(pointer: coarse)").matches;
+
+  // Pas de pointeur persistant sur tactile, et pas d'animation si elle est
+  // refusée : on montre la trame en continu à faible présence plutôt que de
+  // laisser un effet mort.
+  if (tactile || MOINS_DE_MOUVEMENT){
+    couche.style.webkitMaskImage = "none";
+    couche.style.maskImage = "none";
+    couche.style.opacity = ".5";
+    if (invite) invite.classList.add("est-cache");
+    return;
+  }
+
+  const cible  = { x: .5, y: .42 };
+  const actuel = { x: .5, y: .42 };
+  let anime = false;
+
+  function rayon(){
+    // la lentille suit la taille du texte : figée en pixels, elle était
+    // minuscule sur un grand écran et couvrait tout sur un petit
+    return Math.max(90, Math.min(260, nom.getBoundingClientRect().height * .42));
+  }
+
+  zone.addEventListener("mousemove", e => {
+    const r = nom.getBoundingClientRect();
+    cible.x = (e.clientX - r.left) / r.width;
+    cible.y = (e.clientY - r.top) / r.height;
+    if (!anime){ anime = true; requestAnimationFrame(boucle); }
+  });
+
+  function boucle(){
+    const r = nom.getBoundingClientRect();
+    actuel.x += (cible.x - actuel.x) * .13;
+    actuel.y += (cible.y - actuel.y) * .13;
+    couche.style.setProperty("--mx", (actuel.x * r.width).toFixed(1) + "px");
+    couche.style.setProperty("--my", (actuel.y * r.height).toFixed(1) + "px");
+    couche.style.setProperty("--r", rayon().toFixed(0) + "px");
+    // on s'arrête quand le mouvement devient imperceptible : inutile de
+    // garder une boucle d'animation vivante en permanence
+    if (Math.abs(cible.x - actuel.x) > .0008 || Math.abs(cible.y - actuel.y) > .0008){
+      requestAnimationFrame(boucle);
+    } else {
+      anime = false;
+    }
+  }
+
+  // l'invite disparaît dès qu'on a compris : elle ne sert qu'une fois
+  zone.addEventListener("mouseenter", () => {
+    if (invite) setTimeout(() => invite.classList.add("est-cache"), 1400);
+  }, { once: true });
+
+  boucle();
+}
+
 /* ---------- Rail : secteur courant ---------- */
 function rail(){
   const points = $$(".rail-secteur");
@@ -149,6 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(chrono, 1000);
   annee();
   typoSousCharge();
+  revelationLettres();
   rail();
   revelation();
   matriceCroisee();
