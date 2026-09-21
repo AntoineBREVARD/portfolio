@@ -206,6 +206,21 @@ function matriceCroisee(){
   });
 }
 
+/* ---------- Comparateur avant / après ----------
+   Un input range invisible superposé au bloc : on hérite gratuitement du
+   clavier, du tactile et de l'accessibilité au lieu de recoder un
+   glisser-déposer. */
+function comparateur(){
+  $$("[data-ba]").forEach(bloc => {
+    const curseur = $(".ba-curseur", bloc);
+    const cadre = $(".ba-cadre", bloc);
+    if (!curseur || !cadre) return;
+    const appliquer = () => cadre.style.setProperty("--ba", curseur.value + "%");
+    curseur.addEventListener("input", appliquer);
+    appliquer();
+  });
+}
+
 /* ---------- Année du pied ---------- */
 function annee(){
   const el = $("#annee");
@@ -221,4 +236,5 @@ document.addEventListener("DOMContentLoaded", () => {
   rail();
   revelation();
   matriceCroisee();
+  comparateur();
 });

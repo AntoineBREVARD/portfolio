@@ -3,241 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alertes boîtes pleines — Antoine Brévard</title>
-<meta name="description" content="Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien. On le découvrait quand il appelait. Il fallait le savoir avant lui.">
+<title>Alerte sur boîtes saturées — Antoine Brévard</title>
+<meta name="description" content="Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien. Mise en place d'une surveillance qui prévient avant le blocage.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://antoinebrevard.github.io/portfolio/realisation-quotas.html">
-<meta property="og:title" content="Alertes boîtes pleines — Antoine Brévard">
-<meta property="og:description" content="Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien. On le découvrait quand il appelait. Il fallait le savoir avant lui.">
-<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/uploads/666f02ef21a56.jpg">
+<meta property="og:title" content="Alerte sur boîtes saturées — Antoine Brévard">
+<meta property="og:description" content="Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien. Mise en place d'une surveillance qui prévient avant le blocage.">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/antoine-brevard.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0A0C0F">
+<meta name="theme-color" content="#0F3B29">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@75..112.5,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="releve.css?v=6">
 </head>
-<body data-page="realisations">
+<body>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
-<div class="grain" aria-hidden="true"></div>
+<a class="evite" href="#contenu">Aller au contenu</a>
 
-<header class="telemetry" id="telemetry">
-  <div class="telemetry-inner">
-    <a href="index.html" class="telemetry-id">
-      <span class="telemetry-dot" aria-hidden="true"></span>
-      AB<span class="telemetry-id-full">·BRÉVARD</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="telemetry-nav" aria-label="Navigation principale">
-      <a href="index.html" data-nav="accueil">Accueil</a>
-      <a href="profil.html" data-nav="profil">Profil</a>
-      <a href="realisations.html" data-nav="realisations">Réalisations</a>
-      <a href="competences.html" data-nav="competences">Compétences</a>
-      <a href="veille.html" data-nav="veille">Veille</a>
-      <a href="contact.html" data-nav="contact">Contact</a>
-    </nav>
-    <div class="telemetry-readout" aria-hidden="true">
-      <span id="clock">--:--:--</span>
-      <span class="telemetry-sep">/</span>
-      <span>LE MANS, FR</span>
-    </div>
+<nav class="rail" aria-label="Repères">
+  <a href="index.html" class="rail-id">AB</a>
+  <div class="rail-secteurs">
+    <button class="rail-secteur is-on" data-vers="contenu" data-nom="Fiche" aria-label="Haut de fiche"></button>
   </div>
-</header>
+  <p class="rail-position" id="position">Fiche</p>
+  <p class="rail-chrono" id="chrono">--:--:--</p>
+</nav>
 
+<div class="page">
 <main id="contenu">
 
-  <!-- ==================== ACCROCHE ==================== -->
-  <section class="section case-hero">
-    <div class="shell">
-      <p class="eyebrow"><a href="realisations.html" style="color:inherit;text-decoration:none">← Réalisations</a> <b>—</b> 02 · Supervision</p>
-      <h1 class="display">On l'apprenait<br>toujours trop tard.</h1>
-      <p class="lede" style="margin-top:24px;font-size:clamp(18px,2.4vw,25px);color:var(--ink)">
-        Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien.
-        Et un service informatique qui l'apprend par téléphone.
-      </p>
-      <div class="case-meta">
-        <span>Automobile Club de l'Ouest</span>
-        <span>Messagerie d'entreprise Microsoft 365</span>
-        <span>Blocage constaté à <b>97 %</b> — alerte réglée à <b>95 %</b></span>
-      </div>
-    </div>
+  <!-- ===================== ACCROCHE ===================== -->
+  <section class="bloc cas-hero coque bloc--vert">
+    <p class="etiquette">
+      <a class="cas-retour" href="index.html#realisations">← Portfolio</a>
+      <b>/</b>
+      <span>02 — Supervision</span>
+    </p>
+    <h1 class="geant cas-titre">On l'apprenait<br>toujours trop tard.</h1>
+    <p class="cas-amorce">Une boîte pleine, c'est un collaborateur qui ne reçoit plus rien. Et le service informatique qui le découvre quand il appelle.</p>
+    <dl class="cas-meta">
+          <div><dt>Service</dt><dd>Exchange Online</dd></div>
+          <div><dt>Seuil d'alerte</dt><dd>95 %</dd></div>
+          <div><dt>Intervention utilisateur</dt><dd>0</dd></div>
+    </dl>
   </section>
 
-  <!-- ==================== LE PROBLEME ==================== -->
-  <section class="section section--doc">
-    <div class="shell">
+  <hr class="vibreur vibreur--fin">
 
-      <div class="case-step" style="border-top:0;padding-top:0">
+  <!-- ===================== LA FICHE ===================== -->
+  <section class="bloc">
+    <div class="coque">
+      <div class="cas-etape">
         <h2>Ce qui n'allait pas</h2>
-        <p>
-          Un collaborateur appelle : ses messages ne partent plus. On cherche, on finit
-          par ouvrir la console d'administration, et on comprend. Sa boîte était pleine.
-        </p>
-        <p>
-          Le problème n'est pas la panne. C'est le moment où on l'apprend.
-          Entre la saturation et le coup de téléphone, il s'est passé des heures
-          pendant lesquelles quelqu'un a cru envoyer des mails, et n'en a reçu aucun.
-        </p>
-        <p>
-          <strong>Rien ne nous prévenait.</strong> On regardait quand on avait une raison
-          de regarder, c'est-à-dire trop tard.
-        </p>
+        <p>Rien ne surveillait le remplissage des boîtes aux lettres. Le service apprenait la saturation d'une boîte au moment où son propriétaire signalait qu'il ne recevait plus rien — donc après le blocage, jamais avant.</p>
+        <p>Le coût n'est pas technique, il est humain : des messages perdus de vue, un collaborateur bloqué, et une intervention en urgence sur quelque chose qui se voyait venir.</p>
       </div>
 
-      <!-- ==================== LE POINT DE BASCULE ==================== -->
-      <div class="case-step">
-        <h2>Le chiffre qui a tranché</h2>
-        <p>
-          Restait à savoir quand donner l'alerte. Trop tôt, on inonde le service de
-          messages inutiles. Trop tard, elle ne sert à rien.
-        </p>
-        <p>
-          En reprenant les cas rencontrés, un seuil revenait : <strong>à partir de 97 %,
-          une boîte commence à se comporter bizarrement</strong> — des envois qui échouent,
-          des messages qui ne partent plus.
-        </p>
-        <p>
-          L'alerte a donc été fixée à <strong>95 %</strong>. Deux points d'écart :
-          juste assez pour agir avant que l'utilisateur ne s'en aperçoive.
-        </p>
+      <div class="cas-etape">
+        <h2>Le seuil a été mesuré, pas devine</h2>
+        <p>En observant les cas réels, un constat : une boîte commence à présenter des dysfonctionnements — refus d'envoi, notamment — <strong>à partir de 97 % d'occupation</strong>.</p>
+        <p>L'alerte a donc été fixée à <strong>95 %</strong>, pour conserver une marge d'intervention avant que l'utilisateur ne soit gêné. C'est le genre de choix qu'on ne peut pas faire sans avoir regardé le parc.</p>
       </div>
 
-      <!-- ==================== LES CHEMINS POSSIBLES ==================== -->
-      <div class="case-step">
-        <h2>Les chemins possibles</h2>
-        <p>Trois façons de savoir. Une seule qui prévienne toute seule.</p>
-
-        <div class="solutions">
-          <div class="solution">
-            <span class="solution-verdict">Écartée</span>
-            <h4>Consulter les outils d'administration Microsoft</h4>
-            <ul>
-              <li class="pour">Déjà disponible, sans rien ajouter ni payer</li>
-              <li class="pour">L'information est exacte et en temps réel</li>
-              <li class="contre">Il faut aller la chercher : rien ne vient vers nous</li>
-              <li class="contre">C'est exactement la situation de départ</li>
-            </ul>
-          </div>
-          <div class="solution">
-            <span class="solution-verdict">Écartée</span>
-            <h4>Faire tourner le contrôle dans le cloud Microsoft</h4>
-            <ul>
-              <li class="pour">Aucun serveur interne à maintenir</li>
-              <li class="contre">Service facturé</li>
-              <li class="contre">Un abonnement de plus pour un besoin que l'infrastructure existante sait couvrir</li>
-            </ul>
-          </div>
-          <div class="solution is-retenue">
-            <span class="solution-verdict">Retenue</span>
-            <h4>Une tâche planifiée sur nos propres serveurs</h4>
-            <ul>
-              <li class="pour">L'infrastructure est déjà là : rien à acheter</li>
-              <li class="pour">Le contrôle repasse tout seul, à intervalle défini</li>
-              <li class="pour">Le service reçoit la liste, sans avoir rien demandé</li>
-            </ul>
-          </div>
-        </div>
+      <div class="cas-etape">
+        <h2>Comment ça tourne</h2>
+        <p>Une tâche planifiée se connecte à Exchange Online par authentification applicative avec certificat — aucun mot de passe stocké nulle part. Pour chaque boîte, le script relève la taille réellement utilisée, le quota d'envoi et le pourcentage d'occupation.</p>
+        <p>Toute boîte au-delà du seuil est ajoutée à un rapport envoyé au service par le serveur SMTP interne. Aucune action n'est demandée aux utilisateurs, et rien ne s'exécute sur leurs postes.</p>
       </div>
 
-      <!-- ==================== AVANT / APRES ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <h2>Ce que ça change</h2>
         <div class="ba" data-ba>
-          <div class="ba-stage">
-            <div class="ba-panel ba-avant">
+          <div class="ba-cadre">
+            <div class="ba-avant">
               <span class="ba-tag">Avant</span>
-              <h4>On l'apprenait par l'utilisateur.</h4>
-              <p>
-                Le collaborateur signalait que sa messagerie ne répondait plus.
-                Le service ouvrait la console, vérifiait boîte par boîte, confirmait
-                la saturation. Le diagnostic arrivait après la gêne, jamais avant.
-              </p>
+              <h3>Le téléphone sonne.</h3>
+              <p>La saturation se découvrait par un appel : « je ne reçois plus mes mails ». À ce stade le blocage est déjà là, et l'intervention se fait dans l'urgence.</p>
             </div>
-            <div class="ba-panel ba-apres">
+            <div class="ba-apres">
               <span class="ba-tag">Après</span>
-              <h4>On le sait avant lui.</h4>
-              <p>
-                Le contrôle se lance seul et compare chaque boîte au seuil.
-                Quand l'une approche de la limite, le service reçoit un message :
-                qui est concerné, et où elle en est.
-              </p>
+              <h3>Le service est prévenu avant.</h3>
+              <p>La surveillance tourne seule et signale les boîtes qui approchent de leur limite. L'intervention devient planifiable, et le nombre d'incidents de saturation baisse.</p>
             </div>
-            <div class="ba-sep" aria-hidden="true"></div>
-            <input class="ba-range" type="range" min="0" max="100" value="50"
-                   id="baQuotas" aria-label="Comparer la situation avant et après">
+            <div class="ba-ligne" aria-hidden="true"></div>
+            <input class="ba-curseur" type="range" min="0" max="100" value="50"
+                   id="ba-quotas" aria-label="Comparer la situation avant et après">
           </div>
-          <p class="ba-hint">Faites glisser pour comparer</p>
+          <p class="ba-aide">Faites glisser pour comparer</p>
         </div>
       </div>
 
-      <!-- ==================== RECUL ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <h2>Ce que je referais autrement</h2>
         <div class="recul">
-          <h3>Prévenir n'est pas régler</h3>
-          <p>
-            L'alerte fait gagner du temps au service informatique. Elle ne vide aucune
-            boîte. La cause — ce qui remplit une messagerie et pourquoi — reste entière,
-            côté utilisateur.
-          </p>
-          <p>
-            <strong>La solution s'arrête là où commence l'accompagnement.</strong>
-            Le prolongement naturel serait de ne pas garder l'information pour nous :
-            avertir le collaborateur concerné, et lui donner de quoi agir lui-même.
-          </p>
-          <p>
-            Il reste aussi une chose que je n'ai pas encore mesurée : combien d'alertes
-            débouchent réellement sur une intervention avant blocage. Tant que ce chiffre
-            n'existe pas, je peux affirmer que le service est prévenu — pas que
-            l'incident a disparu.
-          </p>
+          <h3>L'alerte prévient le service, pas l'utilisateur</h3>
+          <p>La solution résout le problème du service informatique : il sait. Elle ne traite pas la cause, qui est en amont — des boîtes qui grossissent sans que leur propriétaire en ait conscience.</p>
+          <p>Ce que j'ajouterais : un message à l'utilisateur concerné en même temps qu'au service, et un suivi dans le temps pour distinguer une boîte ponctuellement pleine d'une boîte structurellement trop petite.</p>
         </div>
       </div>
 
-      <!-- ==================== COMPETENCES ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <h2>Ce que cette mission démontre</h2>
-        <p>Chaque étiquette renvoie à la compétence correspondante du référentiel.</p>
+        <p>Chaque étiquette renvoie à la matrice du référentiel.</p>
         <div class="preuves">
-          <a class="preuve-lien" href="competences.html#b21">Élaborer un dossier de choix d'une solution d'infrastructure</a>
-          <a class="preuve-lien" href="competences.html#b23">Automatiser des tâches d'administration</a>
-          <a class="preuve-lien" href="competences.html#b23">Gérer des indicateurs et des fichiers d'activité</a>
-          <a class="preuve-lien" href="competences.html#b11">Vérifier les conditions de la continuité d'un service informatique</a>
-          <a class="preuve-lien" href="competences.html#b11">Mettre en place et vérifier les niveaux d'habilitation</a>
-          <a class="preuve-lien" href="competences.html#b15">Réaliser les tests d'intégration et d'acceptation d'un service</a>
+          <a class="preuve-lien" href="index.html#competences">Gérer des indicateurs et des fichiers d'activité</a>
+          <a class="preuve-lien" href="index.html#competences">Évaluer et améliorer la qualité d'un service</a>
+          <a class="preuve-lien" href="index.html#competences">Automatiser des tâches d'administration</a>
+          <a class="preuve-lien" href="index.html#competences">Déployer un service</a>
         </div>
       </div>
 
-      <!-- ==================== RENVOI DOSSIER ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <div class="renvoi">
-          <p>
-            <strong>Le détail est dans le dossier professionnel :</strong>
-            l'architecture de la tâche planifiée, le mode d'authentification sans mot
-            de passe, la construction de l'alerte et la campagne de tests menée avant
-            la mise en production.
-          </p>
-          <a class="btn btn-cyan" href="realisations.html">Autres réalisations</a>
+          <p><strong>Le détail est dans le dossier professionnel :</strong> l'architecture de la collecte, la détermination du seuil, la campagne de tests et les résultats après mise en production.</p>
+          <a class="btn btn--plein" href="index.html#realisations">Autres réalisations</a>
         </div>
       </div>
-
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="shell">
-    <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
-    <p class="mono">Site statique, sans traceur ni serveur</p>
-  </div>
+<footer class="pied coque">
+  <span>Antoine Brévard — BTS SIO option SISR · <span id="annee"></span></span>
+  <span><a href="index.html">Retour au portfolio</a></span>
 </footer>
+</div>
 
-<script src="script.js?v=4"></script>
+<script src="releve.js?v=6"></script>
 </body>
 </html>

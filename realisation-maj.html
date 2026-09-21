@@ -4,242 +4,157 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mises à jour constructeurs — Antoine Brévard</title>
-<meta name="description" content="Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu'on ne mettait à jour qu'une fois le problème arrivé.">
+<meta name="description" content="Deux constructeurs, deux outils, des dizaines de modèles. Orchestration des mises à jour de pilotes et de firmwares sur l'ensemble du parc.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://antoinebrevard.github.io/portfolio/realisation-maj.html">
 <meta property="og:title" content="Mises à jour constructeurs — Antoine Brévard">
-<meta property="og:description" content="Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu'on ne mettait à jour qu'une fois le problème arrivé.">
-<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/uploads/666f02ef21a56.jpg">
+<meta property="og:description" content="Deux constructeurs, deux outils, des dizaines de modèles. Orchestration des mises à jour de pilotes et de firmwares sur l'ensemble du parc.">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://antoinebrevard.github.io/portfolio/images/antoine-brevard.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0A0C0F">
+<meta name="theme-color" content="#0F3B29">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@75..112.5,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="releve.css?v=6">
 </head>
-<body data-page="realisations">
+<body>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
-<div class="grain" aria-hidden="true"></div>
+<a class="evite" href="#contenu">Aller au contenu</a>
 
-<header class="telemetry" id="telemetry">
-  <div class="telemetry-inner">
-    <a href="index.html" class="telemetry-id">
-      <span class="telemetry-dot" aria-hidden="true"></span>
-      AB<span class="telemetry-id-full">·BRÉVARD</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="telemetry-nav" aria-label="Navigation principale">
-      <a href="index.html" data-nav="accueil">Accueil</a>
-      <a href="profil.html" data-nav="profil">Profil</a>
-      <a href="realisations.html" data-nav="realisations">Réalisations</a>
-      <a href="competences.html" data-nav="competences">Compétences</a>
-      <a href="veille.html" data-nav="veille">Veille</a>
-      <a href="contact.html" data-nav="contact">Contact</a>
-    </nav>
-    <div class="telemetry-readout" aria-hidden="true">
-      <span id="clock">--:--:--</span>
-      <span class="telemetry-sep">/</span>
-      <span>LE MANS, FR</span>
-    </div>
+<nav class="rail" aria-label="Repères">
+  <a href="index.html" class="rail-id">AB</a>
+  <div class="rail-secteurs">
+    <button class="rail-secteur is-on" data-vers="contenu" data-nom="Fiche" aria-label="Haut de fiche"></button>
   </div>
-</header>
+  <p class="rail-position" id="position">Fiche</p>
+  <p class="rail-chrono" id="chrono">--:--:--</p>
+</nav>
 
+<div class="page">
 <main id="contenu">
 
-  <!-- ==================== ACCROCHE ==================== -->
-  <section class="section case-hero">
-    <div class="shell">
-      <p class="eyebrow"><a href="realisations.html" style="color:inherit;text-decoration:none">← Réalisations</a> <b>—</b> 04 · Gestion de parc</p>
-      <h1 class="display">Poste par poste,<br>à la main.</h1>
-      <p class="lede" style="margin-top:24px;font-size:clamp(18px,2.4vw,25px);color:var(--ink)">
-        Pilotes, firmware, BIOS, stations d'accueil. On les mettait à jour
-        quand quelque chose avait déjà cassé.
-      </p>
-      <div class="case-meta">
-        <span>Automobile Club de l'Ouest</span>
-        <span>Parc mixte HP et Dell</span>
-        <span>Codes retour <b>0 / 10 / 20 / 50 / 3010</b></span>
-      </div>
-    </div>
+  <!-- ===================== ACCROCHE ===================== -->
+  <section class="bloc cas-hero coque bloc--vert">
+    <p class="etiquette">
+      <a class="cas-retour" href="index.html#realisations">← Portfolio</a>
+      <b>/</b>
+      <span>04 — Gestion de parc</span>
+    </p>
+    <h1 class="geant cas-titre">Poste par poste,<br>à la main.</h1>
+    <p class="cas-amorce">Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu'on ne mettait à jour qu'une fois le problème arrivé.</p>
+    <dl class="cas-meta">
+          <div><dt>Parc</dt><dd>HP et Dell</dd></div>
+          <div><dt>Systèmes</dt><dd>Windows 10 et 11</dd></div>
+          <div><dt>Codes retour définis</dt><dd>5</dd></div>
+    </dl>
   </section>
 
-  <!-- ==================== LE PROBLEME ==================== -->
-  <section class="section section--doc">
-    <div class="shell">
+  <hr class="vibreur vibreur--fin">
 
-      <div class="case-step" style="border-top:0;padding-top:0">
+  <!-- ===================== LA FICHE ===================== -->
+  <section class="bloc">
+    <div class="coque">
+      <div class="cas-etape">
         <h2>Ce qui n'allait pas</h2>
-        <p>
-          La mise à jour d'un poste demandait un technicien devant ce poste.
-          Ouvrir l'outil du constructeur, lancer l'analyse, attendre, redémarrer.
-          Multiplié par un parc entier, ce n'est plus une tâche : c'est une activité.
-        </p>
-        <p>
-          Alors on ne le faisait pas systématiquement. On le faisait quand un poste
-          posait problème, pendant une opération de prévention, ou au moment de
-          préparer une machine neuve.
-        </p>
-        <p>
-          <strong>Autrement dit : on réparait, on n'entretenait pas.</strong>
-          Et personne ne savait dire ce qui avait été mis à jour, ni où.
-        </p>
+        <p>Les pilotes, firmwares et BIOS se mettaient à jour poste par poste, à la main. C'était chronophage, impossible à suivre à l'échelle du parc, et cela n'arrivait en pratique que dans trois cas : un problème déjà survenu, une opération de prévention, ou le déploiement d'un poste neuf.</p>
+        <p>Autrement dit : la maintenance préventive était une intention, pas une pratique.</p>
       </div>
 
-      <!-- ==================== LE POINT DE BASCULE ==================== -->
-      <div class="case-step">
-        <h2>Les deux contraintes qui ont tout décidé</h2>
-        <p>
-          La première, c'est le parc lui-même. Deux constructeurs, deux outils
-          différents, et derrière chacun des dizaines de modèles et de générations
-          qui ne se comportent pas de la même façon. Un script ne pouvait pas se
-          contenter d'une seule recette.
-        </p>
-        <p>
-          La seconde tenait en une phrase du besoin : <strong>empêcher qu'un poste
-          s'éteigne au milieu d'une opération sensible.</strong> Une mise à jour de
-          firmware interrompue ne se rattrape pas d'un clic.
-        </p>
-        <p>
-          Or pendant l'installation, l'écran clignote, le son se coupe, le réseau
-          tombe un instant. Tout ce qu'il faut pour qu'un utilisateur croie à une
-          panne — et appuie sur le bouton.
-        </p>
+      <div class="cas-etape">
+        <h2>Ne pas remplacer les outils, les orchestrer</h2>
+        <p>HP et Dell fournissent déjà leurs utilitaires — HP Image Assistant et Dell Command Update. Ils font correctement leur travail. Le problème n'était pas leur qualité, c'était qu'ils s'utilisent un poste à la fois.</p>
+        <p>L'enjeu était donc de les <strong>piloter depuis un script centralisé</strong>, capable de détecter le constructeur et d'orienter le traitement, plutôt que de réinventer ce qui existait.</p>
       </div>
 
-      <!-- ==================== LES CHEMINS POSSIBLES ==================== -->
-      <div class="case-step">
-        <h2>Les chemins possibles</h2>
-        <p>Deux approches. La différence tenait à qui décide, et à qui garde la trace.</p>
-
+      <div class="cas-etape">
+        <h2>Deux chemins possibles</h2>
+        <p>Le premier coûtait moins cher à première vue.</p>
         <div class="solutions">
-          <div class="solution">
-            <span class="solution-verdict">Écartée</span>
-            <h4>Un raccourci sur le bureau, l'utilisateur se lance quand il veut</h4>
-            <ul>
-              <li class="pour">À première vue, très peu de charge pour le service</li>
-              <li class="pour">Aucune infrastructure supplémentaire</li>
-              <li class="contre">Tout repose sur la bonne volonté de chacun</li>
-              <li class="contre">Rien n'empêche d'interrompre une mise à jour en cours</li>
-              <li class="contre">Risque de mauvaise manipulation, et parc toujours hétérogène</li>
-              <li class="contre">Aucune traçabilité : on ne sait pas qui a fait quoi</li>
-            </ul>
-          </div>
-          <div class="solution is-retenue">
-            <span class="solution-verdict">Retenue</span>
-            <h4>Le traitement côté machine, l'information côté utilisateur</h4>
-            <ul>
-              <li class="pour">Le poste reconnaît sa propre marque et choisit le bon outil</li>
-              <li class="pour">Une fenêtre prévient l'utilisateur, et seulement quand il y a lieu</li>
-              <li class="pour">Plus besoin d'être devant la machine</li>
-              <li class="pour">Chaque exécution laisse un journal exploitable</li>
-              <li class="contre">Du développement, puis de la maintenance</li>
-              <li class="contre">Autant de cas à tester que de comportements constructeurs</li>
-            </ul>
-          </div>
+        <div class="solution">
+          <span class="solution-verdict">Écartée</span>
+          <h3>Laisser les utilisateurs lancer l'outil eux-mêmes</h3>
+          <ul>
+            <li class="pour">Aucune infrastructure, peu de charge apparente pour le service</li>
+            <li class="contre">Dépend entièrement de l'utilisateur</li>
+            <li class="contre">Risque d'interruption en pleine mise à jour</li>
+            <li class="contre">Aucune traçabilité, parc hétérogène</li>
+          </ul>
+        </div>
+        <div class="solution est-retenue">
+          <span class="solution-verdict">Retenue</span>
+          <h3>Deux stratégies de groupe, dont une interface d'information</h3>
+          <ul>
+            <li class="pour">Traitement automatisé, compatible HP et Dell</li>
+            <li class="pour">L'utilisateur est prévenu, et ne peut pas couper au mauvais moment</li>
+            <li class="pour">Journalisation exploitable, sans besoin d'être sur site</li>
+            <li class="contre">Développement et maintenance, et autant de cas que de constructeurs</li>
+          </ul>
+        </div>
         </div>
       </div>
 
-      <!-- ==================== AVANT / APRES ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <h2>Ce que ça change</h2>
         <div class="ba" data-ba>
-          <div class="ba-stage">
-            <div class="ba-panel ba-avant">
+          <div class="ba-cadre">
+            <div class="ba-avant">
               <span class="ba-tag">Avant</span>
-              <h4>Un technicien, un poste, une fois.</h4>
-              <p>
-                On intervenait machine par machine, le plus souvent après la panne.
-                Rien ne disait ensuite ce qui avait été installé, ni sur quels postes,
-                ni si l'opération était allée jusqu'au bout. La seule trace, c'était
-                la mémoire de celui qui était passé.
-              </p>
+              <h3>On y va quand ça casse.</h3>
+              <p>Chaque poste nécessitait une intervention manuelle. À l'échelle du parc, les mises à jour n'étaient déclenchées qu'après un incident, lors d'une opération de prévention, ou à l'installation d'un poste neuf.</p>
             </div>
-            <div class="ba-panel ba-apres">
+            <div class="ba-apres">
               <span class="ba-tag">Après</span>
-              <h4>Le poste s'en charge, et le dit.</h4>
-              <p>
-                La machine détecte sa marque, analyse, installe. S'il n'y a rien à faire,
-                l'utilisateur ne voit rien. Sinon, une fenêtre lui dit de ne pas éteindre.
-                Et le journal raconte ce qui s'est passé.
-              </p>
+              <h3>Le parc se tient à jour tout seul.</h3>
+              <p>Une stratégie de groupe dépose le script, une autre lance l'interface au bon moment. Le script détecte le constructeur, appelle l'outil correspondant et journalise tout. Si aucune mise à jour n'est disponible, l'utilisateur ne voit jamais rien.</p>
             </div>
-            <div class="ba-sep" aria-hidden="true"></div>
-            <input class="ba-range" type="range" min="0" max="100" value="50"
-                   id="baMaj" aria-label="Comparer la situation avant et après">
+            <div class="ba-ligne" aria-hidden="true"></div>
+            <input class="ba-curseur" type="range" min="0" max="100" value="50"
+                   id="ba-maj" aria-label="Comparer la situation avant et après">
           </div>
-          <p class="ba-hint">Faites glisser pour comparer</p>
+          <p class="ba-aide">Faites glisser pour comparer</p>
         </div>
       </div>
 
-      <!-- ==================== RECUL ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <h2>Ce que je referais autrement</h2>
         <div class="recul">
-          <h3>La fenêtre censée rassurer est devenue le point faible</h3>
-          <p>
-            En production, l'interface qui informe l'utilisateur s'est bloquée
-            ponctuellement sur certains postes. Le principe de la solution n'est pas
-            en cause — mais une fenêtre figée, pour la personne qui la regarde,
-            ressemble exactement à ce qu'on voulait éviter.
-          </p>
-          <p>
-            <strong>J'ai sous-estimé la partie la plus visible.</strong> J'avais mis la
-            rigueur sur l'orchestration des outils constructeurs et sur les codes retour,
-            beaucoup moins sur la robustesse de l'écran que l'utilisateur a sous les yeux.
-          </p>
-          <p>
-            Trois évolutions sont sur la table : une temporisation, une fermeture
-            contrôlée après une inactivité prolongée, et une centralisation des rapports
-            d'exécution — pour ne plus avoir à aller chercher les journaux poste par poste.
-          </p>
+          <h3>L'interface a bloqué en production, et je le dis</h3>
+          <p>Lors de la mise en production, des blocages ponctuels de l'interface graphique ont été observés sur certains postes. Le principe de la solution n'est pas remis en cause, mais la robustesse de la partie visible par l'utilisateur, si.</p>
+          <p>Trois évolutions sont identifiées : une temporisation, une fermeture contrôlée en cas d'inactivité prolongée, et une centralisation des rapports d'exécution pour ne plus dépendre d'une lecture poste par poste.</p>
         </div>
       </div>
 
-      <!-- ==================== COMPETENCES ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <h2>Ce que cette mission démontre</h2>
-        <p>Chaque étiquette renvoie à la compétence correspondante du référentiel.</p>
+        <p>Chaque étiquette renvoie à la matrice du référentiel.</p>
         <div class="preuves">
-          <a class="preuve-lien" href="competences.html#b21">Élaborer un dossier de choix d'une solution d'infrastructure</a>
-          <a class="preuve-lien" href="competences.html#b22">Remplacer ou mettre à jour des éléments défectueux ou obsolètes</a>
-          <a class="preuve-lien" href="competences.html#b23">Automatiser des tâches d'administration</a>
-          <a class="preuve-lien" href="competences.html#b23">Administrer sur site et à distance des éléments d'une infrastructure</a>
-          <a class="preuve-lien" href="competences.html#b23">Gérer des indicateurs et des fichiers d'activité</a>
-          <a class="preuve-lien" href="competences.html#b11">Recenser et identifier les ressources numériques</a>
-          <a class="preuve-lien" href="competences.html#b15">Accompagner les utilisateurs dans la mise en place d'un service</a>
+          <a class="preuve-lien" href="index.html#competences">Gérer le patrimoine informatique</a>
+          <a class="preuve-lien" href="index.html#competences">Automatiser des tâches d'administration</a>
+          <a class="preuve-lien" href="index.html#competences">Déployer un service</a>
+          <a class="preuve-lien" href="index.html#competences">Accompagner les utilisateurs</a>
+          <a class="preuve-lien" href="index.html#competences">Évaluer et améliorer la qualité d'un service</a>
         </div>
       </div>
 
-      <!-- ==================== RENVOI DOSSIER ==================== -->
-      <div class="case-step">
+      <div class="cas-etape">
         <div class="renvoi">
-          <p>
-            <strong>Le détail est dans le dossier professionnel :</strong>
-            l'orchestration des outils HP et Dell, le mécanisme de secours quand
-            l'outil constructeur échoue, la signification de chaque code retour et
-            la campagne de tests menée sur les deux marques.
-          </p>
-          <a class="btn btn-cyan" href="realisations.html">Autres réalisations</a>
+          <p><strong>Le détail est dans le dossier professionnel :</strong> l'orchestration des deux outils constructeurs, l'interface développée en C#, les codes retour et le tableau de recette.</p>
+          <a class="btn btn--plein" href="index.html#realisations">Autres réalisations</a>
         </div>
       </div>
-
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="shell">
-    <p>Antoine Brévard — BTS SIO option SISR · <span id="footerYear"></span></p>
-    <p class="mono">Site statique, sans traceur ni serveur</p>
-  </div>
+<footer class="pied coque">
+  <span>Antoine Brévard — BTS SIO option SISR · <span id="annee"></span></span>
+  <span><a href="index.html">Retour au portfolio</a></span>
 </footer>
+</div>
 
-<script src="script.js?v=4"></script>
+<script src="releve.js?v=6"></script>
 </body>
 </html>

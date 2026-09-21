@@ -380,6 +380,131 @@ p:last-child{margin-bottom:0}
 .jury-case a:hover{border-bottom-color:var(--encre)}
 .bloc--vert .jury-case a{border-bottom-color:rgba(247,239,221,.4)}
 
+/* ------------------------------------------------------------- parcours
+   Le portrait est borne en largeur ET en ratio : sans ces deux bornes il
+   s'affiche a sa taille naturelle, soit enorme.                        */
+.parcours-grille{
+  display:grid;grid-template-columns:minmax(0,256px) minmax(0,1fr);
+  gap:clamp(28px,4vw,60px);align-items:start;
+}
+.parcours-portrait{margin:0;position:relative;max-width:256px}
+.parcours-portrait img{
+  width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 20%;
+  border:1px solid var(--trait-fort);
+}
+.parcours-portrait figcaption{
+  position:absolute;left:-9px;bottom:18px;background:var(--vert);color:var(--jaune);
+  padding:7px 13px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;font-variation-settings:"wdth" 87;
+}
+@media (max-width:760px){
+  .parcours-grille{grid-template-columns:1fr}
+  .parcours-portrait{max-width:190px}
+  .parcours-portrait figcaption{left:0}
+}
+
+/* ==================================================== fiche de réalisation */
+.cas-hero{padding-block:clamp(96px,12vh,150px) clamp(44px,6vw,72px)}
+.cas-retour{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;font-variation-settings:"wdth" 87;
+  border-bottom:1px solid currentColor;padding-bottom:2px;
+}
+.cas-titre{font-size:clamp(40px,8vw,120px)}
+.cas-amorce{
+  font-size:clamp(19px,2.4vw,29px);line-height:1.34;max-width:34ch;
+  margin:26px 0 0;letter-spacing:-.014em;
+}
+.cas-meta{
+  display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--trait);margin-top:36px;
+}
+.cas-meta div{padding:15px 24px 0 0;margin-right:24px;border-right:1px solid var(--trait)}
+.cas-meta div:last-child{border-right:0;margin-right:0;padding-right:0}
+.cas-meta dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:rgba(247,239,221,.6);margin-bottom:5px;font-variation-settings:"wdth" 87;
+}
+.cas-meta dd{margin:0;font-family:var(--display);font-size:21px;line-height:1;font-variation-settings:"wght" 680,"wdth" 86}
+
+.cas-etape{padding-block:clamp(30px,4.2vw,52px);border-top:1px solid var(--trait)}
+.cas-etape:first-child{border-top:0;padding-top:0}
+.cas-etape h2{
+  font-family:var(--display);font-size:clamp(27px,3.8vw,48px);margin:0 0 20px;
+  text-transform:uppercase;letter-spacing:-.018em;line-height:.92;
+  font-variation-settings:"wght" 740,"wdth" 86;
+}
+.cas-etape p{color:var(--encre-2);max-width:var(--mesure);line-height:1.64}
+.cas-etape strong{color:var(--encre);font-weight:600}
+
+/* étude de solutions : les écartées comptent autant que la retenue */
+.solutions{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;margin-top:6px}
+.solution{border:1px solid var(--trait-fort);padding:22px 20px;background:var(--creme)}
+.solution.est-retenue{border:2px solid var(--vert);background:rgba(15,59,41,.05)}
+.solution-verdict{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:11px;display:block;font-variation-settings:"wdth" 87;
+}
+.solution.est-retenue .solution-verdict{color:var(--vert)}
+.solution h3{font-size:16.5px;margin:0 0 13px;line-height:1.28;font-variation-settings:"wght" 660,"wdth" 92}
+.solution ul{margin:0;padding:0;list-style:none}
+.solution li{font-size:13.5px;color:var(--encre-2);padding-left:19px;position:relative;margin-bottom:7px;line-height:1.48}
+.solution li.pour::before{content:"+";position:absolute;left:0;color:var(--vert);font-family:var(--mono);font-weight:700}
+.solution li.contre::before{content:"\2212";position:absolute;left:0;color:#A33;font-family:var(--mono);font-weight:700}
+
+/* avant / après — les deux panneaux partagent la même cellule de grille, le
+   plus haut fixe la hauteur ; en absolu l'un débordait de son cadre */
+.ba{margin-top:6px}
+.ba-cadre{position:relative;overflow:hidden;border:1px solid var(--trait-fort);background:var(--sable);display:grid}
+.ba-avant,.ba-apres{grid-area:1 / 1;padding:clamp(24px,3.4vw,40px) clamp(20px,2.8vw,36px)}
+.ba-apres{position:relative;background:var(--creme);clip-path:inset(0 0 0 var(--ba,50%))}
+.ba-tag{
+  display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
+  text-transform:uppercase;padding:4px 9px;margin-bottom:14px;font-variation-settings:"wdth" 87;
+}
+.ba-avant .ba-tag{background:rgba(163,51,51,.13);color:#8C2B2B}
+.ba-apres .ba-tag{background:rgba(15,59,41,.12);color:var(--vert)}
+.ba h3{font-size:clamp(17px,2.2vw,23px);margin:0 0 12px;max-width:30ch;font-variation-settings:"wght" 700,"wdth" 88}
+.ba p{margin:0;color:var(--encre-2);font-size:14.5px;line-height:1.58;max-width:42ch}
+.ba-ligne{
+  position:absolute;top:0;bottom:0;left:var(--ba,50%);width:3px;background:var(--vert);
+  transform:translateX(-1.5px);pointer-events:none;
+}
+.ba-ligne::after{
+  content:"";position:absolute;top:50%;left:50%;width:32px;height:32px;
+  transform:translate(-50%,-50%);border:2px solid var(--vert);border-radius:50%;background:var(--creme);
+}
+.ba-curseur{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;-webkit-appearance:none;appearance:none;background:none}
+.ba-curseur:focus-visible{opacity:.001;outline:2px solid var(--vert);outline-offset:3px}
+.ba-aide{
+  margin-top:11px;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--encre-3);font-variation-settings:"wdth" 87;
+}
+
+/* recul : un jury retient le recul, et la plupart des candidats le cachent */
+.recul{border-left:4px solid var(--jaune);background:var(--sable);padding:clamp(22px,3vw,32px) clamp(20px,2.6vw,30px)}
+.recul h3{font-size:17.5px;margin:0 0 13px;font-variation-settings:"wght" 680,"wdth" 90}
+.recul p{margin:0 0 13px;color:var(--encre-2);max-width:var(--mesure);line-height:1.6}
+.recul p:last-child{margin-bottom:0}
+
+.renvoi{
+  display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  border:1px solid var(--trait-fort);padding:24px 26px;
+}
+.renvoi p{margin:0;color:var(--encre-2);font-size:14.5px;max-width:52ch}
+.renvoi strong{color:var(--encre);font-weight:600}
+
+.preuves{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.preuve-lien{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:7px 12px;
+  border:1px solid var(--trait-fort);color:var(--encre-2);text-decoration:none;
+  font-variation-settings:"wdth" 87;transition:border-color .2s,color .2s,background .2s;
+}
+.preuve-lien:hover{border-color:var(--vert);color:var(--vert);background:rgba(15,59,41,.05)}
+
+@media (max-width:760px){
+  .cas-meta div{border-right:0;margin-right:0;padding-right:0;min-width:47%}
+}
+
 /* -------------------------------------------------------------- révélation */
 .leve{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
 .leve.est-vu{opacity:1;transform:none}
