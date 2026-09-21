@@ -127,17 +127,18 @@ p:last-child{margin-bottom:0}
   font-family:var(--display);font-variation-settings:"wght" 800,"wdth" 78;
   font-size:22px;letter-spacing:.02em;text-decoration:none;line-height:1;
 }
-.rail-secteurs{display:flex;flex-direction:column;gap:14px;align-items:center}
-.rail-secteur{
-  width:9px;height:9px;border:1.5px solid var(--trait-fort);border-radius:50%;
-  background:none;padding:0;cursor:pointer;transition:background .25s,border-color .25s,transform .25s;
+/* navigation entre pages, ecrite dans le sens du rail : on lit de haut en
+   bas comme sur une feuille de chronos, et la page courante est marquee */
+.rail-nav{display:flex;flex-direction:column;gap:20px;align-items:center}
+.rail-nav a{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--encre-3);font-variation-settings:"wdth" 87;
+  border-left:2px solid transparent;padding-left:5px;
+  transition:color .22s,border-color .22s;
 }
-.rail-secteur:hover{border-color:var(--encre);transform:scale(1.25)}
-.rail-secteur.is-on{background:var(--bleu);border-color:var(--bleu)}
-.rail-position{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--encre-3);
-  writing-mode:vertical-rl;text-orientation:mixed;font-variation-settings:"wdth" 87;
-}
+.rail-nav a:hover{color:var(--encre)}
+.rail-nav a.est-active{color:var(--encre);border-left-color:var(--bleu)}
 .rail-chrono{
   font-family:var(--mono);font-size:10px;color:var(--encre-3);
   writing-mode:vertical-rl;font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
@@ -527,8 +528,13 @@ p:last-child{margin-bottom:0}
     flex-direction:row;padding:0 var(--gouttiere);
     border-right:0;border-bottom:1px solid var(--trait);
   }
-  .rail-position,.rail-chrono{writing-mode:horizontal-tb}
-  .rail-secteurs{flex-direction:row;gap:11px}
+  .rail-chrono{writing-mode:horizontal-tb}
+  .rail-nav{flex-direction:row;gap:16px;overflow-x:auto;padding-inline:2px}
+  .rail-nav a{
+    writing-mode:horizontal-tb;border-left:0;padding-left:0;
+    border-bottom:2px solid transparent;padding-bottom:3px;white-space:nowrap;
+  }
+  .rail-nav a.est-active{border-bottom-color:var(--bleu)}
   .page{margin-left:0;padding-top:52px}
   .hero{min-height:calc(100svh - 52px)}
   .hero-bas{grid-template-columns:1fr}

@@ -1,8 +1,8 @@
 /* =========================================================================
    LE RELEVÉ — script partagé
-   Trois comportements, rien de plus : la typo qui se déforme sous la charge
-   du défilement, le rail qui dit où l'on est, et la matrice qui se lit dans
-   les deux sens.
+   Site multi-pages. Trois comportements portent l'interaction : la typo qui
+   se déforme sous la charge du défilement, la révélation dans les lettres du
+   nom, et la matrice de compétences qui se lit dans les deux sens.
    ========================================================================= */
 
 const $  = (s, c = document) => c.querySelector(s);
@@ -118,37 +118,6 @@ function revelationLettres(){
   boucle();
 }
 
-/* ---------- Rail : secteur courant ---------- */
-function rail(){
-  const points = $$(".rail-secteur");
-  const position = $("#position");
-  if (!points.length) return;
-
-  const blocs = points
-    .map(p => ({ point: p, cible: document.getElementById(p.dataset.vers) }))
-    .filter(b => b.cible);
-
-  points.forEach(p => {
-    p.addEventListener("click", () => {
-      const c = document.getElementById(p.dataset.vers);
-      if (c) c.scrollIntoView({ behavior: MOINS_DE_MOUVEMENT ? "auto" : "smooth", block: "start" });
-    });
-  });
-
-  const obs = new IntersectionObserver(entrees => {
-    entrees.forEach(e => {
-      if (!e.isIntersecting) return;
-      const b = blocs.find(x => x.cible === e.target);
-      if (!b) return;
-      points.forEach(p => p.classList.remove("is-on"));
-      b.point.classList.add("is-on");
-      if (position) position.textContent = b.point.dataset.nom || "";
-    });
-  }, { rootMargin: "-45% 0px -45% 0px" });
-
-  blocs.forEach(b => obs.observe(b.cible));
-}
-
 /* ---------- Révélation au défilement ---------- */
 function revelation(){
   const cibles = $$(".entree, .matrice-bloc, .jury-case, .hero-releve, .tete");
@@ -233,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
   annee();
   typoSousCharge();
   revelationLettres();
-  rail();
   revelation();
   matriceCroisee();
   comparateur();
