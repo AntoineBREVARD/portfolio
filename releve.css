@@ -109,12 +109,29 @@ p:last-child{margin-bottom:0}
 /* ------------------------------------------------------- filet « vibreur »
    La bande jaune et bleu des bords de piste du Mans. Elle separe les
    sections : c'est un element de structure, pas un ornement.             */
+/* Un vibreur, c'est du beton peint : des segments droits, separes par un
+   joint, avec une arete qui prend la lumiere et un flanc dans l'ombre.
+   La version precedente etait une bande diagonale en aplat, a saturation
+   maximale — ca ne lisait pas comme un bord de piste, ca lisait comme un
+   ruban de bonbon. Les couleurs sont legerement rabattues pour la meme
+   raison : sur un ecran, du jaune et du bleu purs vibrent trop. */
 .vibreur{
-  height:18px;border:0;margin:0;
-  background:repeating-linear-gradient(115deg,
-    var(--jaune) 0 26px, var(--bleu) 26px 52px);
+  height:12px;border:0;margin:0;
+  background:
+    /* le joint entre deux segments */
+    repeating-linear-gradient(90deg,
+      transparent 0 30px, rgba(22,18,11,.42) 30px 32px),
+    /* les segments peints */
+    repeating-linear-gradient(90deg,
+      #E3B41C 0 32px, #1D4E8C 32px 64px);
+  box-shadow:
+    inset 0  2px 0 rgba(255,255,255,.26),   /* arete eclairee */
+    inset 0 -3px 0 rgba(22,18,11,.26);      /* flanc dans l'ombre */
 }
-.vibreur--fin{height:9px}
+.vibreur--fin{
+  height:7px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(22,18,11,.22);
+}
 
 /* ---------------------------------------------------------- rail lateral */
 .rail{
@@ -380,6 +397,25 @@ p:last-child{margin-bottom:0}
 }
 .jury-case a:hover{border-bottom-color:var(--encre)}
 .bloc--vert .jury-case a{border-bottom-color:rgba(247,239,221,.4)}
+
+/* ------------------------------------------------------- bandes photo
+   Les photos n'occupent pas les heros : elles servent de respiration
+   pleine largeur entre deux sections. Trois seulement, toutes prises par
+   Antoine au Mans Classic — donc aucune question de droits. Legerement
+   rabattues pour qu'elles appartiennent au systeme au lieu de s'y poser. */
+.bande{position:relative;overflow:hidden;margin:0;background:var(--vert)}
+.bande img{
+  width:100%;height:clamp(230px,36vh,420px);object-fit:cover;display:block;
+  filter:saturate(.92) contrast(1.04);
+}
+.bande--haute img{height:clamp(300px,50vh,560px)}
+.bande figcaption{
+  position:absolute;left:0;bottom:0;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--creme);background:var(--vert);padding:8px 14px;
+  font-variation-settings:"wdth" 87;
+}
+.bande figcaption b{color:var(--jaune);font-weight:400}
 
 /* ------------------------------------------------------------- parcours
    Le portrait est borne en largeur ET en ratio : sans ces deux bornes il
