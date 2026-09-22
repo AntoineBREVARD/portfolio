@@ -1,0 +1,32 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"page","layout":{"type":"default"}} -->
+<main class="wp-block-group page">
+<!-- wp:group {"className":"bloc cas-hero coque bloc--vert","layout":{"type":"constrained"}} -->
+<div class="wp-block-group bloc cas-hero coque bloc--vert">
+<!-- wp:query-title {"type":"archive","className":"geant cas-titre"} /-->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:separator {"className":"vibreur vibreur--fin"} -->
+<hr class="wp-block-separator vibreur vibreur--fin"/>
+<!-- /wp:separator -->
+
+<!-- wp:group {"className":"bloc","layout":{"type":"constrained"}} -->
+<div class="wp-block-group bloc">
+<!-- wp:group {"className":"coque","layout":{"type":"default"}} -->
+<div class="wp-block-group coque">
+<!-- wp:query {"query":{"perPage":20,"postType":"post"},"className":"journal"} -->
+<div class="wp-block-query journal"><!-- wp:post-template -->
+<!-- wp:post-title {"isLink":true,"className":"entree-titre"} /-->
+<!-- wp:post-excerpt {"className":"entree-mot"} /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

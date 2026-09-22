@@ -1,0 +1,775 @@
+/*
+Theme Name: Brévard — Le Relevé
+Theme URI: https://antoinebrevard.github.io/portfolio/
+Author: Antoine Brévard
+Description: Thème de blocs pour un portfolio BTS SIO option SISR. Univers feuille de chronos : la typographie porte l'identité, le vibreur jaune et bleu du circuit du Mans sert de filet structurel. Aucun plugin requis — pensé pour un hébergement sans accès Internet sortant. Polices embarquées dans le thème : aucune requête vers un service tiers, donc aucune adresse IP de visiteur transmise à Google.
+Version: 1.0.0
+Requires at least: 6.5
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: brevard-releve
+Tags: portfolio, full-site-editing, block-patterns, one-column, custom-colors, custom-menu
+*/
+
+/* =========================================================================
+   Les polices sont servies par le thème, jamais par Google.
+   Deux raisons : le site doit fonctionner sur un hébergement isolé, et
+   charger une police depuis un CDN tiers transmet l'adresse IP du visiteur
+   à ce tiers — ce qui est un traitement de données à caractère personnel.
+   ========================================================================= */
+@font-face{
+  font-family:"Bricolage Grotesque";
+  src:url("assets/polices/bricolage-latin.woff2") format("woff2-variations");
+  font-display:swap;font-style:normal;
+  font-weight:200 800;font-stretch:75% 100%;
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:"Bricolage Grotesque";
+  src:url("assets/polices/bricolage-latin-ext.woff2") format("woff2-variations");
+  font-display:swap;font-style:normal;
+  font-weight:200 800;font-stretch:75% 100%;
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:"Instrument Sans";
+  src:url("assets/polices/instrument-latin.woff2") format("woff2-variations");
+  font-display:swap;font-style:normal;
+  font-weight:400 600;
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:"Instrument Sans";
+  src:url("assets/polices/instrument-latin-ext.woff2") format("woff2-variations");
+  font-display:swap;font-style:normal;
+  font-weight:400 600;
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:"Martian Mono";
+  src:url("assets/polices/martian-latin.woff2") format("woff2-variations");
+  font-display:swap;font-style:normal;
+  font-weight:100 700;font-stretch:75% 112.5%;
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:"Martian Mono";
+  src:url("assets/polices/martian-latin-ext.woff2") format("woff2-variations");
+  font-display:swap;font-style:normal;
+  font-weight:100 700;font-stretch:75% 112.5%;
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* =========================================================================
+   LE RELEVÉ — Portfolio Antoine Brévard
+   BTS SIO option SISR · alternance Automobile Club de l'Ouest
+
+   Parti pris : une feuille de chronos, pas une brochure.
+   Le Mans est present en typographie et en donnees, pas en photos de
+   voitures — c'est plus juste, et ca evite d'emprunter des images qui ne
+   nous appartiennent pas.
+
+   Trois idees portent tout :
+     1. la typo EST l'image — echelle du viewport, bord a bord
+     2. le titre se deforme sous la charge du defilement : le propos du site
+        (un systeme qui encaisse) rendu physique
+     3. le vibreur jaune et bleu du circuit sert de filet structurel
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- jetons
+   La couleur vient du circuit, pas d'un nuancier : le vert profond des
+   portiques et de l'identite ACO, le creme chaud, et les deux couleurs de
+   vibreur du Mans. Aplats pleine largeur section par section plutot qu'un
+   fond unique — un fond unique restait trop sage.                        */
+:root{
+  --vert:#0F3B29;          /* le vert des portiques : couleur dominante */
+  --vert-2:#1A5B40;
+  --creme:#F7EFDD;         /* chaud, pas le gris papier */
+  --sable:#EDDFC2;
+  --sable-2:#E0CCA6;
+  --encre:#16120B;         /* noir chaud, jamais neutre */
+  --encre-2:#4C4334;
+  --encre-3:#8A7D66;
+
+  --jaune:#F5C518;         /* vibreur */
+  --bleu:#17509E;          /* vibreur */
+
+  --trait:rgba(22,18,11,.16);
+  --trait-fort:rgba(22,18,11,.34);
+
+  /* statuts du referentiel — semantiques, distincts de l'identite */
+  --prouve:#0F6B4F;
+  --partiel:#9A5B08;
+  --absent:#8A7D66;
+
+  --rail:76px;
+  --gouttiere:clamp(20px,4vw,52px);
+  --largeur:1320px;
+  --mesure:62ch;
+
+  --display:"Bricolage Grotesque","Arial Narrow",sans-serif;
+  --texte:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,.84,.28,1);
+
+  --wght:790;
+  --wdth:100;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--creme);color:var(--encre);
+  font-family:var(--texte);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--bleu);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.evite{
+  position:absolute;top:-70px;left:var(--gouttiere);z-index:200;
+  background:var(--jaune);color:var(--encre);padding:12px 20px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;transition:top .2s;
+}
+.evite:focus{top:14px}
+
+/* ------------------------------------------------------------ typographie */
+.mono{
+  font-family:var(--mono);font-size:11px;letter-spacing:.02em;
+  text-transform:uppercase;font-variation-settings:"wdth" 87,"wght" 400;
+}
+.geant{
+  font-family:var(--display);margin:0;line-height:.82;
+  letter-spacing:-.022em;text-transform:uppercase;
+  font-variation-settings:"wght" var(--wght),"wdth" var(--wdth),"opsz" 96;
+}
+h1.geant{font-size:clamp(60px,16.5vw,252px)}
+h2.geant{font-size:clamp(38px,7vw,104px)}
+h3{
+  font-family:var(--display);font-size:clamp(21px,2.4vw,32px);margin:0;
+  line-height:1.05;letter-spacing:-.017em;
+  font-variation-settings:"wght" 700,"wdth" 88,"opsz" 32;
+}
+
+.etiquette{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--encre-3);margin:0 0 18px;font-variation-settings:"wdth" 87,"wght" 400;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.etiquette b{color:var(--bleu);font-weight:400}
+.chapeau{
+  font-size:clamp(18px,2.1vw,25px);line-height:1.42;color:var(--encre-2);
+  max-width:var(--mesure);margin:0;letter-spacing:-.011em;
+}
+.chapeau strong{color:var(--encre);font-weight:600}
+p{margin:0 0 17px}
+p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------- filet « vibreur »
+   La bande jaune et bleu des bords de piste du Mans. Elle separe les
+   sections : c'est un element de structure, pas un ornement.             */
+/* Un vibreur, c'est du beton peint : des segments droits, separes par un
+   joint, avec une arete qui prend la lumiere et un flanc dans l'ombre.
+   La version precedente etait une bande diagonale en aplat, a saturation
+   maximale — ca ne lisait pas comme un bord de piste, ca lisait comme un
+   ruban de bonbon. Les couleurs sont legerement rabattues pour la meme
+   raison : sur un ecran, du jaune et du bleu purs vibrent trop. */
+.vibreur{
+  height:12px;border:0;margin:0;
+  background:
+    /* le joint entre deux segments */
+    repeating-linear-gradient(90deg,
+      transparent 0 30px, rgba(22,18,11,.42) 30px 32px),
+    /* les segments peints */
+    repeating-linear-gradient(90deg,
+      #E3B41C 0 32px, #1D4E8C 32px 64px);
+  box-shadow:
+    inset 0  2px 0 rgba(255,255,255,.26),   /* arete eclairee */
+    inset 0 -3px 0 rgba(22,18,11,.26);      /* flanc dans l'ombre */
+}
+.vibreur--fin{
+  height:7px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(22,18,11,.22);
+}
+
+/* ---------------------------------------------------------- rail lateral */
+.rail{
+  position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:60;
+  border-right:2px solid var(--encre);background:var(--sable);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:space-between;padding:22px 0 20px;
+}
+.rail-id{
+  font-family:var(--display);font-variation-settings:"wght" 800,"wdth" 78;
+  font-size:22px;letter-spacing:.02em;text-decoration:none;line-height:1;
+}
+/* navigation entre pages, ecrite dans le sens du rail : on lit de haut en
+   bas comme sur une feuille de chronos, et la page courante est marquee */
+.rail-nav{display:flex;flex-direction:column;gap:20px;align-items:center}
+.rail-nav a{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--encre-3);font-variation-settings:"wdth" 87;
+  border-left:2px solid transparent;padding-left:5px;
+  transition:color .22s,border-color .22s;
+}
+.rail-nav a:hover{color:var(--encre)}
+.rail-nav a.est-active{color:var(--encre);border-left-color:var(--bleu)}
+.rail-chrono{
+  font-family:var(--mono);font-size:10px;color:var(--encre-3);
+  writing-mode:vertical-rl;font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
+}
+
+/* --------------------------------------------------------------- gabarit */
+.page{margin-left:var(--rail)}
+.coque{max-width:var(--largeur);margin:0 auto;padding-inline:var(--gouttiere)}
+.bloc{padding-block:clamp(64px,9vw,140px);position:relative}
+.bloc--serre{padding-block:clamp(44px,5.5vw,80px)}
+/* Chaque grande section porte son propre aplat : c'est ce qui donne le
+   rythme. */
+.bloc--vert{
+  background:var(--vert);color:var(--creme);
+  --trait:rgba(247,239,221,.22);--trait-fort:rgba(247,239,221,.42);
+}
+.bloc--vert .chapeau{color:rgba(247,239,221,.78)}
+.bloc--vert .chapeau strong{color:var(--creme)}
+.bloc--vert .etiquette{color:rgba(247,239,221,.6)}
+.bloc--vert .etiquette b{color:var(--jaune)}
+.bloc--vert .matrice-code{color:var(--jaune)}
+.bloc--vert .matrice-nom,.bloc--vert .ligne-intitule{color:var(--creme)}
+.bloc--vert .preuve{color:rgba(247,239,221,.82)}
+.bloc--vert .preuve:hover,.bloc--vert .preuve.is-lie{
+  border-color:var(--jaune);color:var(--jaune);background:rgba(245,197,24,.12);
+}
+.bloc--vert .ligne:hover,.bloc--vert .ligne.is-lie{background:rgba(247,239,221,.07)}
+.bloc--sable{background:var(--sable)}
+.bloc--creme{background:var(--creme)}
+.tete{max-width:var(--mesure);margin-bottom:clamp(30px,4vw,56px)}
+.tete .chapeau{margin-top:20px}
+
+/* ------------------------------------------------------------------ hero
+   Pas de photo. Le nom occupe l'ecran, bord a bord, et se comprime au
+   defilement. C'est la seule chose a voir en arrivant.                  */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;
+  padding-block:clamp(84px,11vh,130px) clamp(30px,4vw,52px);
+}
+.hero-nom{width:100%}
+.hero-nom span{display:block}
+/* la deuxieme ligne en contour : le nom devient une structure, pas un aplat */
+.hero-nom .creux{
+  -webkit-text-stroke:1.7px var(--encre);color:transparent;
+}
+.bloc--vert .hero-nom .creux{-webkit-text-stroke-color:var(--jaune)}
+.bloc--vert .hero-these{color:var(--creme)}
+.bloc--vert .hero-releve dt{color:rgba(247,239,221,.6)}
+.bloc--vert .hero-releve dd{color:var(--creme)}
+.bloc--vert .rail-id{color:var(--encre)}
+.hero-bas{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px 44px;align-items:end;
+}
+.hero-these{
+  font-size:clamp(19px,2.3vw,28px);line-height:1.34;max-width:32ch;
+  letter-spacing:-.014em;margin:0;
+}
+.hero-these strong{
+  font-weight:600;
+  box-shadow:inset 0 -.42em 0 var(--jaune);
+}
+.hero-actions{display:flex;gap:11px;flex-wrap:wrap}
+
+/* ------------------------------------------- révélation dans les lettres
+   Le nom est le masque. Une seconde copie du nom, remplie d'une trame
+   technique, est superposee a la premiere et decoupee par un cercle qui
+   suit le curseur : la vue systemes apparait A L'INTERIEUR des lettres.
+   Aucune photo, donc aucune question de droits — et c'est le nom lui-meme
+   qui s'ouvre, pas une image posee derriere.                            */
+.hero-nom{position:relative}
+.hero-nom-systemes{
+  position:absolute;inset:0;pointer-events:none;
+  /* le cercle est franc au centre et se dissout sur son bord : un bord net
+     ferait spot de projecteur, pas revelation */
+  -webkit-mask-image:radial-gradient(circle at var(--mx,50%) var(--my,42%),
+    #000 0, #000 calc(var(--r,150px) * .52), transparent var(--r,150px));
+          mask-image:radial-gradient(circle at var(--mx,50%) var(--my,42%),
+    #000 0, #000 calc(var(--r,150px) * .52), transparent var(--r,150px));
+}
+.hero-nom-systemes span{
+  -webkit-text-stroke:0;color:transparent;
+  /* trame fine + reperes : la meme grammaire que la nappe de supervision,
+     mais enfermee dans le dessin des lettres */
+  background-image:
+    repeating-linear-gradient(0deg,  var(--jaune) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(90deg, var(--jaune) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(0deg,  rgba(245,197,24,.35) 0 2px, transparent 2px 50px),
+    linear-gradient(rgba(245,197,24,.16), rgba(245,197,24,.16));
+  -webkit-background-clip:text;background-clip:text;
+  background-attachment:fixed;
+}
+/* la trame respire meme curseur immobile : une trame figee fait autocollant */
+@media (prefers-reduced-motion:no-preference){
+  .hero-nom-systemes span{animation:trame 5.5s linear infinite}
+}
+@keyframes trame{
+  to{ background-position:0 10px, 10px 0, 0 50px, 0 0 }
+}
+.hero-invite{
+  margin:18px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;color:rgba(247,239,221,.55);
+  font-variation-settings:"wdth" 87;display:flex;align-items:center;gap:9px;
+}
+.hero-invite::before{
+  content:"";width:22px;height:1px;background:var(--jaune);flex:none;
+}
+.hero-invite.est-cache{display:none}
+/* grille fixe plutot qu'un flex : en flex, le quatrieme releve retombait
+   seul sur une deuxieme ligne des que la place manquait */
+.hero-releves{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--trait);margin-top:34px;max-width:560px;
+}
+.hero-releve{padding:16px 18px 0 0;border-right:1px solid var(--trait)}
+.hero-releve:last-child{border-right:0;padding-right:0}
+.hero-releve dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:6px;font-variation-settings:"wdth" 87;
+}
+.hero-releve dd{
+  margin:0;font-family:var(--display);font-size:25px;line-height:1;
+  font-variation-settings:"wght" 700,"wdth" 85;font-variant-numeric:tabular-nums;
+}
+
+/* --------------------------------------------------------------- boutons */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+  padding:14px 22px;border:1px solid var(--encre);cursor:pointer;background:none;
+  font-variation-settings:"wdth" 87,"wght" 500;
+  transition:background .2s,color .2s,transform .3s var(--ease);
+}
+.btn:hover{background:var(--encre);color:var(--creme)}
+.btn--plein{background:var(--vert);border-color:var(--vert);color:var(--creme)}
+.btn--plein:hover{background:var(--jaune);border-color:var(--jaune);color:var(--encre)}
+.bloc--vert .btn{border-color:rgba(247,239,221,.45);color:var(--creme)}
+.bloc--vert .btn:hover{background:var(--jaune);border-color:var(--jaune);color:var(--encre)}
+
+/* ----------------------------------------------- realisations, en journal
+   Des lignes editoriales, pas des cartes. Une grille de cartes toutes
+   identiques est le tic visuel d'un gabarit ; une liste numerotee dit un
+   ordre et laisse la typographie respirer.                              */
+.journal{border-top:1px solid var(--trait)}
+.entree{
+  display:grid;grid-template-columns:78px minmax(0,1fr) minmax(0,30ch) auto;
+  gap:0 clamp(20px,3vw,48px);align-items:start;
+  padding:clamp(24px,3.2vw,40px) 0;border-bottom:1px solid var(--trait);
+  text-decoration:none;color:inherit;position:relative;
+  transition:padding-left .35s var(--ease);
+}
+.entree::before{
+  content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;
+  background:var(--sable-2);opacity:0;transition:opacity .3s;
+}
+.entree:hover::before{opacity:1}
+.entree:hover{padding-left:16px}
+.entree-num{
+  font-family:var(--mono);font-size:11px;color:var(--encre-3);padding-top:6px;
+  font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
+}
+.entree-titre{max-width:24ch}
+.entree-mot{
+  font-size:15px;line-height:1.5;color:var(--encre-2);margin:0;
+}
+.entree-comp{display:flex;flex-wrap:wrap;gap:5px;align-items:flex-start;padding-top:5px}
+.puce{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;
+  padding:4px 8px;border:1px solid var(--trait);color:var(--encre-3);white-space:nowrap;
+  font-variation-settings:"wdth" 87;
+}
+.entree-fleche{
+  align-self:center;font-family:var(--mono);font-size:15px;color:var(--encre-3);
+  transition:transform .35s var(--ease),color .2s;
+}
+.entree:hover .entree-fleche{transform:translateX(7px);color:var(--encre)}
+
+/* ---------------------------------------------- matrice de competences
+   La piece interactive du site : survoler une competence allume les
+   realisations qui la prouvent, et inversement.                        */
+.matrice{border-top:1px solid var(--trait)}
+.matrice-bloc{margin-bottom:38px}
+.matrice-bloc:last-child{margin-bottom:0}
+.matrice-tete{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding:14px 0 11px;border-bottom:1.5px solid var(--trait-fort);
+}
+.matrice-code{
+  font-family:var(--mono);font-size:10.5px;color:var(--bleu);flex:none;
+  font-variation-settings:"wdth" 87,"wght" 500;letter-spacing:.04em;
+}
+.matrice-nom{font-weight:600;font-size:16px;letter-spacing:-.012em}
+.matrice-epreuve{
+  margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--encre-3);font-variation-settings:"wdth" 87;
+}
+.ligne{
+  display:grid;grid-template-columns:3px minmax(0,1fr) auto;gap:0 15px;align-items:start;
+  padding:12px 0;border-bottom:1px solid var(--trait);transition:background .2s;
+}
+.ligne:hover,.ligne.is-lie{background:var(--sable-2)}
+.ligne-barre{align-self:stretch;min-height:20px}
+.est-prouve  .ligne-barre{background:var(--prouve)}
+.est-partiel .ligne-barre{background:var(--partiel)}
+.est-absent  .ligne-barre{background:var(--absent)}
+.ligne-intitule{font-size:14.5px;line-height:1.45}
+.ligne-preuves{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.preuve{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:3px 8px;
+  border:1px solid var(--trait);color:var(--encre-2);text-decoration:none;
+  font-variation-settings:"wdth" 87;transition:border-color .2s,color .2s,background .2s;
+}
+.preuve:hover,.preuve.is-lie{border-color:var(--bleu);color:var(--bleu);background:rgba(23,80,158,.06)}
+.ligne-statut{
+  font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;white-space:nowrap;align-self:start;font-variation-settings:"wdth" 87;
+}
+.est-prouve  .ligne-statut{background:rgba(15,107,79,.12);color:var(--prouve)}
+.est-partiel .ligne-statut{background:rgba(150,97,15,.12);color:var(--partiel)}
+.est-absent  .ligne-statut{background:rgba(138,141,147,.16);color:var(--absent)}
+
+/* ------------------------------------------------------------ accès jury */
+.jury{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:1px;background:var(--trait);border:1px solid var(--trait);
+}
+.jury-case{background:var(--creme);padding:24px 22px 26px;display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.bloc--vert .jury-case{background:var(--vert)}
+.jury-case dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--bleu);font-variation-settings:"wdth" 87;
+}
+.bloc--vert .jury-case dt{color:var(--jaune)}
+.jury-case dd{margin:0;font-size:14.5px;color:var(--encre-2);line-height:1.5}
+.bloc--vert .jury-case dd{color:rgba(247,239,221,.74)}
+.jury-case a{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+  text-decoration:none;border-bottom:1px solid var(--trait-fort);padding-bottom:2px;
+  font-variation-settings:"wdth" 87;margin-top:4px;
+}
+.jury-case a:hover{border-bottom-color:var(--encre)}
+.bloc--vert .jury-case a{border-bottom-color:rgba(247,239,221,.4)}
+
+/* ------------------------------------------------------- bandes photo
+   Les photos n'occupent pas les heros : elles servent de respiration
+   pleine largeur entre deux sections. Trois seulement, toutes prises par
+   Antoine au Mans Classic — donc aucune question de droits. Legerement
+   rabattues pour qu'elles appartiennent au systeme au lieu de s'y poser. */
+.bande{position:relative;overflow:hidden;margin:0;background:var(--vert)}
+/* Les photos sont recadrees en panoramique a la source, sujet centre : le
+   cadre suit donc leur format au lieu de tailler dedans. Le plafond ne sert
+   qu'a eviter une bande de 1000 px de haut sur un tres grand ecran, et il
+   rabote des bords, jamais le sujet.
+   La version precedente enfermait des photos VERTICALES dans une bande
+   horizontale : on n'en voyait qu'une tranche, parfois a cote du sujet. */
+.bande img{
+  width:100%;height:auto;display:block;
+  aspect-ratio:2.35;object-fit:cover;object-position:center;
+  max-height:clamp(210px,30vw,440px);
+  filter:saturate(.94) contrast(1.03);
+}
+.bande--haute img{max-height:clamp(250px,36vw,540px)}
+.bande figcaption{
+  position:absolute;left:0;bottom:0;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--creme);background:var(--vert);padding:8px 14px;
+  font-variation-settings:"wdth" 87;
+}
+.bande figcaption b{color:var(--jaune);font-weight:400}
+
+/* ------------------------------------------------------------- parcours
+   Le portrait est borne en largeur ET en ratio : sans ces deux bornes il
+   s'affiche a sa taille naturelle, soit enorme.                        */
+.parcours-grille{
+  display:grid;grid-template-columns:minmax(0,256px) minmax(0,1fr);
+  gap:clamp(28px,4vw,60px);align-items:start;
+}
+.parcours-portrait{margin:0;position:relative;max-width:256px}
+.parcours-portrait img{
+  width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 20%;
+  border:1px solid var(--trait-fort);
+}
+.parcours-portrait figcaption{
+  position:absolute;left:-9px;bottom:18px;background:var(--vert);color:var(--jaune);
+  padding:7px 13px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;font-variation-settings:"wdth" 87;
+}
+@media (max-width:760px){
+  .parcours-grille{grid-template-columns:1fr}
+  .parcours-portrait{max-width:190px}
+  .parcours-portrait figcaption{left:0}
+}
+
+/* ==================================================== fiche de réalisation */
+.cas-hero{padding-block:clamp(96px,12vh,150px) clamp(44px,6vw,72px)}
+.cas-retour{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;font-variation-settings:"wdth" 87;
+  border-bottom:1px solid currentColor;padding-bottom:2px;
+}
+/* Le nom a l'echelle de l'ecran n'a de sens que sur l'accueil : la, il EST
+   l'image. Sur une page interieure, un titre de 120 px ecrase le contenu
+   qu'on est venu lire. */
+/* h1.cas-titre, pas .cas-titre : h1.geant porte un element ET une classe,
+   donc il gagne contre une classe seule — la regle etait ecrasee. */
+h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
+.cas-amorce{
+  font-size:clamp(19px,2.4vw,29px);line-height:1.34;max-width:34ch;
+  margin:26px 0 0;letter-spacing:-.014em;
+}
+.cas-meta{
+  display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--trait);margin-top:36px;
+}
+.cas-meta div{padding:15px 24px 0 0;margin-right:24px;border-right:1px solid var(--trait)}
+.cas-meta div:last-child{border-right:0;margin-right:0;padding-right:0}
+.cas-meta dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:rgba(247,239,221,.6);margin-bottom:5px;font-variation-settings:"wdth" 87;
+}
+.cas-meta dd{margin:0;font-family:var(--display);font-size:21px;line-height:1;font-variation-settings:"wght" 680,"wdth" 86}
+
+.cas-etape{padding-block:clamp(30px,4.2vw,52px);border-top:1px solid var(--trait)}
+.cas-etape:first-child{border-top:0;padding-top:0}
+.cas-etape h2{
+  font-family:var(--display);font-size:clamp(27px,3.8vw,48px);margin:0 0 20px;
+  text-transform:uppercase;letter-spacing:-.018em;line-height:.92;
+  font-variation-settings:"wght" 740,"wdth" 86;
+}
+.cas-etape p{color:var(--encre-2);max-width:var(--mesure);line-height:1.64}
+.cas-etape strong{color:var(--encre);font-weight:600}
+
+/* étude de solutions : les écartées comptent autant que la retenue */
+.solutions{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;margin-top:6px}
+.solution{border:1px solid var(--trait-fort);padding:22px 20px;background:var(--creme)}
+.solution.est-retenue{border:2px solid var(--vert);background:rgba(15,59,41,.05)}
+.solution-verdict{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:11px;display:block;font-variation-settings:"wdth" 87;
+}
+.solution.est-retenue .solution-verdict{color:var(--vert)}
+.solution h3{font-size:16.5px;margin:0 0 13px;line-height:1.28;font-variation-settings:"wght" 660,"wdth" 92}
+.solution ul{margin:0;padding:0;list-style:none}
+.solution li{font-size:13.5px;color:var(--encre-2);padding-left:19px;position:relative;margin-bottom:7px;line-height:1.48}
+.solution li.pour::before{content:"+";position:absolute;left:0;color:var(--vert);font-family:var(--mono);font-weight:700}
+.solution li.contre::before{content:"\2212";position:absolute;left:0;color:#A33;font-family:var(--mono);font-weight:700}
+
+/* avant / après — les deux panneaux partagent la même cellule de grille, le
+   plus haut fixe la hauteur ; en absolu l'un débordait de son cadre */
+.ba{margin-top:6px}
+.ba-cadre{position:relative;overflow:hidden;border:1px solid var(--trait-fort);background:var(--sable);display:grid}
+.ba-avant,.ba-apres{grid-area:1 / 1;padding:clamp(24px,3.4vw,40px) clamp(20px,2.8vw,36px)}
+.ba-apres{position:relative;background:var(--creme);clip-path:inset(0 0 0 var(--ba,50%))}
+.ba-tag{
+  display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
+  text-transform:uppercase;padding:4px 9px;margin-bottom:14px;font-variation-settings:"wdth" 87;
+}
+.ba-avant .ba-tag{background:rgba(163,51,51,.13);color:#8C2B2B}
+.ba-apres .ba-tag{background:rgba(15,59,41,.12);color:var(--vert)}
+.ba h3{font-size:clamp(17px,2.2vw,23px);margin:0 0 12px;max-width:30ch;font-variation-settings:"wght" 700,"wdth" 88}
+.ba p{margin:0;color:var(--encre-2);font-size:14.5px;line-height:1.58;max-width:42ch}
+.ba-ligne{
+  position:absolute;top:0;bottom:0;left:var(--ba,50%);width:3px;background:var(--vert);
+  transform:translateX(-1.5px);pointer-events:none;
+}
+.ba-ligne::after{
+  content:"";position:absolute;top:50%;left:50%;width:32px;height:32px;
+  transform:translate(-50%,-50%);border:2px solid var(--vert);border-radius:50%;background:var(--creme);
+}
+.ba-curseur{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;-webkit-appearance:none;appearance:none;background:none}
+.ba-curseur:focus-visible{opacity:.001;outline:2px solid var(--vert);outline-offset:3px}
+.ba-aide{
+  margin-top:11px;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--encre-3);font-variation-settings:"wdth" 87;
+}
+
+/* recul : un jury retient le recul, et la plupart des candidats le cachent */
+.recul{border-left:4px solid var(--jaune);background:var(--sable);padding:clamp(22px,3vw,32px) clamp(20px,2.6vw,30px)}
+.recul h3{font-size:17.5px;margin:0 0 13px;font-variation-settings:"wght" 680,"wdth" 90}
+.recul p{margin:0 0 13px;color:var(--encre-2);max-width:var(--mesure);line-height:1.6}
+.recul p:last-child{margin-bottom:0}
+
+.renvoi{
+  display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  border:1px solid var(--trait-fort);padding:24px 26px;
+}
+.renvoi p{margin:0;color:var(--encre-2);font-size:14.5px;max-width:52ch}
+.renvoi strong{color:var(--encre);font-weight:600}
+
+.preuves{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.preuve-lien{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:7px 12px;
+  border:1px solid var(--trait-fort);color:var(--encre-2);text-decoration:none;
+  font-variation-settings:"wdth" 87;transition:border-color .2s,color .2s,background .2s;
+}
+.preuve-lien:hover{border-color:var(--vert);color:var(--vert);background:rgba(15,59,41,.05)}
+
+@media (max-width:760px){
+  .cas-meta div{border-right:0;margin-right:0;padding-right:0;min-width:47%}
+}
+
+/* -------------------------------------------------------------- révélation */
+.leve{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.leve.est-vu{opacity:1;transform:none}
+
+/* -------------------------------------------------------------------- pied */
+.pied{
+  border-top:1px solid var(--trait);padding-block:36px;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--encre-3);font-variation-settings:"wdth" 87;
+}
+.pied a{text-decoration:none;border-bottom:1px solid var(--trait)}
+.pied a:hover{color:var(--encre);border-bottom-color:var(--encre)}
+
+/* -------------------------------------------------------------- responsive */
+@media (max-width:900px){
+  :root{--rail:0px}
+  .rail{
+    left:0;right:0;bottom:auto;top:0;width:auto;height:52px;
+    flex-direction:row;padding:0 var(--gouttiere);
+    border-right:0;border-bottom:1px solid var(--trait);
+  }
+  .rail-chrono{writing-mode:horizontal-tb}
+  .rail-nav{flex-direction:row;gap:16px;overflow-x:auto;padding-inline:2px}
+  .rail-nav a{
+    writing-mode:horizontal-tb;border-left:0;padding-left:0;
+    border-bottom:2px solid transparent;padding-bottom:3px;white-space:nowrap;
+  }
+  .rail-nav a.est-active{border-bottom-color:var(--bleu)}
+  .page{margin-left:0;padding-top:52px}
+  .hero{min-height:calc(100svh - 52px)}
+  .hero-bas{grid-template-columns:1fr}
+  .entree{grid-template-columns:52px minmax(0,1fr) auto;gap:0 16px}
+  .entree-mot{grid-column:2;margin-top:10px}
+  .entree-comp{grid-column:2;margin-top:12px}
+  .ligne{grid-template-columns:3px minmax(0,1fr)}
+  .ligne-statut{grid-column:2;justify-self:start;margin-top:9px}
+}
+@media (max-width:560px){
+  .hero-releves{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-releve:nth-child(2n){border-right:0;padding-right:0}
+  .hero-releve:nth-child(n+3){border-top:1px solid var(--trait);margin-top:14px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .leve{opacity:1;transform:none}
+}
+
+/* -------------------------------------------------------------- impression
+   Le portfolio est une piece d'examen : il sera imprime ou exporte en PDF. */
+@media print{
+  :root{--rail:0px}
+  body{background:#fff;font-size:11pt}
+  .rail,.evite,.hero-actions,.entree-fleche{display:none!important}
+  .page{margin-left:0}
+  .hero{min-height:auto;padding-block:0 18pt}
+  .hero-nom .creux{-webkit-text-stroke:0;color:#000}
+  .bloc,.bloc--serre{padding-block:12pt;break-inside:avoid}
+  .bloc--vert{background:#fff!important;color:#000!important}
+  .bloc--vert .chapeau,.bloc--vert .jury-case dd,.bloc--vert .ligne-intitule,.bloc--vert .matrice-nom{color:#000!important}
+  .bloc--sable,.bloc--creme,.jury-case{background:#fff!important}
+  .vibreur{height:2px;background:#000}
+  .entree,.ligne,.jury-case{break-inside:avoid}
+  .leve{opacity:1!important;transform:none!important}
+  h1,h2,h3{break-after:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#666}
+}
+
+/* =========================================================================
+   RACCORDS WORDPRESS
+   Le site statique produisait exactement le balisage que la feuille de style
+   attendait. WordPress produit le sien : un lien de navigation est enveloppe,
+   un separateur a ses propres bordures, un bouton met le lien a l'interieur
+   du bloc. Ces regles raccordent les deux, sans toucher au reste.
+   ========================================================================= */
+
+/* --- rail : le bloc navigation remplace mes liens nus --- */
+.rail .wp-block-navigation__container{
+  display:flex;flex-direction:column;gap:20px;align-items:center;
+}
+.rail .wp-block-navigation-item__content{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--encre-3);font-variation-settings:"wdth" 87;
+  border-left:2px solid transparent;padding-left:5px;
+  transition:color .22s,border-color .22s;
+}
+.rail .wp-block-navigation-item__content:hover{color:var(--encre)}
+.rail .current-menu-item .wp-block-navigation-item__content{
+  color:var(--encre);border-left-color:var(--bleu);
+}
+/* le titre du site sert de monogramme */
+.rail .wp-block-site-title{margin:0}
+.rail .wp-block-site-title a{
+  font-family:var(--display);font-variation-settings:"wght" 800,"wdth" 78;
+  font-size:22px;letter-spacing:.02em;text-decoration:none;line-height:1;
+}
+
+/* --- separateur : WordPress lui donne une bordure et des marges --- */
+.wp-block-separator.vibreur{
+  border:0;margin-block:0;opacity:1;max-width:none;width:100%;
+}
+
+/* --- bande photo : le bloc image apporte figure + figcaption --- */
+.wp-block-image.bande{margin:0}
+.wp-block-image.bande figcaption{
+  position:absolute;left:0;bottom:0;margin:0;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--creme);background:var(--vert);padding:8px 14px;
+  font-variation-settings:"wdth" 87;
+}
+
+/* --- boutons : le lien est a l'interieur du bloc, pas le bloc lui-meme --- */
+.wp-block-button.btn{display:inline-flex}
+.wp-block-button.btn .wp-block-button__link{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+  padding:14px 22px;border:1px solid var(--encre);background:none;color:var(--encre);
+  border-radius:0;font-variation-settings:"wdth" 87,"wght" 500;
+  transition:background .2s,color .2s;
+}
+.wp-block-button.btn .wp-block-button__link:hover{background:var(--encre);color:var(--creme)}
+.wp-block-button.btn--plein .wp-block-button__link{
+  background:var(--vert);border-color:var(--vert);color:var(--creme);
+}
+.wp-block-button.btn--plein .wp-block-button__link:hover{
+  background:var(--jaune);border-color:var(--jaune);color:var(--encre);
+}
+.bloc--vert .wp-block-button.btn .wp-block-button__link{
+  border-color:rgba(247,239,221,.45);color:var(--creme);
+}
+.bloc--vert .wp-block-button.btn .wp-block-button__link:hover{
+  background:var(--jaune);border-color:var(--jaune);color:var(--encre);
+}
+
+/* --- le journal, alimente par une requete plutot qu'ecrit a la main --- */
+.journal .wp-block-post-template{list-style:none;margin:0;padding:0}
+.journal .entree{display:block;padding-block:clamp(24px,3.2vw,40px)}
+.journal .entree-titre{margin:0 0 10px}
+.journal .entree-titre a{text-decoration:none}
+.journal .entree-mot{margin:0;font-size:15px;line-height:1.5;color:var(--encre-2)}
+
+/* --- le contenu d'une fiche est produit par l'editeur --- */
+.entry-content > h2,.wp-block-post-content > h2{
+  font-family:var(--display);font-size:clamp(27px,3.8vw,48px);
+  text-transform:uppercase;letter-spacing:-.018em;line-height:.92;
+  margin:clamp(30px,4.2vw,52px) 0 20px;padding-top:clamp(30px,4.2vw,52px);
+  border-top:1px solid var(--trait);
+}
+.entry-content > h2:first-child,.wp-block-post-content > h2:first-child{
+  border-top:0;padding-top:0;margin-top:0;
+}
+.wp-block-post-content > p{color:var(--encre-2);max-width:var(--mesure);line-height:1.64}

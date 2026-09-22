@@ -1,0 +1,267 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "layout": {
+      "contentSize": "760px",
+      "wideSize": "1320px"
+    },
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "defaultDuotone": false,
+      "custom": true,
+      "palette": [
+        {
+          "slug": "vert",
+          "color": "#0F3B29",
+          "name": "Vert circuit"
+        },
+        {
+          "slug": "creme",
+          "color": "#F7EFDD",
+          "name": "Crème"
+        },
+        {
+          "slug": "sable",
+          "color": "#EDDFC2",
+          "name": "Sable"
+        },
+        {
+          "slug": "encre",
+          "color": "#16120B",
+          "name": "Encre"
+        },
+        {
+          "slug": "jaune",
+          "color": "#F5C518",
+          "name": "Jaune vibreur"
+        },
+        {
+          "slug": "bleu",
+          "color": "#17509E",
+          "name": "Bleu vibreur"
+        },
+        {
+          "slug": "encre-2",
+          "color": "#4C4334",
+          "name": "Encre atténuée"
+        }
+      ]
+    },
+    "typography": {
+      "fluid": true,
+      "defaultFontSizes": false,
+      "customFontSize": true,
+      "fontFamilies": [
+        {
+          "name": "Bricolage Grotesque",
+          "slug": "titre",
+          "fontFamily": "\"Bricolage Grotesque\",\"Arial Narrow\",sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Bricolage Grotesque",
+              "fontStyle": "normal",
+              "fontWeight": "200 800",
+              "src": [
+                "file:./assets/polices/bricolage-latin.woff2"
+              ],
+              "fontStretch": "75% 100%"
+            },
+            {
+              "fontFamily": "Bricolage Grotesque",
+              "fontStyle": "normal",
+              "fontWeight": "200 800",
+              "src": [
+                "file:./assets/polices/bricolage-latin-ext.woff2"
+              ],
+              "fontStretch": "75% 100%"
+            }
+          ]
+        },
+        {
+          "name": "Instrument Sans",
+          "slug": "texte",
+          "fontFamily": "\"Instrument Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Instrument Sans",
+              "fontStyle": "normal",
+              "fontWeight": "400 600",
+              "src": [
+                "file:./assets/polices/instrument-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Instrument Sans",
+              "fontStyle": "normal",
+              "fontWeight": "400 600",
+              "src": [
+                "file:./assets/polices/instrument-latin-ext.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Martian Mono",
+          "slug": "mono",
+          "fontFamily": "\"Martian Mono\",ui-monospace,SFMono-Regular,Menlo,monospace",
+          "fontFace": [
+            {
+              "fontFamily": "Martian Mono",
+              "fontStyle": "normal",
+              "fontWeight": "100 700",
+              "src": [
+                "file:./assets/polices/martian-latin.woff2"
+              ],
+              "fontStretch": "75% 112.5%"
+            },
+            {
+              "fontFamily": "Martian Mono",
+              "fontStyle": "normal",
+              "fontWeight": "100 700",
+              "src": [
+                "file:./assets/polices/martian-latin-ext.woff2"
+              ],
+              "fontStretch": "75% 112.5%"
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "petit",
+          "name": "Petit",
+          "size": "13px"
+        },
+        {
+          "slug": "normal",
+          "name": "Normal",
+          "size": "17px"
+        },
+        {
+          "slug": "chapeau",
+          "name": "Chapeau",
+          "size": "clamp(18px,2.1vw,25px)"
+        },
+        {
+          "slug": "titre",
+          "name": "Titre",
+          "size": "clamp(31px,5vw,64px)"
+        },
+        {
+          "slug": "geant",
+          "name": "Nom en grand",
+          "size": "clamp(60px,16.5vw,252px)"
+        }
+      ]
+    },
+    "spacing": {
+      "units": [
+        "px",
+        "rem",
+        "vw",
+        "%"
+      ],
+      "spacingSizes": [
+        {
+          "slug": "30",
+          "name": "Serré",
+          "size": "clamp(18px,2.4vw,30px)"
+        },
+        {
+          "slug": "50",
+          "name": "Moyen",
+          "size": "clamp(32px,4.4vw,60px)"
+        },
+        {
+          "slug": "70",
+          "name": "Large",
+          "size": "clamp(64px,9vw,140px)"
+        }
+      ]
+    },
+    "blocks": {
+      "core/button": {
+        "border": {
+          "radius": false
+        }
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--creme)",
+      "text": "var(--wp--preset--color--encre)"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--texte)",
+      "fontSize": "var(--wp--preset--font-size--normal)",
+      "lineHeight": "1.55"
+    },
+    "spacing": {
+      "blockGap": "clamp(18px,2.4vw,30px)"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "inherit"
+        },
+        ":hover": {
+          "typography": {
+            "textDecoration": "none"
+          }
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--titre)",
+          "fontSize": "var(--wp--preset--font-size--titre)",
+          "lineHeight": "0.94",
+          "textTransform": "uppercase",
+          "letterSpacing": "-0.022em"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--titre)",
+          "fontSize": "clamp(27px,3.8vw,48px)",
+          "lineHeight": "0.92",
+          "textTransform": "uppercase",
+          "letterSpacing": "-0.018em"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--titre)",
+          "fontSize": "clamp(21px,2.4vw,32px)",
+          "lineHeight": "1.05",
+          "letterSpacing": "-0.017em"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    {
+      "name": "header",
+      "title": "Rail de navigation",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Pied de page",
+      "area": "footer"
+    }
+  ],
+  "customTemplates": [
+    {
+      "name": "page-large",
+      "title": "Page pleine largeur",
+      "postTypes": [
+        "page"
+      ]
+    }
+  ]
+}
