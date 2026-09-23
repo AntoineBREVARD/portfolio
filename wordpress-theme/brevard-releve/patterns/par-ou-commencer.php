@@ -21,22 +21,22 @@
   <div class="jury-case">
     <dt>Réalisations</dt>
     <dd>Quatre missions en production, avec les solutions écartées et la raison du rejet.</dd>
-    <a href="/realisations/">Les quatre fiches</a>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Les quatre fiches</a>
   </div>
   <div class="jury-case">
     <dt>Compétences</dt>
     <dd>Chaque compétence du référentiel, et la réalisation qui la démontre.</dd>
-    <a href="/competences/">La matrice</a>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'competences' ) ); ?>">La matrice</a>
   </div>
   <div class="jury-case">
     <dt>Profil</dt>
     <dd>La formation, le contexte d'alternance, et ce qu'on m'y confie.</dd>
-    <a href="/profil/">Le parcours</a>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'profil' ) ); ?>">Le parcours</a>
   </div>
   <div class="jury-case">
     <dt>Épreuves E4 et E5</dt>
     <dd>Les entrées utiles si vous évaluez ce portfolio.</dd>
-    <a href="/jury/">Accès direct</a>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'jury' ) ); ?>">Accès direct</a>
   </div>
 </dl>
 <!-- /wp:html -->

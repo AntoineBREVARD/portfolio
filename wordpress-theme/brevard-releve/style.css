@@ -3,9 +3,9 @@ Theme Name: Brévard — Le Relevé
 Theme URI: https://antoinebrevard.github.io/portfolio/
 Author: Antoine Brévard
 Description: Thème de blocs pour un portfolio BTS SIO option SISR. Univers feuille de chronos : la typographie porte l'identité, le vibreur jaune et bleu du circuit du Mans sert de filet structurel. Aucun plugin requis — pensé pour un hébergement sans accès Internet sortant. Polices embarquées dans le thème : aucune requête vers un service tiers, donc aucune adresse IP de visiteur transmise à Google.
-Version: 1.0.0
+Version: 1.0.1
 Requires at least: 6.5
-Tested up to: 6.7
+Tested up to: 7.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -773,3 +773,27 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   border-top:0;padding-top:0;margin-top:0;
 }
 .wp-block-post-content > p{color:var(--encre-2);max-width:var(--mesure);line-height:1.64}
+
+/* --- gabarit : dans WordPress le pied de page est un FRERE de .page, pas
+   son enfant comme dans le site statique. L'ecart du rail doit donc etre
+   porte par le corps de page, sinon le pied demarre au bord gauche et son
+   texte passe sous le rail. --- */
+body{padding-left:var(--rail)}
+.page{margin-left:0}
+@media print{body{padding-left:0}}
+
+/* --- monogramme du rail : WordPress enveloppe le lien dans un <p>, donc
+   les styles doivent viser l'ancre et non plus le bloc. --- */
+.rail .rail-id{margin:0}
+.rail .rail-id a{
+  font-family:var(--display);font-variation-settings:"wght" 800,"wdth" 78;
+  font-size:22px;letter-spacing:.02em;text-decoration:none;line-height:1;
+  color:var(--encre);
+}
+
+/* --- les quatre portes d'entree : auto-fit en tenait trois par rangee et
+   laissait la quatrieme seule, le fond de grille apparaissant en gris sur
+   la moitie de la largeur. On impose des rangees toujours pleines. --- */
+.jury{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:1180px){.jury{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:560px){.jury{grid-template-columns:1fr}}

@@ -124,3 +124,31 @@ function brevard_releve_classes_corps( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'brevard_releve_classes_corps' );
+
+/**
+ * URL d'une page du portfolio, quelle que soit la structure des permaliens.
+ *
+ * L'hebergement ne permet pas toujours la reecriture d'URL : WordPress bascule
+ * alors sur des adresses prefixees par /index.php/. Ecrire « /realisations/ »
+ * en dur donnerait donc une 404. On demande l'adresse reelle de la page, et a
+ * defaut on reconstruit le prefixe.
+ */
+function brevard_releve_lien( $slug ) {
+	$pages = get_posts(
+		array(
+			'name'        => $slug,
+			'post_type'   => 'page',
+			'post_status' => 'publish',
+			'numberposts' => 1,
+		)
+	);
+
+	if ( $pages ) {
+		return get_permalink( $pages[0] );
+	}
+
+	$structure = (string) get_option( 'permalink_structure' );
+	$prefixe   = ( 0 === strpos( $structure, '/index.php' ) ) ? '/index.php' : '';
+
+	return home_url( $prefixe . '/' . $slug . '/' );
+}

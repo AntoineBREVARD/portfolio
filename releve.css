@@ -377,8 +377,10 @@ p:last-child{margin-bottom:0}
 .est-absent  .ligne-statut{background:rgba(138,141,147,.16);color:var(--absent)}
 
 /* ------------------------------------------------------------ accès jury */
+/* Quatre cases : auto-fit en tenait trois par rangee et laissait la
+   quatrieme seule, fond de grille visible. Rangees toujours pleines. */
 .jury{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   gap:1px;background:var(--trait);border:1px solid var(--trait);
 }
 .jury-case{background:var(--creme);padding:24px 22px 26px;display:flex;flex-direction:column;gap:9px;align-items:flex-start}
@@ -623,3 +625,6 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   h1,h2,h3{break-after:avoid}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#666}
 }
+
+@media (min-width:1180px){.jury{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:560px){.jury{grid-template-columns:1fr}}
