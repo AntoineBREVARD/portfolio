@@ -134,6 +134,13 @@ add_filter( 'body_class', 'brevard_releve_classes_corps' );
  * defaut on reconstruit le prefixe.
  */
 function brevard_releve_lien( $slug ) {
+	if ( 'realisations' === $slug ) {
+		$archive = get_post_type_archive_link( 'realisation' );
+		if ( $archive ) {
+			return $archive;
+		}
+	}
+
 	$pages = get_posts(
 		array(
 			'name'        => $slug,
@@ -151,4 +158,27 @@ function brevard_releve_lien( $slug ) {
 	$prefixe   = ( 0 === strpos( $structure, '/index.php' ) ) ? '/index.php' : '';
 
 	return home_url( $prefixe . '/' . $slug . '/' );
+}
+
+/**
+ * Adresse d'une fiche de realisation, retrouvee par son identifiant.
+ *
+ * Si la fiche n'existe pas encore, on renvoie vers la liste plutot que vers
+ * une 404 : le site reste navigable pendant qu'on le remplit.
+ */
+function brevard_releve_fiche( $slug ) {
+	$fiches = get_posts(
+		array(
+			'name'        => $slug,
+			'post_type'   => 'realisation',
+			'post_status' => 'publish',
+			'numberposts' => 1,
+		)
+	);
+
+	if ( $fiches ) {
+		return get_permalink( $fiches[0] );
+	}
+
+	return brevard_releve_lien( 'realisations' );
 }

@@ -254,14 +254,5 @@
       "title": "Pied de page",
       "area": "footer"
     }
-  ],
-  "customTemplates": [
-    {
-      "name": "page-large",
-      "title": "Page pleine largeur",
-      "postTypes": [
-        "page"
-      ]
-    }
   ]
 }

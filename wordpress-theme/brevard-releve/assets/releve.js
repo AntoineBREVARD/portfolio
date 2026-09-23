@@ -196,9 +196,37 @@ function annee(){
   if (el) el.textContent = new Date().getFullYear();
 }
 
+
+/* ---------- Lien courant dans le rail ----------
+   Le rail est un fragment de gabarit, identique sur toutes les pages : il ne
+   sait pas ou l'on se trouve. On compare donc les adresses au chargement.
+   L'accueil ne compte que sur une correspondance exacte, sinon il resterait
+   allume partout. */
+function railCourant(){
+  const liens = document.querySelectorAll(".rail-nav a");
+  if (!liens.length) return;
+  const chemin = u => { try { return new URL(u).pathname.replace(/\/+$/, "") || "/"; }
+                        catch (e) { return null; } };
+  const ici = location.pathname.replace(/\/+$/, "") || "/";
+  let meilleur = null, meilleurLong = -1;
+  liens.forEach(a => {
+    const cible = chemin(a.href);
+    if (cible === null) return;
+    if (cible === "/" || cible === "/index.php") {
+      if (ici === cible && meilleurLong < 0) { meilleur = a; meilleurLong = 0; }
+      return;
+    }
+    if ((ici === cible || ici.startsWith(cible + "/")) && cible.length > meilleurLong) {
+      meilleur = a; meilleurLong = cible.length;
+    }
+  });
+  if (meilleur) meilleur.classList.add("est-active");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   chrono();
   setInterval(chrono, 1000);
+  railCourant();
   annee();
   typoSousCharge();
   revelationLettres();
