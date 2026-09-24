@@ -36,7 +36,7 @@ manque :
 | Page Entreprise             | `/entreprise/`           |
 | Page À propos (mentions légales) | `/a-propos/`        |
 | Les quatre réalisations     | `/realisation/contacts/`, `quotas`, `teams`, `maj` |
-| Les veilles REACTIV et GPMI | menu **Veilles** (PDF copiés dans la médiathèque) |
+| Les quatre veilles | menu **Veilles** (PDF copiés dans la médiathèque) |
 
 Il recalcule aussi les permaliens : plus besoin de passer par **Réglages →
 Permaliens**. Ce qui existe déjà n'est jamais écrasé, et une page mise à la
