@@ -104,7 +104,7 @@
 
 <!-- wp:html -->
 <div class="preuves">
-  <a class="preuve-lien" href="/competences/">Intitulé exact de la compétence</a>
-  <a class="preuve-lien" href="/competences/">Autre compétence du référentiel</a>
+  <a class="preuve-lien" href="<?php echo esc_url( brevard_releve_lien( 'grille-competences' ) ); ?>">Intitulé exact de la compétence</a>
+  <a class="preuve-lien" href="<?php echo esc_url( brevard_releve_lien( 'grille-competences' ) ); ?>">Autre compétence du référentiel</a>
 </div>
 <!-- /wp:html -->

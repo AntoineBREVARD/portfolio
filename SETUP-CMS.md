@@ -4,7 +4,7 @@ Le site a maintenant un panneau d'administration à l'adresse `/admin/` (par
 exemple `https://tonsite.github.io/portfolio/admin/` une fois en ligne),
 propulsé par [Decap CMS](https://decapcms.org/). Une fois connecté avec ton
 compte GitHub, tu peux modifier tous les textes, photos et listes (missions,
-compétences, photos du terrain...) depuis des formulaires, sans toucher au
+veilles, grille de compétences...) depuis des formulaires, sans toucher au
 code — un bouton "Publier" fait le commit + push à ta place.
 
 Il manque une seule pièce pour que ça marche en ligne : un petit serveur qui
@@ -76,3 +76,21 @@ depuis la racine du repo) et ouvre `http://localhost:8000/admin/` — Decap
 détecte automatiquement `localhost` et utilise ce petit serveur local au lieu
 de GitHub, donc aucune des étapes ci-dessus n'est nécessaire juste pour
 regarder à quoi ressemble l'éditeur.
+
+## Déposer une veille ou la grille de compétences
+
+- **Depuis l'admin** : `/admin/` → **Veilles** (ajoute une entrée : titre,
+  description, date, fichier) ou **Grille de compétences** (un seul fichier).
+  Publier suffit : les pages `veilles.html` et `grille-competences.html` lisent
+  la liste au chargement.
+- **À la main** : dépose le fichier dans `Veilles/` (ou
+  `documents/grille/`), puis ajoute-le dans `content/veilles.json` (ou
+  `content/grille.json`), par exemple :
+  ```json
+  { "items": [
+    { "titre": "L'IA et la cybersécurité", "description": "…", "date": "2026-10-01",
+      "fichier": "Veilles/veille-ia.pdf" }
+  ] }
+  ```
+  Une grille en PDF s'affiche directement dans la page ; un autre format
+  (Excel, Word) est proposé au téléchargement.
