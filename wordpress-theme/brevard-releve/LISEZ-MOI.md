@@ -49,6 +49,20 @@ modifient librement.
 Reste à faire à la main : supprimer « Sample Page » et « Hello world! », et
 régler le titre du site dans **Réglages → Général**.
 
+## Une page manque ?
+
+**Apparence → Portfolio** montre l'état du site : ce que le thème attend, ce
+qui existe, et un lien pour chaque rubrique. **Créer ce qui manque** crée les
+pages, réalisations et veilles absentes et restaure celles de la corbeille,
+sans toucher au reste.
+
+Accueil et Réalisations ne sont pas des pages : l'accueil est un gabarit du
+thème, la liste des réalisations est produite à partir des fiches publiées.
+On ne les trouve donc pas dans **Pages**. Les quatre pages du portfolio y
+portent le titre affiché en grand (« Accès direct », « Ce que je
+surveille »…) ; l'étiquette « Portfolio — Jury », « Portfolio — Veilles »…
+indique laquelle est laquelle.
+
 ## Les anciennes modifications reviennent après une mise à jour
 
 Ce qu'on modifie dans **Apparence → Éditeur** (menu, en-tête, modèles,
@@ -56,7 +70,7 @@ couleurs) est enregistré dans la base de WordPress, pas dans le thème.
 Installer une nouvelle version ne l'efface donc pas : les anciennes
 modifications restent appliquées par-dessus.
 
-**Apparence → Remettre à neuf** les efface en un clic. Cocher ce qu'il faut
+**Apparence → Portfolio** les efface en un clic. Cocher ce qu'il faut
 remettre dans l'état livré par le thème : modèles, styles, pages du
 portfolio, et, seulement si l'on n'y a rien écrit soi-même, les quatre
 réalisations. Les veilles et la médiathèque ne sont jamais touchées. Un
