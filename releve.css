@@ -404,7 +404,7 @@ p:last-child{margin-bottom:0}
 }
 .chiffres span{font-size:13.5px;color:var(--encre-2);line-height:1.45}
 .source{font-size:13px!important;color:var(--encre-3)!important}
-.cas-etape a{color:var(--vert);text-underline-offset:2px}
+.cas-etape a:not(.btn){color:var(--vert);text-underline-offset:2px}
 
 /* ------------------------------------------------------------ accès jury */
 /* Quatre cases : auto-fit en tenait trois par rangee et laissait la

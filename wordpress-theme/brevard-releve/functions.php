@@ -432,10 +432,11 @@ function brevard_releve_importer_veille( $slug, $veille ) {
  * ordinaire.
  */
 function brevard_releve_installer() {
-	if ( get_option( 'brevard_releve_contenu' ) === BREVARD_RELEVE_CONTENU ) {
+	if ( ! current_user_can( 'edit_pages' ) ) {
 		return;
 	}
-	if ( ! current_user_can( 'edit_pages' ) ) {
+	brevard_releve_mise_a_jour();
+	if ( get_option( 'brevard_releve_contenu' ) === BREVARD_RELEVE_CONTENU ) {
 		return;
 	}
 
@@ -854,3 +855,87 @@ function brevard_releve_icones() {
 	echo '<meta name="theme-color" content="#0F3B29">' . "\n";
 }
 add_action( 'wp_head', 'brevard_releve_icones' );
+
+/**
+ * À chaque nouvelle version du thème, les anciens modèles enregistrés en base
+ * sont effacés et ce qui manque est recréé.
+ *
+ * Le thème est déployé depuis GitHub et le site n'est pas retouché dans
+ * l'éditeur : une copie de modèle restée en base masque la nouvelle version
+ * (ancien accueil sans les boutons, anciens liens vers des photos supprimées,
+ * adresses figées sur un ancien dossier de thème). Mieux vaut repartir des
+ * fichiers du thème. Les pages, réalisations et veilles ne sont pas touchées ;
+ * celles qui manquent sont créées.
+ */
+function brevard_releve_mise_a_jour() {
+	$version = wp_get_theme()->get( 'Version' );
+	if ( get_option( 'brevard_releve_version' ) === $version ) {
+		return;
+	}
+
+	$copies = get_posts(
+		array(
+			'post_type'   => array( 'wp_template', 'wp_template_part' ),
+			'post_status' => 'any',
+			'numberposts' => -1,
+			'fields'      => 'ids',
+			'tax_query'   => array(
+				array(
+					'taxonomy' => 'wp_theme',
+					'field'    => 'name',
+					'terms'    => get_stylesheet(),
+				),
+			),
+		)
+	);
+	foreach ( $copies as $id ) {
+		wp_delete_post( $id, true );
+	}
+
+	// les pages, réalisations et veilles absentes : même travail que le
+	// bouton « Créer ce qui manque », la corbeille en moins
+	$present = function ( $slug, $type ) {
+		return (bool) get_posts(
+			array(
+				'name'        => $slug,
+				'post_type'   => $type,
+				'post_status' => array( 'publish', 'draft', 'pending', 'private', 'future', 'trash' ),
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			)
+		);
+	};
+	foreach ( array( 'page', 'realisation' ) as $type ) {
+		foreach ( brevard_releve_contenus( $type ) as $slug => $contenu ) {
+			if ( ! $present( $slug, $type ) ) {
+				brevard_releve_remettre( $type, $slug, $contenu );
+			}
+		}
+	}
+	foreach ( brevard_releve_contenus( 'veille' ) as $slug => $veille ) {
+		if ( ! $present( $slug, 'veille' ) ) {
+			brevard_releve_importer_veille( $slug, $veille );
+		}
+	}
+
+	flush_rewrite_rules();
+	update_option( 'brevard_releve_version', $version );
+	set_transient( 'brevard_releve_mis_a_jour', count( $copies ), 300 );
+}
+
+/**
+ * Bandeau de confirmation après une mise à jour du thème.
+ */
+function brevard_releve_bandeau_maj() {
+	$n = get_transient( 'brevard_releve_mis_a_jour' );
+	if ( false === $n || ! current_user_can( 'edit_theme_options' ) ) {
+		return;
+	}
+	delete_transient( 'brevard_releve_mis_a_jour' );
+	printf(
+		'<div class="notice notice-success is-dismissible"><p><strong>Brévard — Le Relevé %s :</strong> le site est à jour. %s</p></div>',
+		esc_html( wp_get_theme()->get( 'Version' ) ),
+		$n ? esc_html( sprintf( '%d ancien(s) modèle(s) effacé(s) pour afficher la nouvelle version.', (int) $n ) ) : ''
+	);
+}
+add_action( 'admin_notices', 'brevard_releve_bandeau_maj' );
