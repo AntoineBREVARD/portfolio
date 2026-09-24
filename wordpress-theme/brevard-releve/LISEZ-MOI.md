@@ -66,6 +66,13 @@ indique laquelle est laquelle.
 
 ## Les anciennes modifications reviennent après une mise à jour
 
+**Depuis la version 1.20.0, c'est automatique** : au premier passage dans
+l'admin après une mise à jour du thème, les anciens modèles enregistrés en
+base sont effacés, et les pages, réalisations et veilles absentes sont
+recréées. Un bandeau vert le confirme. Les pages existantes ne sont pas
+touchées. La page ci-dessous reste utile pour tout remettre à neuf à la
+demande, pages comprises.
+
 Ce qu'on modifie dans **Apparence → Éditeur** (menu, en-tête, modèles,
 couleurs) est enregistré dans la base de WordPress, pas dans le thème.
 Installer une nouvelle version ne l'efface donc pas : les anciennes
