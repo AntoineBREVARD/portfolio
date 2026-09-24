@@ -327,7 +327,7 @@ function brevard_releve_noms() {
 
 function brevard_releve_contenus( $type ) {
 	$contenus = array(
-		'veilles'            => array( 'Ce que je surveille', 'Mes veilles technologiques, rédigées au fil de la formation. Chaque document se télécharge d\'un clic.', 'page-veilles' ),
+		'veilles'            => array( 'Ce que je surveille', 'Mes veilles technologiques, rédigées au fil de la formation. Chaque document s\'ouvre d\'un clic.', 'page-veilles' ),
 		'grille-competences' => array( 'La grille de compétences', 'Le tableau de synthèse du référentiel BTS SIO option SISR, rempli à partir des réalisations.', 'page-grille' ),
 		'profil'             => array( 'Une PME onze mois par an, une multinationale le douzième', '', 'page-profil' ),
 		'entreprise'         => array( 'L\'Automobile Club de l\'Ouest', 'L\'organisateur des 24 Heures du Mans, où j\'effectue mon alternance au service informatique depuis septembre 2025.', 'page-entreprise' ),
