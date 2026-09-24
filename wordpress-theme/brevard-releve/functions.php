@@ -837,3 +837,20 @@ function brevard_releve_completer() {
 	exit;
 }
 add_action( 'admin_post_brevard_releve_completer', 'brevard_releve_completer' );
+
+/**
+ * Icône d'onglet aux couleurs de la charte : AB crème sur vert circuit,
+ * filet vibreur. Seulement si aucune icône n'a été choisie dans
+ * Apparence → Personnaliser → Identité du site, qui garde la main.
+ */
+function brevard_releve_icones() {
+	if ( has_site_icon() ) {
+		return;
+	}
+	$dossier = get_theme_file_uri( 'assets/icones/' );
+	printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( $dossier . 'favicon.svg' ) );
+	printf( '<link rel="icon" href="%s" sizes="32x32" type="image/png">' . "\n", esc_url( $dossier . 'favicon-32.png' ) );
+	printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( $dossier . 'apple-touch-icon.png' ) );
+	echo '<meta name="theme-color" content="#0F3B29">' . "\n";
+}
+add_action( 'wp_head', 'brevard_releve_icones' );
