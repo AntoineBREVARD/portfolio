@@ -35,6 +35,7 @@ manque :
 | Page Profil                 | `/profil/`               |
 | Page Jury                   | `/jury/`                 |
 | Les quatre réalisations     | `/realisation/contacts/`, `quotas`, `teams`, `maj` |
+| Les veilles REACTIV et GPMI | menu **Veilles** (PDF copiés dans la médiathèque) |
 
 Il recalcule aussi les permaliens : plus besoin de passer par **Réglages →
 Permaliens**. Ce qui existe déjà n'est jamais écrasé, et une page mise à la
@@ -63,6 +64,10 @@ bandeau dans l'admin signale la page tant qu'il reste d'anciennes
 modifications.
 
 ## Déposer une veille
+
+Les veilles livrées avec le thème sont dans `assets/veilles/` et décrites
+dans `brevard_releve_contenus()` (`functions.php`). Les autres se déposent
+depuis l'admin :
 
 Menu **Veilles → Ajouter une veille** :
 

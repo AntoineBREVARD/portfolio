@@ -308,7 +308,7 @@ add_action( 'init', 'brevard_releve_bloc_veilles' );
  * Version du contenu livré avec le thème. L'augmenter relance
  * l'installation, qui ne crée que ce qui manque.
  */
-const BREVARD_RELEVE_CONTENU = '2';
+const BREVARD_RELEVE_CONTENU = '3';
 
 /**
  * Le contenu livré avec le thème : pour chaque identifiant, le titre, le
@@ -328,6 +328,16 @@ function brevard_releve_contenus( $type ) {
 		'maj'      => array( 'Poste par poste, à la main', 'Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu\'on ne mettait à jour qu\'une fois le problème arrivé.' ),
 	);
 
+	// les veilles livrées avec le thème : titre, résumé, fichier dans
+	// assets/veilles/ et date de rédaction
+	$veilles = array(
+		'reactiv' => array( 'REACTIV, la riposte de l\'État aux fuites de données', 'Le nouveau dispositif qui donne à l\'ANSSI un pouvoir directif sur les ministères touchés par une cyberattaque, après France Titres, l\'Éducation nationale et la DGFiP.', 'REACTIV_Antoine.pdf', '2026-09-18' ),
+		'gpmi'    => array( 'Le câble GPMI, la réponse chinoise à HDMI et USB-C', 'Une connectique unique portée par SUCA : jusqu\'à 192 Gbit/s, 480 W d\'alimentation et le contrôle bidirectionnel de plusieurs périphériques.', 'Cable_GPMI_Antoine.pdf', '2025-11-20' ),
+	);
+
+	if ( 'veille' === $type ) {
+		return $veilles;
+	}
 	if ( 'realisation' !== $type ) {
 		return $contenus;
 	}
@@ -339,11 +349,67 @@ function brevard_releve_contenus( $type ) {
 }
 
 /**
+ * Crée une veille livrée avec le thème : son PDF est copié dans la
+ * médiathèque, puis la veille le propose dans un bloc Fichier, exactement
+ * comme si on l'avait déposée à la main. Elle se modifie ou se supprime
+ * ensuite comme n'importe quelle autre.
+ */
+function brevard_releve_importer_veille( $slug, $veille ) {
+	$source = get_theme_file_path( 'assets/veilles/' . $veille[2] );
+	if ( ! is_readable( $source ) ) {
+		return;
+	}
+
+	$depot = wp_upload_bits( $veille[2], null, file_get_contents( $source ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	if ( ! empty( $depot['error'] ) ) {
+		return;
+	}
+
+	$date = $veille[3] . ' 12:00:00';
+	$id   = wp_insert_post(
+		array(
+			'post_type'    => 'veille',
+			'post_status'  => 'publish',
+			'post_name'    => $slug,
+			'post_title'   => $veille[0],
+			'post_excerpt' => $veille[1],
+			'post_date'    => $date,
+		)
+	);
+	if ( ! $id || is_wp_error( $id ) ) {
+		return;
+	}
+
+	$piece = wp_insert_attachment(
+		array(
+			'post_title'     => $veille[0],
+			'post_mime_type' => 'application/pdf',
+			'post_status'    => 'inherit',
+		),
+		$depot['file'],
+		$id
+	);
+
+	$url = $depot['url'];
+	wp_update_post(
+		array(
+			'ID'           => $id,
+			'post_content' => sprintf(
+				'<!-- wp:file {"id":%1$d,"href":"%2$s"} --><div class="wp-block-file"><a href="%2$s">%3$s</a><a href="%2$s" class="wp-block-file__button wp-element-button" download>Télécharger</a></div><!-- /wp:file -->',
+				(int) $piece,
+				esc_url( $url ),
+				esc_html( $veille[0] )
+			),
+		)
+	);
+}
+
+/**
  * Remplit le site au premier passage dans l'admin.
  *
  * Le thème est déployé par WP Pusher depuis GitHub : il doit arriver avec
- * tout le site, pas seulement avec son dessin. On crée donc les pages et les
- * quatre réalisations qui manquent. Ce qui existe déjà n'est jamais touché,
+ * tout le site, pas seulement avec son dessin. On crée donc les pages, les
+ * quatre réalisations et les veilles qui manquent. Ce qui existe déjà n'est jamais touché,
  * et une page mise à la corbeille n'est pas recréée : c'est un choix.
  *
  * Le contenu créé est une référence à une composition du thème, évaluée à
@@ -406,6 +472,12 @@ function brevard_releve_installer() {
 				'post_content' => '<!-- wp:pattern {"slug":"brevard-releve/' . $fiche[2] . '"} /-->',
 			)
 		);
+	}
+
+	foreach ( brevard_releve_contenus( 'veille' ) as $slug => $veille ) {
+		if ( ! $existe( $slug, 'veille' ) ) {
+			brevard_releve_importer_veille( $slug, $veille );
+		}
 	}
 
 	// L'ancienne page Compétences (la matrice) est remplacée par la grille.
