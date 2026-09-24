@@ -118,24 +118,6 @@ var ProfilPreview = createClass({
   }
 });
 
-var CompetencesPreview = createClass({
-  render: function(){
-    var items = this.props.entry.getIn(["data", "items"]);
-    items = items && items.toJS ? items.toJS() : [];
-    return h("section", { className: "section" },
-      h("div", { className: "skills-board" },
-        items.map(function(it, i){
-          return h("div", { className: "skill-row", key: i },
-            h("span", { className: "skill-status mono" }, "ACTIF"),
-            h("span", { className: "skill-name" }, it.name),
-            h("span", { className: "skill-context" }, it.context)
-          );
-        })
-      )
-    );
-  }
-});
-
 var ProjetsPreview = createClass({
   render: function(){
     var e = this.props.entry.get("data");
@@ -190,7 +172,6 @@ var ContactPreview = createClass({
 
 CMS.registerPreviewTemplate("home", HomePreview);
 CMS.registerPreviewTemplate("profil", ProfilPreview);
-CMS.registerPreviewTemplate("competences", CompetencesPreview);
 CMS.registerPreviewTemplate("projets", ProjetsPreview);
 CMS.registerPreviewTemplate("contact", ContactPreview);
 </script>

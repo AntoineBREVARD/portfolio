@@ -81,20 +81,46 @@ collections:
             widget: "list"
             field: { label: "Mission", name: "mission", widget: "string" }
 
-  - name: "competences"
-    label: "Compétences"
+  - name: "veilles"
+    label: "Veilles"
     files:
-      - file: "content/competences.json"
-        label: "Liste des compétences"
-        name: "competences"
+      - file: "content/veilles.json"
+        label: "Veilles technologiques"
+        name: "veilles"
         fields:
-          - label: "Compétences"
+          - label: "Veilles"
             name: "items"
             widget: "list"
-            summary: "{{fields.name}}"
+            summary: "{{fields.titre}}"
+            hint: "La page les affiche de la plus récente à la plus ancienne."
             fields:
-              - { label: "Nom de la compétence", name: "name", widget: "string" }
-              - { label: "Contexte concret", name: "context", widget: "text" }
+              - { label: "Titre", name: "titre", widget: "string" }
+              - { label: "Description courte", name: "description", widget: "text", required: false }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+              - label: "Fichier à télécharger (PDF, Word, PowerPoint…)"
+                name: "fichier"
+                widget: "file"
+                media_folder: "/documents/veilles"
+                public_folder: "documents/veilles"
+                choose_url: false
+
+  - name: "grille"
+    label: "Grille de compétences"
+    files:
+      - file: "content/grille.json"
+        label: "Grille de compétences"
+        name: "grille"
+        fields:
+          - label: "Fichier de la grille"
+            name: "fichier"
+            widget: "file"
+            hint: "Un PDF s'affiche directement dans la page ; un autre format (Excel…) est proposé au téléchargement."
+            media_folder: "/documents/grille"
+            public_folder: "documents/grille"
+            choose_url: false
+            required: false
+          - { label: "Date de mise à jour", name: "miseAJour", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+          - { label: "Commentaire (facultatif)", name: "commentaire", widget: "text", required: false }
 
   - name: "projets"
     label: "Projets"

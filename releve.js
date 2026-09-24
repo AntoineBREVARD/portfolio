@@ -1,8 +1,8 @@
 /* =========================================================================
    LE RELEVÉ — script partagé
-   Site multi-pages. Trois comportements portent l'interaction : la typo qui
-   se déforme sous la charge du défilement, la révélation dans les lettres du
-   nom, et la matrice de compétences qui se lit dans les deux sens.
+   Site multi-pages. Deux comportements portent l'interaction : la typo qui
+   se déforme sous la charge du défilement et la révélation dans les lettres
+   du nom. Le reste affiche les documents déposés depuis l'admin.
    ========================================================================= */
 
 const $  = (s, c = document) => c.querySelector(s);
@@ -120,7 +120,7 @@ function revelationLettres(){
 
 /* ---------- Révélation au défilement ---------- */
 function revelation(){
-  const cibles = $$(".entree, .matrice-bloc, .jury-case, .hero-releve, .tete");
+  const cibles = $$(".entree, .jury-case, .hero-releve, .tete");
   if (!cibles.length) return;
   if (MOINS_DE_MOUVEMENT){ cibles.forEach(c => c.classList.add("est-vu")); return; }
 
@@ -141,38 +141,111 @@ function revelation(){
   });
 }
 
-/* ---------- Matrice : lecture dans les deux sens ----------
-   Survoler une compétence allume les réalisations qui la prouvent ;
-   survoler une réalisation allume les compétences qu'elle couvre.
-   C'est la traçabilité du référentiel rendue manipulable — la seule
-   interaction du site qui apporte une information plutôt qu'un effet. */
-function matriceCroisee(){
-  const lignes = $$(".ligne[data-preuves]");
-  if (!lignes.length) return;
+/* ---------- Documents déposés ----------
+   Les veilles et la grille de compétences sont des fichiers déposés depuis
+   l'admin (/admin/). Decap CMS les range dans documents/ et tient la liste
+   dans content/*.json : la page lit ce fichier au lieu d'être réécrite à
+   chaque dépôt. */
+async function lireContenu(chemin){
+  // no-cache : un dépôt doit apparaître au rechargement suivant, pas après
+  // l'expiration du cache de GitHub Pages
+  const rep = await fetch(chemin, { cache: "no-cache" });
+  if (!rep.ok) throw new Error(`${chemin} : ${rep.status}`);
+  return rep.json();
+}
 
-  const clef = el => (el.dataset.preuves || "").split(/\s+/).filter(Boolean);
+function format(fichier){
+  const ext = (fichier.split("?")[0].split(".").pop() || "").toLowerCase();
+  return ext && ext !== fichier.toLowerCase() ? ext.toUpperCase() : "Fichier";
+}
 
-  function allumer(refs){
-    const ens = new Set(refs);
-    lignes.forEach(l => {
-      const lie = clef(l).some(r => ens.has(r));
-      l.classList.toggle("is-lie", lie);
-      $$(".preuve", l).forEach(p => p.classList.toggle("is-lie", ens.has(p.dataset.ref)));
-    });
+function dateLisible(iso){
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function el(balise, classe, texte){
+  const n = document.createElement(balise);
+  if (classe) n.className = classe;
+  if (texte != null) n.textContent = texte;
+  return n;
+}
+
+function vide(cible, message){
+  cible.replaceChildren(el("p", "vide", message));
+}
+
+async function veilles(){
+  const liste = $("#veilles");
+  if (!liste) return;
+  try {
+    const { items = [] } = await lireContenu("content/veilles.json");
+    const deposees = items.filter(v => v && v.fichier);
+    if (!deposees.length){
+      vide(liste, "Aucune veille déposée pour l'instant.");
+      return;
+    }
+    // la plus récente en tête : c'est elle qu'on vient chercher
+    deposees.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+    liste.replaceChildren(...deposees.map((v, i) => {
+      const lien = el("a", "entree");
+      lien.href = v.fichier;
+      lien.setAttribute("download", "");
+      lien.append(el("span", "entree-num", String(i + 1).padStart(2, "0")));
+      lien.append(el("h3", "entree-titre", v.titre || "Veille"));
+      lien.append(el("p", "entree-mot", v.description || ""));
+      const puces = el("span", "entree-comp");
+      puces.append(el("span", "puce", format(v.fichier)));
+      if (v.date) puces.append(el("span", "puce", dateLisible(v.date)));
+      lien.append(puces);
+      const fleche = el("span", "entree-fleche", "↓");
+      fleche.setAttribute("aria-hidden", "true");
+      lien.append(fleche);
+      return lien;
+    }));
+  } catch (e){
+    vide(liste, "La liste des veilles n'a pas pu être chargée. Ouvrez le site en ligne plutôt que depuis le disque.");
   }
-  function eteindre(){
-    lignes.forEach(l => {
-      l.classList.remove("is-lie");
-      $$(".preuve", l).forEach(p => p.classList.remove("is-lie"));
-    });
-  }
+}
 
-  $$(".preuve[data-ref]").forEach(p => {
-    p.addEventListener("mouseenter", () => allumer([p.dataset.ref]));
-    p.addEventListener("focus",      () => allumer([p.dataset.ref]));
-    p.addEventListener("mouseleave", eteindre);
-    p.addEventListener("blur",       eteindre);
-  });
+async function grille(){
+  const zone = $("#grille");
+  if (!zone) return;
+  try {
+    const g = await lireContenu("content/grille.json");
+    if (!g.fichier){
+      vide(zone, "La grille de compétences n'a pas encore été déposée.");
+      return;
+    }
+    const actions = el("div", "document-actions");
+    const telecharger = el("a", "btn btn--plein", `Télécharger (${format(g.fichier)})`);
+    telecharger.href = g.fichier;
+    telecharger.setAttribute("download", "");
+    const ouvrir = el("a", "btn", "Ouvrir dans un onglet");
+    ouvrir.href = g.fichier;
+    ouvrir.target = "_blank";
+    ouvrir.rel = "noopener";
+    actions.append(telecharger, ouvrir);
+
+    const morceaux = [];
+    if (g.miseAJour) morceaux.push(el("p", "etiquette", `Mise à jour le ${dateLisible(g.miseAJour)}`));
+    if (g.commentaire) morceaux.push(el("p", "chapeau document-note", g.commentaire));
+    morceaux.push(actions);
+
+    // seul un PDF s'affiche dans la page ; un tableur se télécharge
+    if (format(g.fichier) === "PDF"){
+      const apercu = el("iframe", "apercu");
+      apercu.src = g.fichier;
+      apercu.title = "Grille de compétences";
+      apercu.loading = "lazy";
+      morceaux.push(apercu);
+    }
+    zone.replaceChildren(...morceaux);
+  } catch (e){
+    vide(zone, "La grille n'a pas pu être chargée. Ouvrez le site en ligne plutôt que depuis le disque.");
+  }
 }
 
 /* ---------- Comparateur avant / après ----------
@@ -203,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
   typoSousCharge();
   revelationLettres();
   revelation();
-  matriceCroisee();
+  veilles();
+  grille();
   comparateur();
 });

@@ -35,11 +35,6 @@
   --trait:rgba(22,18,11,.16);
   --trait-fort:rgba(22,18,11,.34);
 
-  /* statuts du referentiel — semantiques, distincts de l'identite */
-  --prouve:#0F6B4F;
-  --partiel:#9A5B08;
-  --absent:#8A7D66;
-
   --rail:76px;
   --gouttiere:clamp(20px,4vw,52px);
   --largeur:1320px;
@@ -176,13 +171,6 @@ p:last-child{margin-bottom:0}
 .bloc--vert .chapeau strong{color:var(--creme)}
 .bloc--vert .etiquette{color:rgba(247,239,221,.6)}
 .bloc--vert .etiquette b{color:var(--jaune)}
-.bloc--vert .matrice-code{color:var(--jaune)}
-.bloc--vert .matrice-nom,.bloc--vert .ligne-intitule{color:var(--creme)}
-.bloc--vert .preuve{color:rgba(247,239,221,.82)}
-.bloc--vert .preuve:hover,.bloc--vert .preuve.is-lie{
-  border-color:var(--jaune);color:var(--jaune);background:rgba(245,197,24,.12);
-}
-.bloc--vert .ligne:hover,.bloc--vert .ligne.is-lie{background:rgba(247,239,221,.07)}
 .bloc--sable{background:var(--sable)}
 .bloc--creme{background:var(--creme)}
 .tete{max-width:var(--mesure);margin-bottom:clamp(30px,4vw,56px)}
@@ -332,49 +320,20 @@ p:last-child{margin-bottom:0}
 }
 .entree:hover .entree-fleche{transform:translateX(7px);color:var(--encre)}
 
-/* ---------------------------------------------- matrice de competences
-   La piece interactive du site : survoler une competence allume les
-   realisations qui la prouvent, et inversement.                        */
-.matrice{border-top:1px solid var(--trait)}
-.matrice-bloc{margin-bottom:38px}
-.matrice-bloc:last-child{margin-bottom:0}
-.matrice-tete{
-  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
-  padding:14px 0 11px;border-bottom:1.5px solid var(--trait-fort);
+/* ------------------------------------------------ documents deposes
+   Veilles et grille de competences : des fichiers deposes depuis l'admin
+   et listes a partir de content/*.json. Les veilles reprennent le journal
+   des realisations ; seul l'etat vide a besoin d'un style a lui.       */
+.vide{
+  border:1px dashed var(--trait-fort);padding:26px;color:var(--encre-2);
+  font-size:14.5px;max-width:var(--mesure);margin:0;
 }
-.matrice-code{
-  font-family:var(--mono);font-size:10.5px;color:var(--bleu);flex:none;
-  font-variation-settings:"wdth" 87,"wght" 500;letter-spacing:.04em;
+.document-note{margin:14px 0 26px}
+.document-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.apercu{
+  display:block;width:100%;height:min(80vh,960px);border:1px solid var(--trait-fort);
+  background:#fff;
 }
-.matrice-nom{font-weight:600;font-size:16px;letter-spacing:-.012em}
-.matrice-epreuve{
-  margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
-  text-transform:uppercase;color:var(--encre-3);font-variation-settings:"wdth" 87;
-}
-.ligne{
-  display:grid;grid-template-columns:3px minmax(0,1fr) auto;gap:0 15px;align-items:start;
-  padding:12px 0;border-bottom:1px solid var(--trait);transition:background .2s;
-}
-.ligne:hover,.ligne.is-lie{background:var(--sable-2)}
-.ligne-barre{align-self:stretch;min-height:20px}
-.est-prouve  .ligne-barre{background:var(--prouve)}
-.est-partiel .ligne-barre{background:var(--partiel)}
-.est-absent  .ligne-barre{background:var(--absent)}
-.ligne-intitule{font-size:14.5px;line-height:1.45}
-.ligne-preuves{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.preuve{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:3px 8px;
-  border:1px solid var(--trait);color:var(--encre-2);text-decoration:none;
-  font-variation-settings:"wdth" 87;transition:border-color .2s,color .2s,background .2s;
-}
-.preuve:hover,.preuve.is-lie{border-color:var(--bleu);color:var(--bleu);background:rgba(23,80,158,.06)}
-.ligne-statut{
-  font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;
-  padding:4px 9px;white-space:nowrap;align-self:start;font-variation-settings:"wdth" 87;
-}
-.est-prouve  .ligne-statut{background:rgba(15,107,79,.12);color:var(--prouve)}
-.est-partiel .ligne-statut{background:rgba(150,97,15,.12);color:var(--partiel)}
-.est-absent  .ligne-statut{background:rgba(138,141,147,.16);color:var(--absent)}
 
 /* ------------------------------------------------------------ accès jury */
 /* Quatre cases : auto-fit en tenait trois par rangee et laissait la
@@ -592,8 +551,6 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   .entree{grid-template-columns:52px minmax(0,1fr) auto;gap:0 16px}
   .entree-mot{grid-column:2;margin-top:10px}
   .entree-comp{grid-column:2;margin-top:12px}
-  .ligne{grid-template-columns:3px minmax(0,1fr)}
-  .ligne-statut{grid-column:2;justify-self:start;margin-top:9px}
 }
 @media (max-width:560px){
   .hero-releves{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -617,10 +574,10 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   .hero-nom .creux{-webkit-text-stroke:0;color:#000}
   .bloc,.bloc--serre{padding-block:12pt;break-inside:avoid}
   .bloc--vert{background:#fff!important;color:#000!important}
-  .bloc--vert .chapeau,.bloc--vert .jury-case dd,.bloc--vert .ligne-intitule,.bloc--vert .matrice-nom{color:#000!important}
+  .bloc--vert .chapeau,.bloc--vert .jury-case dd{color:#000!important}
   .bloc--sable,.bloc--creme,.jury-case{background:#fff!important}
   .vibreur{height:2px;background:#000}
-  .entree,.ligne,.jury-case{break-inside:avoid}
+  .entree,.jury-case{break-inside:avoid}
   .leve{opacity:1!important;transform:none!important}
   h1,h2,h3{break-after:avoid}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#666}
