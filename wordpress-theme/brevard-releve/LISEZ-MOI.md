@@ -47,8 +47,7 @@ Les identifiants (le « slug ») ne doivent pas changer : les liens du site les
 cherchent. Le titre et le résumé (panneau de droite, « Extrait ») se
 modifient librement.
 
-Reste à faire à la main : **renseigner l'hébergeur** dans la page À propos
-(nom, adresse, téléphone : obligatoire selon la LCEN), supprimer « Sample Page » et « Hello world! », et
+Reste à faire à la main : supprimer « Sample Page » et « Hello world! », et
 régler le titre du site dans **Réglages → Général**.
 
 ## Une page manque ?
