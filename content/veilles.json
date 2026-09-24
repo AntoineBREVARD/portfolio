@@ -7,18 +7,6 @@
       "fichier": "Veilles/Cable_GPMI_Antoine.pdf"
     },
     {
-      "titre": "Mise en garde Microsoft : l'hameçonnage par OAuth",
-      "description": "Des applications OAuth malveillantes et des redirections d'erreur pour contourner les défenses des organisations sous Microsoft Entra ID.",
-      "date": "2026-03-05",
-      "fichier": "Veilles/Mise_en_garde_Microsoft_Antoine.pdf"
-    },
-    {
-      "titre": "Vishing et vol de données SaaS",
-      "description": "Le groupe ShinyHunters appelle les employés en se faisant passer pour le support, vole le jeton de session et contourne la MFA.",
-      "date": "2026-04-01",
-      "fichier": "Veilles/Vishing_vol_de_donnees_SaaS_Antoine.pdf"
-    },
-    {
       "titre": "REACTIV, la riposte de l'État aux fuites de données",
       "description": "Le nouveau dispositif qui donne à l'ANSSI un pouvoir directif sur les ministères touchés par une cyberattaque, après France Titres, l'Éducation nationale et la DGFiP.",
       "date": "2026-09-18",
