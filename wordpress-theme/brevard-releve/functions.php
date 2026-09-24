@@ -308,7 +308,7 @@ add_action( 'init', 'brevard_releve_bloc_veilles' );
  * Version du contenu livré avec le thème. L'augmenter relance
  * l'installation, qui ne crée que ce qui manque.
  */
-const BREVARD_RELEVE_CONTENU = '5';
+const BREVARD_RELEVE_CONTENU = '6';
 
 /**
  * Le contenu livré avec le thème : pour chaque identifiant, le titre, le
@@ -344,6 +344,8 @@ function brevard_releve_contenus( $type ) {
 	$veilles = array(
 		'reactiv' => array( 'REACTIV, la riposte de l\'État aux fuites de données', 'Le nouveau dispositif qui donne à l\'ANSSI un pouvoir directif sur les ministères touchés par une cyberattaque, après France Titres, l\'Éducation nationale et la DGFiP.', 'REACTIV_Antoine.pdf', '2026-09-18' ),
 		'gpmi'    => array( 'Le câble GPMI, la réponse chinoise à HDMI et USB-C', 'Une connectique unique portée par SUCA : jusqu\'à 192 Gbit/s, 480 W d\'alimentation et le contrôle bidirectionnel de plusieurs périphériques.', 'Cable_GPMI_Antoine.pdf', '2025-11-20' ),
+		'oauth'   => array( 'Mise en garde Microsoft : l\'hameçonnage par OAuth', 'Des applications OAuth malveillantes et des redirections d\'erreur pour contourner les défenses des organisations sous Microsoft Entra ID.', 'Mise_en_garde_Microsoft_Antoine.pdf', '2026-03-05' ),
+		'vishing' => array( 'Vishing et vol de données SaaS', 'Le groupe ShinyHunters appelle les employés en se faisant passer pour le support, vole le jeton de session et contourne la MFA.', 'Vishing_vol_de_donnees_SaaS_Antoine.pdf', '2026-04-01' ),
 	);
 
 	if ( 'veille' === $type ) {
