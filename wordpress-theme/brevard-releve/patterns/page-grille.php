@@ -17,7 +17,7 @@
 <div class="wp-block-group bloc">
 <!-- wp:group {"className":"coque grille","layout":{"type":"default"}} -->
 <div class="wp-block-group coque grille">
-<!-- wp:file {"displayPreview":true} /-->
+<!-- wp:file {"displayPreview":true,"textLinkTarget":"_blank"} /-->
 
 <!-- wp:paragraph {"className":"vide grille-attente"} -->
 <p class="vide grille-attente">La grille de compétences n'a pas encore été déposée.</p>

@@ -206,7 +206,9 @@ async function veilles(){
     liste.replaceChildren(...deposees.map((v, i) => {
       const lien = el("a", "entree");
       lien.href = v.fichier;
-      lien.setAttribute("download", "");
+      // le document s'ouvre dans un onglet : on le lit avant de le garder
+      lien.target = "_blank";
+      lien.rel = "noopener";
       lien.append(el("span", "entree-num", String(i + 1).padStart(2, "0")));
       lien.append(el("h3", "entree-titre", v.titre || "Veille"));
       lien.append(el("p", "entree-mot", v.description || ""));
@@ -214,7 +216,7 @@ async function veilles(){
       puces.append(el("span", "puce", format(v.fichier)));
       if (v.date) puces.append(el("span", "puce", dateLisible(v.date)));
       lien.append(puces);
-      const fleche = el("span", "entree-fleche", "↓");
+      const fleche = el("span", "entree-fleche", "↗");
       fleche.setAttribute("aria-hidden", "true");
       lien.append(fleche);
       return lien;
@@ -234,14 +236,14 @@ async function grille(){
       return;
     }
     const actions = el("div", "document-actions");
-    const telecharger = el("a", "btn btn--plein", `Télécharger (${format(g.fichier)})`);
-    telecharger.href = g.fichier;
-    telecharger.setAttribute("download", "");
-    const ouvrir = el("a", "btn", "Ouvrir dans un onglet");
+    const ouvrir = el("a", "btn btn--plein", `Ouvrir la grille (${format(g.fichier)})`);
     ouvrir.href = g.fichier;
     ouvrir.target = "_blank";
     ouvrir.rel = "noopener";
-    actions.append(telecharger, ouvrir);
+    const telecharger = el("a", "btn", "Télécharger");
+    telecharger.href = g.fichier;
+    telecharger.setAttribute("download", "");
+    actions.append(ouvrir, telecharger);
 
     const morceaux = [];
     if (g.miseAJour) morceaux.push(el("p", "etiquette", `Mise à jour le ${dateLisible(g.miseAJour)}`));
