@@ -3,7 +3,7 @@ Theme Name: Brévard — Le Relevé
 Theme URI: https://antoinebrevard.github.io/portfolio/
 Author: Antoine Brévard
 Description: Thème de blocs pour un portfolio BTS SIO option SISR. Univers feuille de chronos : la typographie porte l'identité, le vibreur jaune et bleu du circuit du Mans sert de filet structurel. Aucun plugin requis — pensé pour un hébergement sans accès Internet sortant. Polices embarquées dans le thème : aucune requête vers un service tiers, donc aucune adresse IP de visiteur transmise à Google.
-Version: 1.16.0
+Version: 1.17.0
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -635,24 +635,41 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
 /* -------------------------------------------------------------- responsive */
 @media (max-width:900px){
   :root{--rail:0px}
+  /* Sur mobile, le rail devient une barre en haut. Les six rubriques ne
+     tiennent pas sur une ligne : plutot que de les faire defiler (on ne
+     voyait pas qu'il y en avait d'autres), elles passent a la ligne sous le
+     monogramme et l'heure. La barre est collante et prend sa propre place :
+     sa hauteur varie avec la largeur, il n'y a donc rien a compenser. */
   .rail{
-    left:0;right:0;bottom:auto;top:0;width:auto;height:52px;
-    flex-direction:row;padding:0 var(--gouttiere);
+    position:sticky;left:auto;right:auto;bottom:auto;top:0;width:auto;height:auto;
+    flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    gap:6px 12px;padding:10px var(--gouttiere) 8px;
     border-right:0;border-bottom:1px solid var(--trait);
   }
-  .rail-chrono{writing-mode:horizontal-tb;transform:none}
-  .rail-nav{flex-direction:row;gap:16px;overflow-x:auto;padding-inline:2px}
+  .rail-id{order:1}
+  .rail-chrono{order:2;writing-mode:horizontal-tb;transform:none;margin:0}
+  /* grille reguliere : 3 rubriques par ligne sur telephone, 6 sur une
+     ligne des qu'il y a la place, jamais un mot seul sur sa ligne */
+  .rail-nav{
+    order:3;flex-basis:100%;display:grid;
+    grid-template-columns:repeat(3,auto);justify-content:space-between;gap:6px 12px;
+  }
+  .rail-nav a{justify-self:start}
   .rail-nav a{
     writing-mode:horizontal-tb;transform:none;border-right:0;padding-right:0;
     border-bottom:2px solid transparent;padding-bottom:3px;white-space:nowrap;
+    letter-spacing:.1em;
   }
   .rail-nav a.est-active{border-bottom-color:var(--bleu)}
-  .page{margin-left:0;padding-top:52px}
-  .hero{min-height:calc(100svh - 52px)}
+  .page{margin-left:0;padding-top:0}
+  .hero{min-height:calc(100svh - 70px)}
   .hero-bas{grid-template-columns:1fr}
   .entree{grid-template-columns:52px minmax(0,1fr) auto;gap:0 16px}
   .entree-mot{grid-column:2;margin-top:10px}
   .entree-comp{grid-column:2;margin-top:12px}
+}
+@media (min-width:600px) and (max-width:900px){
+  .rail-nav{grid-template-columns:repeat(6,auto)}
 }
 @media (max-width:560px){
   .hero-releves{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -783,6 +800,12 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
 body{padding-left:var(--rail)}
 .page{margin-left:0}
 @media print{body{padding-left:0}}
+/* sur mobile, la barre collante vit dans le <header> du modele : c'est lui
+   qui doit coller, un element sticky ne depassant jamais son parent. */
+@media (max-width:900px){
+  header.wp-block-template-part{position:sticky;top:0;z-index:60}
+  header.wp-block-template-part .rail{position:relative}
+}
 
 /* --- monogramme du rail : WordPress enveloppe le lien dans un <p>, donc
    les styles doivent viser l'ancre et non plus le bloc. --- */
