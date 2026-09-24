@@ -30,9 +30,10 @@
     <a href="<?php echo esc_url( brevard_releve_lien( 'veilles' ) ); ?>">Les veilles</a>
   </div>
   <div class="jury-case">
-    <dt>Curriculum vitae</dt>
-    <dd>Une page, au format PDF.</dd>
-    <a href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>" download>Télécharger</a>
+    <dt>Dossier professionnel et CV</dt>
+    <dd>Le détail des quatre réalisations, et le CV en une page. Au format PDF.</dd>
+    <a href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Dossier_Professionnel_Antoine_Brevard.pdf' ) ); ?>" download>Le dossier</a>
+    <a href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>" download>Le CV</a>
   </div>
 </dl>
 <!-- /wp:html -->

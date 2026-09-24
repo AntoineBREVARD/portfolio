@@ -83,7 +83,10 @@
 <div class="cas-etape">
   <div class="renvoi">
     <p><strong>Le détail est dans le dossier professionnel :</strong> l'architecture de la collecte, la détermination du seuil, la campagne de tests et les résultats après mise en production.</p>
-    <a class="btn btn--plein" href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Autres réalisations</a>
+    <div class="renvoi-actions">
+      <a class="btn btn--plein" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Dossier_Professionnel_Antoine_Brevard.pdf' ) ); ?>" download>Le dossier (PDF)</a>
+      <a class="btn" href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Autres réalisations</a>
+    </div>
   </div>
 </div>
 <!-- /wp:html -->
