@@ -35,6 +35,7 @@ manque :
 | Page Profil                 | `/profil/`               |
 | Page Jury                   | `/jury/`                 |
 | Les quatre réalisations     | `/realisation/contacts/`, `quotas`, `teams`, `maj` |
+| Les veilles REACTIV et GPMI | menu **Veilles** (PDF copiés dans la médiathèque) |
 
 Il recalcule aussi les permaliens : plus besoin de passer par **Réglages →
 Permaliens**. Ce qui existe déjà n'est jamais écrasé, et une page mise à la
@@ -48,7 +49,25 @@ modifient librement.
 Reste à faire à la main : supprimer « Sample Page » et « Hello world! », et
 régler le titre du site dans **Réglages → Général**.
 
+## Les anciennes modifications reviennent après une mise à jour
+
+Ce qu'on modifie dans **Apparence → Éditeur** (menu, en-tête, modèles,
+couleurs) est enregistré dans la base de WordPress, pas dans le thème.
+Installer une nouvelle version ne l'efface donc pas : les anciennes
+modifications restent appliquées par-dessus.
+
+**Apparence → Remettre à neuf** les efface en un clic. Cocher ce qu'il faut
+remettre dans l'état livré par le thème : modèles, styles, pages du
+portfolio, et, seulement si l'on n'y a rien écrit soi-même, les quatre
+réalisations. Les veilles et la médiathèque ne sont jamais touchées. Un
+bandeau dans l'admin signale la page tant qu'il reste d'anciennes
+modifications.
+
 ## Déposer une veille
+
+Les veilles livrées avec le thème sont dans `assets/veilles/` et décrites
+dans `brevard_releve_contenus()` (`functions.php`). Les autres se déposent
+depuis l'admin :
 
 Menu **Veilles → Ajouter une veille** :
 
