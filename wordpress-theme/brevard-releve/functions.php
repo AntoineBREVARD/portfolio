@@ -311,6 +311,34 @@ add_action( 'init', 'brevard_releve_bloc_veilles' );
 const BREVARD_RELEVE_CONTENU = '2';
 
 /**
+ * Le contenu livré avec le thème : pour chaque identifiant, le titre, le
+ * résumé et la composition qui en fournit le corps.
+ */
+function brevard_releve_contenus( $type ) {
+	$contenus = array(
+		'veilles'            => array( 'Ce que je surveille', 'Mes veilles technologiques, rédigées au fil de la formation. Chaque document se télécharge d\'un clic.', 'page-veilles' ),
+		'grille-competences' => array( 'La grille de compétences', 'Le tableau de synthèse du référentiel BTS SIO option SISR, rempli à partir des réalisations.', 'page-grille' ),
+		'profil'             => array( 'Une PME onze mois par an, une multinationale le douzième', '', 'page-profil' ),
+		'jury'               => array( 'Accès direct', 'Si vous évaluez ce portfolio, voici les entrées utiles — sans avoir à parcourir le site.', 'page-jury' ),
+	);
+	$realisations = array(
+		'contacts' => array( 'Microsoft allait fermer la porte', 'Tout le carnet d\'adresses de l\'entreprise reposait sur une fonctionnalité qu\'Outlook s\'apprêtait à abandonner. Aucun remplacement gratuit sur le marché.' ),
+		'quotas'   => array( 'On l\'apprenait toujours trop tard', 'Une boîte pleine, c\'est un collaborateur qui ne reçoit plus rien. Et le service informatique qui le découvre quand il appelle.' ),
+		'teams'    => array( 'Une image de marque, 300 écrans', 'La communication voulait le même arrière-plan pour tout le monde en visioconférence. Microsoft vendait la fonctionnalité. Nous ne l\'avons pas achetée.' ),
+		'maj'      => array( 'Poste par poste, à la main', 'Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu\'on ne mettait à jour qu\'une fois le problème arrivé.' ),
+	);
+
+	if ( 'realisation' !== $type ) {
+		return $contenus;
+	}
+	$fiches = array();
+	foreach ( $realisations as $slug => $fiche ) {
+		$fiches[ $slug ] = array( $fiche[0], $fiche[1], 'contenu-' . $slug );
+	}
+	return $fiches;
+}
+
+/**
  * Remplit le site au premier passage dans l'admin.
  *
  * Le thème est déployé par WP Pusher depuis GitHub : il doit arriver avec
@@ -343,12 +371,7 @@ function brevard_releve_installer() {
 		);
 	};
 
-	$pages = array(
-		'veilles'            => array( 'Ce que je surveille', 'Mes veilles technologiques, rédigées au fil de la formation. Chaque document se télécharge d\'un clic.', 'page-veilles' ),
-		'grille-competences' => array( 'La grille de compétences', 'Le tableau de synthèse du référentiel BTS SIO option SISR, rempli à partir des réalisations.', 'page-grille' ),
-		'profil'             => array( 'Une PME onze mois par an, une multinationale le douzième', '', 'page-profil' ),
-		'jury'               => array( 'Accès direct', 'Si vous évaluez ce portfolio, voici les entrées utiles — sans avoir à parcourir le site.', 'page-jury' ),
-	);
+	$pages = brevard_releve_contenus( 'page' );
 	foreach ( $pages as $slug => $page ) {
 		if ( $existe( $slug, 'page' ) ) {
 			continue;
@@ -365,12 +388,7 @@ function brevard_releve_installer() {
 		);
 	}
 
-	$fiches = array(
-		'contacts' => array( 'Microsoft allait fermer la porte', 'Tout le carnet d\'adresses de l\'entreprise reposait sur une fonctionnalité qu\'Outlook s\'apprêtait à abandonner. Aucun remplacement gratuit sur le marché.' ),
-		'quotas'   => array( 'On l\'apprenait toujours trop tard', 'Une boîte pleine, c\'est un collaborateur qui ne reçoit plus rien. Et le service informatique qui le découvre quand il appelle.' ),
-		'teams'    => array( 'Une image de marque, 300 écrans', 'La communication voulait le même arrière-plan pour tout le monde en visioconférence. Microsoft vendait la fonctionnalité. Nous ne l\'avons pas achetée.' ),
-		'maj'      => array( 'Poste par poste, à la main', 'Deux constructeurs, deux outils, des dizaines de modèles — et des pilotes qu\'on ne mettait à jour qu\'une fois le problème arrivé.' ),
-	);
+	$fiches = brevard_releve_contenus( 'realisation' );
 	$ordre = 0;
 	foreach ( $fiches as $slug => $fiche ) {
 		++$ordre;
@@ -385,7 +403,7 @@ function brevard_releve_installer() {
 				'post_title'   => $fiche[0],
 				'post_excerpt' => $fiche[1],
 				'menu_order'   => $ordre,
-				'post_content' => '<!-- wp:pattern {"slug":"brevard-releve/contenu-' . $slug . '"} /-->',
+				'post_content' => '<!-- wp:pattern {"slug":"brevard-releve/' . $fiche[2] . '"} /-->',
 			)
 		);
 	}
@@ -412,3 +430,188 @@ function brevard_releve_installer() {
 }
 add_action( 'admin_init', 'brevard_releve_installer' );
 
+
+/**
+ * Remise à neuf : Apparence → Remettre à neuf.
+ *
+ * Ce qu'on modifie dans l'éditeur de site n'est pas écrit dans le thème mais
+ * dans la base, rattaché à l'identifiant du thème. Remplacer le thème par une
+ * nouvelle version ne l'efface donc pas : les anciennes modifications
+ * reviennent par-dessus. Cette page efface ces personnalisations et remet les
+ * pages du portfolio dans leur état d'origine, sans avoir à chercher les
+ * boutons « Réinitialiser » modèle par modèle.
+ */
+function brevard_releve_menu_neuf() {
+	add_theme_page(
+		'Remettre le thème à neuf',
+		'Remettre à neuf',
+		'edit_theme_options',
+		'brevard-releve-neuf',
+		'brevard_releve_page_neuf'
+	);
+}
+add_action( 'admin_menu', 'brevard_releve_menu_neuf' );
+
+function brevard_releve_page_neuf() {
+	$fait = isset( $_GET['fait'] ) ? sanitize_key( wp_unslash( $_GET['fait'] ) ) : '';
+	?>
+	<div class="wrap">
+		<h1>Remettre le thème à neuf</h1>
+		<?php if ( 'oui' === $fait ) : ?>
+			<div class="notice notice-success"><p>C'est fait. Rechargez le site avec Ctrl+F5 pour voir le résultat.</p></div>
+		<?php endif; ?>
+		<p>Les modifications faites dans <strong>Apparence → Éditeur</strong> sont enregistrées à part du thème : elles restent appliquées même après avoir installé une nouvelle version. Cochez ce qu'il faut remettre dans l'état livré par le thème.</p>
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<input type="hidden" name="action" value="brevard_releve_neuf">
+			<?php wp_nonce_field( 'brevard_releve_neuf' ); ?>
+			<p><label><input type="checkbox" name="neuf[]" value="modeles" checked> <strong>Modèles et parties de modèle</strong> — le menu, l'en-tête, le pied de page et la mise en page de chaque type de page.</label></p>
+			<p><label><input type="checkbox" name="neuf[]" value="styles" checked> <strong>Styles</strong> — les couleurs et polices changées dans l'éditeur.</label></p>
+			<p><label><input type="checkbox" name="neuf[]" value="pages" checked> <strong>Pages du portfolio</strong> — Veilles, Grille de compétences, Profil et Jury retrouvent leur texte d'origine. La grille déposée devra être redéposée.</label></p>
+			<p><label><input type="checkbox" name="neuf[]" value="realisations"> <strong>Les quatre réalisations</strong> — leur texte est remplacé par celui du site statique. À ne cocher que si vous n'y avez rien écrit vous-même.</label></p>
+			<p>Les veilles, la médiathèque et les autres pages ne sont jamais touchées.</p>
+			<?php submit_button( 'Remettre à neuf', 'primary', 'submit', true, array( 'onclick' => "return confirm('Les modifications cochées seront effacées. Continuer ?');" ) ); ?>
+		</form>
+	</div>
+	<?php
+}
+
+/**
+ * Remet une page ou une réalisation dans son état d'origine, en la créant
+ * ou en la sortant de la corbeille au besoin.
+ */
+function brevard_releve_remettre( $type, $slug, $contenu ) {
+	$donnees = array(
+		'post_type'    => $type,
+		'post_status'  => 'publish',
+		'post_name'    => $slug,
+		'post_title'   => $contenu[0],
+		'post_excerpt' => $contenu[1],
+		'post_content' => '<!-- wp:pattern {"slug":"brevard-releve/' . $contenu[2] . '"} /-->',
+	);
+
+	$existant = get_posts(
+		array(
+			'name'        => $slug,
+			'post_type'   => $type,
+			'post_status' => array( 'publish', 'draft', 'pending', 'private', 'future', 'trash' ),
+			'numberposts' => 1,
+		)
+	);
+	// une page à la corbeille a vu son identifiant suffixé par WordPress
+	if ( ! $existant ) {
+		$existant = get_posts(
+			array(
+				'name'        => $slug . '__trashed',
+				'post_type'   => $type,
+				'post_status' => 'trash',
+				'numberposts' => 1,
+			)
+		);
+	}
+
+	if ( $existant ) {
+		$donnees['ID'] = $existant[0]->ID;
+		wp_update_post( $donnees );
+	} else {
+		wp_insert_post( $donnees );
+	}
+}
+
+function brevard_releve_faire_neuf() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_die( 'Action non autorisée.' );
+	}
+	check_admin_referer( 'brevard_releve_neuf' );
+
+	$choix = isset( $_POST['neuf'] ) ? array_map( 'sanitize_key', (array) wp_unslash( $_POST['neuf'] ) ) : array();
+
+	if ( in_array( 'modeles', $choix, true ) ) {
+		$personnalisations = get_posts(
+			array(
+				'post_type'   => array( 'wp_template', 'wp_template_part' ),
+				'post_status' => 'any',
+				'numberposts' => -1,
+				'fields'      => 'ids',
+				'tax_query'   => array(
+					array(
+						'taxonomy' => 'wp_theme',
+						'field'    => 'name',
+						'terms'    => get_stylesheet(),
+					),
+				),
+			)
+		);
+		foreach ( $personnalisations as $id ) {
+			wp_delete_post( $id, true );
+		}
+	}
+
+	if ( in_array( 'styles', $choix, true ) && class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+		$styles = WP_Theme_JSON_Resolver::get_user_global_styles_post_id();
+		if ( $styles ) {
+			wp_delete_post( $styles, true );
+		}
+	}
+
+	if ( in_array( 'pages', $choix, true ) ) {
+		foreach ( brevard_releve_contenus( 'page' ) as $slug => $contenu ) {
+			brevard_releve_remettre( 'page', $slug, $contenu );
+		}
+	}
+
+	if ( in_array( 'realisations', $choix, true ) ) {
+		$ordre = 0;
+		foreach ( brevard_releve_contenus( 'realisation' ) as $slug => $contenu ) {
+			brevard_releve_remettre( 'realisation', $slug, $contenu );
+			$fiche = get_posts( array( 'name' => $slug, 'post_type' => 'realisation', 'numberposts' => 1, 'fields' => 'ids' ) );
+			if ( $fiche ) {
+				wp_update_post( array( 'ID' => $fiche[0], 'menu_order' => ++$ordre ) );
+			}
+		}
+	}
+
+	update_option( 'brevard_releve_neuf_fait', 1 );
+	flush_rewrite_rules();
+
+	wp_safe_redirect( admin_url( 'themes.php?page=brevard-releve-neuf&fait=oui' ) );
+	exit;
+}
+add_action( 'admin_post_brevard_releve_neuf', 'brevard_releve_faire_neuf' );
+
+/**
+ * Tant que la remise à neuf n'a jamais servi et qu'il reste d'anciennes
+ * personnalisations, un bandeau la signale : c'est justement quand on ne
+ * sait pas où chercher qu'on en a besoin.
+ */
+function brevard_releve_bandeau_neuf() {
+	if ( get_option( 'brevard_releve_neuf_fait' ) || ! current_user_can( 'edit_theme_options' ) ) {
+		return;
+	}
+	$ecran = get_current_screen();
+	if ( $ecran && 'appearance_page_brevard-releve-neuf' === $ecran->id ) {
+		return;
+	}
+	$reste = get_posts(
+		array(
+			'post_type'   => array( 'wp_template', 'wp_template_part' ),
+			'post_status' => 'any',
+			'numberposts' => 1,
+			'fields'      => 'ids',
+			'tax_query'   => array(
+				array(
+					'taxonomy' => 'wp_theme',
+					'field'    => 'name',
+					'terms'    => get_stylesheet(),
+				),
+			),
+		)
+	);
+	if ( ! $reste ) {
+		return;
+	}
+	printf(
+		'<div class="notice notice-warning"><p><strong>Brévard — Le Relevé :</strong> d\'anciennes modifications de l\'éditeur masquent la nouvelle version du thème. <a href="%s">Remettre le thème à neuf</a></p></div>',
+		esc_url( admin_url( 'themes.php?page=brevard-releve-neuf' ) )
+	);
+}
+add_action( 'admin_notices', 'brevard_releve_bandeau_neuf' );

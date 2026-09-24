@@ -48,6 +48,20 @@ modifient librement.
 Reste à faire à la main : supprimer « Sample Page » et « Hello world! », et
 régler le titre du site dans **Réglages → Général**.
 
+## Les anciennes modifications reviennent après une mise à jour
+
+Ce qu'on modifie dans **Apparence → Éditeur** (menu, en-tête, modèles,
+couleurs) est enregistré dans la base de WordPress, pas dans le thème.
+Installer une nouvelle version ne l'efface donc pas : les anciennes
+modifications restent appliquées par-dessus.
+
+**Apparence → Remettre à neuf** les efface en un clic. Cocher ce qu'il faut
+remettre dans l'état livré par le thème : modèles, styles, pages du
+portfolio, et, seulement si l'on n'y a rien écrit soi-même, les quatre
+réalisations. Les veilles et la médiathèque ne sont jamais touchées. Un
+bandeau dans l'admin signale la page tant qu'il reste d'anciennes
+modifications.
+
 ## Déposer une veille
 
 Menu **Veilles → Ajouter une veille** :
