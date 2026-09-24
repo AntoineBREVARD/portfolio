@@ -10,7 +10,7 @@
  */
 ?>
 <!-- wp:image {"align":"full","className":"bande","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image alignfull bande"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/tribunes.webp' ) ); ?>" alt="Tribunes du circuit des 24 Heures du Mans, drapeaux nationaux et drapeau à damier"/><figcaption class="wp-element-caption">Circuit des 24 Heures — <b>photo personnelle</b></figcaption></figure>
+<figure class="wp-block-image alignfull bande"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/musee-24h.webp' ) ); ?>" alt="Ferrari rouge n° 20 exposée au musée des 24 Heures du Mans, à côté d'un prototype hybride"/><figcaption class="wp-element-caption">Musée des 24 Heures du Mans — <b>photo personnelle</b></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:separator {"className":"vibreur vibreur--fin"} -->

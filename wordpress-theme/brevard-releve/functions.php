@@ -558,7 +558,7 @@ function brevard_releve_page_neuf() {
 			<?php wp_nonce_field( 'brevard_releve_neuf' ); ?>
 			<p><label><input type="checkbox" name="neuf[]" value="modeles" checked> <strong>Modèles et parties de modèle</strong> — le menu, l'en-tête, le pied de page et la mise en page de chaque type de page.</label></p>
 			<p><label><input type="checkbox" name="neuf[]" value="styles" checked> <strong>Styles</strong> — les couleurs et polices changées dans l'éditeur.</label></p>
-			<p><label><input type="checkbox" name="neuf[]" value="pages" checked> <strong>Pages du portfolio</strong> — Veilles, Grille de compétences, Profil et Jury retrouvent leur texte d'origine. La grille déposée devra être redéposée.</label></p>
+			<p><label><input type="checkbox" name="neuf[]" value="pages" checked> <strong>Pages du portfolio</strong> — Veilles, Grille de compétences, Profil, Entreprise et À propos retrouvent leur texte d'origine. La grille déposée devra être redéposée.</label></p>
 			<p><label><input type="checkbox" name="neuf[]" value="realisations"> <strong>Les quatre réalisations</strong> — leur texte est remplacé par celui du site statique. À ne cocher que si vous n'y avez rien écrit vous-même.</label></p>
 			<p>Les veilles, la médiathèque et les autres pages ne sont jamais touchées.</p>
 			<?php submit_button( 'Remettre à neuf', 'primary', 'submit', true, array( 'onclick' => "return confirm('Les modifications cochées seront effacées. Continuer ?');" ) ); ?>
