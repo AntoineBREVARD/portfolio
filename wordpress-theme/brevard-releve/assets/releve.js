@@ -1,8 +1,8 @@
 /* =========================================================================
    LE RELEVÉ — script partagé
-   Site multi-pages. Trois comportements portent l'interaction : la typo qui
-   se déforme sous la charge du défilement, la révélation dans les lettres du
-   nom, et la matrice de compétences qui se lit dans les deux sens.
+   Site multi-pages. Deux comportements portent l'interaction : la typo qui
+   se déforme sous la charge du défilement et la révélation dans les lettres
+   du nom.
    ========================================================================= */
 
 const $  = (s, c = document) => c.querySelector(s);
@@ -120,7 +120,7 @@ function revelationLettres(){
 
 /* ---------- Révélation au défilement ---------- */
 function revelation(){
-  const cibles = $$(".entree, .matrice-bloc, .jury-case, .hero-releve, .tete");
+  const cibles = $$(".entree, .jury-case, .hero-releve, .tete");
   if (!cibles.length) return;
   if (MOINS_DE_MOUVEMENT){ cibles.forEach(c => c.classList.add("est-vu")); return; }
 
@@ -138,40 +138,6 @@ function revelation(){
     // filet de sécurité : si l'observateur ne se déclenche jamais (page
     // courte, navigateur capricieux), le contenu ne doit pas rester invisible
     setTimeout(() => c.classList.add("est-vu"), 2200);
-  });
-}
-
-/* ---------- Matrice : lecture dans les deux sens ----------
-   Survoler une compétence allume les réalisations qui la prouvent ;
-   survoler une réalisation allume les compétences qu'elle couvre.
-   C'est la traçabilité du référentiel rendue manipulable — la seule
-   interaction du site qui apporte une information plutôt qu'un effet. */
-function matriceCroisee(){
-  const lignes = $$(".ligne[data-preuves]");
-  if (!lignes.length) return;
-
-  const clef = el => (el.dataset.preuves || "").split(/\s+/).filter(Boolean);
-
-  function allumer(refs){
-    const ens = new Set(refs);
-    lignes.forEach(l => {
-      const lie = clef(l).some(r => ens.has(r));
-      l.classList.toggle("is-lie", lie);
-      $$(".preuve", l).forEach(p => p.classList.toggle("is-lie", ens.has(p.dataset.ref)));
-    });
-  }
-  function eteindre(){
-    lignes.forEach(l => {
-      l.classList.remove("is-lie");
-      $$(".preuve", l).forEach(p => p.classList.remove("is-lie"));
-    });
-  }
-
-  $$(".preuve[data-ref]").forEach(p => {
-    p.addEventListener("mouseenter", () => allumer([p.dataset.ref]));
-    p.addEventListener("focus",      () => allumer([p.dataset.ref]));
-    p.addEventListener("mouseleave", eteindre);
-    p.addEventListener("blur",       eteindre);
   });
 }
 
@@ -231,6 +197,5 @@ document.addEventListener("DOMContentLoaded", () => {
   typoSousCharge();
   revelationLettres();
   revelation();
-  matriceCroisee();
   comparateur();
 });

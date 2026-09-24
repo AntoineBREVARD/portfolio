@@ -24,14 +24,14 @@
     <a href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Les quatre fiches</a>
   </div>
   <div class="jury-case">
-    <dt>Compétences</dt>
-    <dd>Chaque compétence du référentiel, et la réalisation qui la démontre.</dd>
-    <a href="<?php echo esc_url( brevard_releve_lien( 'competences' ) ); ?>">La matrice</a>
+    <dt>Veilles</dt>
+    <dd>Mes veilles technologiques, à télécharger.</dd>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'veilles' ) ); ?>">Les documents</a>
   </div>
   <div class="jury-case">
-    <dt>Profil</dt>
-    <dd>La formation, le contexte d'alternance, et ce qu'on m'y confie.</dd>
-    <a href="<?php echo esc_url( brevard_releve_lien( 'profil' ) ); ?>">Le parcours</a>
+    <dt>Grille de compétences</dt>
+    <dd>Le tableau de synthèse du référentiel BTS SIO.</dd>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'grille-competences' ) ); ?>">La grille</a>
   </div>
   <div class="jury-case">
     <dt>Épreuves E4 et E5</dt>

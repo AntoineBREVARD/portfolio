@@ -54,11 +54,11 @@
 
 <!-- wp:buttons {"className":"hero-actions"} -->
 <div class="wp-block-buttons hero-actions"><!-- wp:button {"className":"btn btn--plein"} -->
-<div class="wp-block-button btn btn--plein"><a class="wp-block-button__link wp-element-button" href="/realisations/">Les réalisations</a></div>
+<div class="wp-block-button btn btn--plein"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Les réalisations</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"btn"} -->
-<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="#">CV — PDF</a></div>
+<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>">CV — PDF</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 </div>

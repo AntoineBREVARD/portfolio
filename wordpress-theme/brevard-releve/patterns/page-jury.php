@@ -20,19 +20,19 @@
     <a href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Les quatre fiches</a>
   </div>
   <div class="jury-case">
-    <dt>Traçabilité</dt>
-    <dd>Chaque compétence du référentiel confrontée à la réalisation qui la démontre, y compris celles qui restent à couvrir.</dd>
-    <a href="<?php echo esc_url( brevard_releve_lien( 'competences' ) ); ?>">La matrice</a>
+    <dt>Grille de compétences</dt>
+    <dd>Le tableau de synthèse du référentiel, à consulter en ligne ou à télécharger.</dd>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'grille-competences' ) ); ?>">La grille</a>
   </div>
   <div class="jury-case">
-    <dt>Parcours</dt>
-    <dd>La formation, le contexte d'alternance et les missions confiées.</dd>
-    <a href="<?php echo esc_url( brevard_releve_lien( 'profil' ) ); ?>">Le profil</a>
+    <dt>Veilles technologiques</dt>
+    <dd>Les documents de veille produits pendant la formation.</dd>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'veilles' ) ); ?>">Les veilles</a>
   </div>
   <div class="jury-case">
     <dt>Curriculum vitae</dt>
     <dd>Une page, au format PDF.</dd>
-    <a href="#">À téléverser dans la médiathèque</a>
+    <a href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>" download>Télécharger</a>
   </div>
 </dl>
 <!-- /wp:html -->

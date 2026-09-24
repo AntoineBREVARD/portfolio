@@ -2,56 +2,74 @@
 
 Thème de blocs WordPress pour le portfolio BTS SIO option SISR d'Antoine Brévard.
 
-## Installation
+## Installation avec WP Pusher (recommandé)
 
-1. Créer l'archive : compresser le dossier `brevard-releve` en `.zip`.
-2. Dans WordPress : **Apparence → Thèmes → Ajouter → Téléverser un thème**.
-3. Activer.
-4. **Réglages → Permaliens → Enregistrer** (sans rien changer). Cette étape est
-   obligatoire : elle régénère les règles de réécriture pour le type de contenu
-   « Réalisation », sinon ses pages renvoient une erreur 404.
+Le thème vit dans le dépôt GitHub du portfolio, dans un sous-dossier. WP
+Pusher sait l'y chercher :
 
-Aucun plugin n'est nécessaire, et c'est voulu : l'hébergement visé n'a pas
-d'accès Internet sortant, donc rien ne peut être installé depuis la
-bibliothèque WordPress.
+1. **WP Pusher → Install Theme**.
+2. **Theme repository** : `AntoineBREVARD/portfolio`
+3. **Repository branch** : `main`
+4. **Repository subdirectory** : `wordpress-theme/brevard-releve`
+   — sans ce réglage, WP Pusher prend la racine du dépôt, qui est le site
+   statique, et refuse d'installer : il n'y trouve pas de `style.css` de thème.
+5. Cocher **Push-to-Deploy** pour que chaque modification poussée sur GitHub
+   mette le thème à jour toute seule.
+6. **Install theme**, puis **Apparence → Thèmes → Activer**.
 
-## Remplir le site
+Si le dépôt est privé, WP Pusher demande un jeton GitHub (et sa version
+payante). Un dépôt public fonctionne avec la version gratuite.
 
-Le thème apporte le dessin et les gabarits ; le contenu se crée dans
-WordPress. Dans l'ordre :
+Sans WP Pusher : compresser le dossier `brevard-releve` en `.zip`, puis
+**Apparence → Thèmes → Ajouter → Téléverser un thème**.
 
-**1. Les trois pages.** Pour chacune : **Pages → Ajouter**, donner le titre et
-l'identifiant (le « slug ») exactement comme ci-dessous, puis dans le contenu
-insérer la composition du même nom (bouton **+** → onglet **Compositions** →
-catégorie **Le Relevé**).
+## Le site se remplit tout seul
 
-| Titre       | Identifiant   | Composition à insérer |
-|-------------|---------------|-----------------------|
-| Compétences | `competences` | Page — Compétences    |
-| Profil      | `profil`      | Page — Profil         |
-| Jury        | `jury`        | Page — Jury           |
+Au premier passage dans l'admin après l'activation, le thème crée ce qui
+manque :
 
-Le titre s'affiche en très gros caractères en haut de la page, et le
-**résumé** (panneau de droite, « Extrait ») sert de phrase d'accroche sous
-le titre. Les deux se modifient librement ; l'identifiant, lui, ne doit pas
-changer : les liens du site le cherchent.
+| Contenu                     | Adresse                  |
+|-----------------------------|--------------------------|
+| Page Veilles                | `/veilles/`              |
+| Page Grille de compétences  | `/grille-competences/`   |
+| Page Profil                 | `/profil/`               |
+| Page Jury                   | `/jury/`                 |
+| Les quatre réalisations     | `/realisation/contacts/`, `quotas`, `teams`, `maj` |
 
-**2. Les réalisations.** Menu **Réalisations → Ajouter**. Chaque fiche s'ouvre
-déjà structurée. Pour que la matrice de compétences pointe vers les bonnes
-fiches, garder ces identifiants : `contacts`, `quotas`, `teams`, `maj`.
+Il recalcule aussi les permaliens : plus besoin de passer par **Réglages →
+Permaliens**. Ce qui existe déjà n'est jamais écrasé, et une page mise à la
+corbeille n'est pas recréée. L'ancienne page « Compétences », si elle existe,
+passe en brouillon : la grille la remplace.
 
-Il n'y a pas de page « Réalisations » à créer : la liste est produite
-automatiquement à partir des fiches publiées.
+Les identifiants (le « slug ») ne doivent pas changer : les liens du site les
+cherchent. Le titre et le résumé (panneau de droite, « Extrait ») se
+modifient librement.
 
-**3. Le ménage.** Supprimer la page « Sample Page » et l'article « Hello
-world! » créés par WordPress à l'installation.
+Reste à faire à la main : supprimer « Sample Page » et « Hello world! », et
+régler le titre du site dans **Réglages → Général**.
 
-**4. Le titre du site.** **Réglages → Général** : il s'affiche dans l'onglet
-du navigateur et dans les résultats de recherche.
+## Déposer une veille
 
-Tant qu'une page n'existe pas, les liens qui la visent renvoient vers
-l'accueil plutôt que vers une erreur : le site reste navigable pendant qu'on
-le remplit.
+Menu **Veilles → Ajouter une veille** :
+
+1. le titre ;
+2. le fichier : la veille s'ouvre avec un bloc **Fichier** déjà en place,
+   cliquer sur **Téléverser** et choisir le PDF, le Word ou le PowerPoint ;
+3. le résumé (panneau de droite, « Extrait ») : une phrase, affichée sous le
+   titre dans la liste ;
+4. **Publier**. La date de publication sert de date de la veille : la modifier
+   dans le panneau de droite pour une veille plus ancienne.
+
+La page Veilles les liste de la plus récente à la plus ancienne ; un clic
+télécharge le document.
+
+## Déposer la grille de compétences
+
+**Pages → La grille de compétences → Modifier**. Le bloc **Fichier** est déjà
+dans la page : **Téléverser**, choisir la grille, **Mettre à jour**. Un PDF
+s'affiche directement dans la page avec un bouton de téléchargement ; un
+fichier Excel est proposé au téléchargement. Pour une nouvelle version,
+remplacer le fichier dans le même bloc.
 
 ## Ce qui s'édite sans code
 
@@ -75,7 +93,9 @@ Trois interactions vivent dans `assets/releve.js` :
 
 - la typographie qui se comprime au défilement ;
 - la révélation de la trame technique dans les lettres du nom ;
-- la matrice de compétences qui se lit dans les deux sens.
+- le comparateur avant / après des fiches.
+
+La liste des veilles et l'installation du contenu sont dans `functions.php`.
 
 Elles s'accrochent à des classes CSS. Tant que les compositions gardent ces
 classes, elles fonctionnent. Les désactiver se fait en retirant le script ;
