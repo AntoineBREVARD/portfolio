@@ -3,7 +3,7 @@ Theme Name: Brévard — Le Relevé
 Theme URI: https://antoinebrevard.github.io/portfolio/
 Author: Antoine Brévard
 Description: Thème de blocs pour un portfolio BTS SIO option SISR. Univers feuille de chronos : la typographie porte l'identité, le vibreur jaune et bleu du circuit du Mans sert de filet structurel. Aucun plugin requis — pensé pour un hébergement sans accès Internet sortant. Polices embarquées dans le thème : aucune requête vers un service tiers, donc aucune adresse IP de visiteur transmise à Google.
-Version: 1.14.0
+Version: 1.15.0
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -203,21 +203,23 @@ p:last-child{margin-bottom:0}
   font-family:var(--display);font-variation-settings:"wght" 800,"wdth" 78;
   font-size:22px;letter-spacing:.02em;text-decoration:none;line-height:1;
 }
-/* navigation entre pages, ecrite dans le sens du rail : on lit de haut en
-   bas comme sur une feuille de chronos, et la page courante est marquee */
+/* navigation entre pages, ecrite dans le sens du rail. Retournee d'un demi-
+   tour : on la lit de bas en haut, la tete penchee a gauche, comme le dos
+   d'un livre francais. La page courante est marquee d'un trait bleu, place
+   a droite avant le retournement pour apparaitre a gauche. */
 .rail-nav{display:flex;flex-direction:column;gap:20px;align-items:center}
 .rail-nav a{
-  writing-mode:vertical-rl;text-orientation:mixed;
+  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
   font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
   text-decoration:none;color:var(--encre-3);font-variation-settings:"wdth" 87;
-  border-left:2px solid transparent;padding-left:5px;
+  border-right:2px solid transparent;padding-right:5px;
   transition:color .22s,border-color .22s;
 }
 .rail-nav a:hover{color:var(--encre)}
-.rail-nav a.est-active{color:var(--encre);border-left-color:var(--bleu)}
+.rail-nav a.est-active{color:var(--encre);border-right-color:var(--bleu)}
 .rail-chrono{
   font-family:var(--mono);font-size:10px;color:var(--encre-3);
-  writing-mode:vertical-rl;font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
+  writing-mode:vertical-rl;transform:rotate(180deg);font-variation-settings:"wdth" 87;font-variant-numeric:tabular-nums;
 }
 
 /* --------------------------------------------------------------- gabarit */
@@ -638,10 +640,10 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
     flex-direction:row;padding:0 var(--gouttiere);
     border-right:0;border-bottom:1px solid var(--trait);
   }
-  .rail-chrono{writing-mode:horizontal-tb}
+  .rail-chrono{writing-mode:horizontal-tb;transform:none}
   .rail-nav{flex-direction:row;gap:16px;overflow-x:auto;padding-inline:2px}
   .rail-nav a{
-    writing-mode:horizontal-tb;border-left:0;padding-left:0;
+    writing-mode:horizontal-tb;transform:none;border-right:0;padding-right:0;
     border-bottom:2px solid transparent;padding-bottom:3px;white-space:nowrap;
   }
   .rail-nav a.est-active{border-bottom-color:var(--bleu)}
@@ -700,15 +702,15 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   display:flex;flex-direction:column;gap:20px;align-items:center;
 }
 .rail .wp-block-navigation-item__content{
-  writing-mode:vertical-rl;text-orientation:mixed;
+  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
   font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
   text-decoration:none;color:var(--encre-3);font-variation-settings:"wdth" 87;
-  border-left:2px solid transparent;padding-left:5px;
+  border-right:2px solid transparent;padding-right:5px;
   transition:color .22s,border-color .22s;
 }
 .rail .wp-block-navigation-item__content:hover{color:var(--encre)}
 .rail .current-menu-item .wp-block-navigation-item__content{
-  color:var(--encre);border-left-color:var(--bleu);
+  color:var(--encre);border-right-color:var(--bleu);
 }
 /* le titre du site sert de monogramme */
 .rail .wp-block-site-title{margin:0}
