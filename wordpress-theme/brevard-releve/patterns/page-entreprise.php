@@ -95,7 +95,7 @@
   <p><strong>Ce que j'y ai construit :</strong> quatre missions menées en production, avec les solutions écartées et la raison du rejet.</p>
   <div class="renvoi-actions">
     <a class="btn btn--plein" href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Les réalisations</a>
-    <a class="btn" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Dossier_Professionnel_Antoine_Brevard.pdf' ) ); ?>" download>Le dossier (PDF)</a>
+    <a class="btn" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Dossier_Professionnel_Antoine_Brevard.pdf' ) ); ?>" target="_blank" rel="noopener">Le dossier (PDF)</a>
   </div>
 </div>
 <!-- /wp:html -->

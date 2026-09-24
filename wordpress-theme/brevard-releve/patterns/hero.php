@@ -56,16 +56,16 @@
 <div class="wp-block-button btn btn--plein"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Les réalisations</a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"className":"btn"} -->
-<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Dossier_Professionnel_Antoine_Brevard.pdf' ) ); ?>">Dossier U6</a></div>
+<!-- wp:button {"className":"btn","linkTarget":"_blank","rel":"noopener"} -->
+<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Dossier_Professionnel_Antoine_Brevard.pdf' ) ); ?>" target="_blank" rel="noopener">Dossier U6</a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"className":"btn"} -->
-<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>">CV — PDF</a></div>
+<!-- wp:button {"className":"btn","linkTarget":"_blank","rel":"noopener"} -->
+<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>" target="_blank" rel="noopener">CV — PDF</a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"className":"btn"} -->
-<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Lettre_de_motivation_Antoine_Brevard.pdf' ) ); ?>">Lettre de motivation</a></div>
+<!-- wp:button {"className":"btn","linkTarget":"_blank","rel":"noopener"} -->
+<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Lettre_de_motivation_Antoine_Brevard.pdf' ) ); ?>" target="_blank" rel="noopener">Lettre de motivation</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 </div>

@@ -254,7 +254,8 @@ function brevard_releve_fichier( $post ) {
  * contenu d'une veille ; un bloc dynamique, évalué à chaque affichage, le
  * peut. Pas de code court : son bloc passe la sortie à wpautop, qui insère
  * des paragraphes au milieu des lignes et casse leur grille.
- * Le rendu reprend le journal des réalisations.
+ * Le rendu reprend le journal des réalisations ; un clic ouvre le PDF
+ * dans un nouvel onglet.
  */
 function brevard_releve_liste_veilles() {
 	$veilles = get_posts(
@@ -276,7 +277,7 @@ function brevard_releve_liste_veilles() {
 		$format = strtoupper( (string) pathinfo( (string) wp_parse_url( $fichier, PHP_URL_PATH ), PATHINFO_EXTENSION ) );
 
 		$lignes[] = sprintf(
-			'<a class="entree" href="%1$s" download><span class="entree-num">%2$s</span><h3 class="entree-titre">%3$s</h3><p class="entree-mot">%4$s</p><span class="entree-comp"><span class="puce">%5$s</span><span class="puce">%6$s</span></span><span class="entree-fleche" aria-hidden="true">↓</span></a>',
+			'<a class="entree" href="%1$s" target="_blank" rel="noopener"><span class="entree-num">%2$s</span><h3 class="entree-titre">%3$s</h3><p class="entree-mot">%4$s</p><span class="entree-comp"><span class="puce">%5$s</span><span class="puce">%6$s</span></span><span class="entree-fleche" aria-hidden="true">↗</span></a>',
 			esc_url( $fichier ),
 			esc_html( str_pad( (string) ( count( $lignes ) + 1 ), 2, '0', STR_PAD_LEFT ) ),
 			esc_html( get_the_title( $veille ) ),
