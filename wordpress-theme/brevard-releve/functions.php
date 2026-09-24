@@ -314,6 +314,15 @@ const BREVARD_RELEVE_CONTENU = '3';
  * Le contenu livré avec le thème : pour chaque identifiant, le titre, le
  * résumé et la composition qui en fournit le corps.
  */
+function brevard_releve_noms() {
+	return array(
+		'veilles'            => 'Veilles',
+		'grille-competences' => 'Grille de compétences',
+		'profil'             => 'Profil',
+		'jury'               => 'Jury',
+	);
+}
+
 function brevard_releve_contenus( $type ) {
 	$contenus = array(
 		'veilles'            => array( 'Ce que je surveille', 'Mes veilles technologiques, rédigées au fil de la formation. Chaque document se télécharge d\'un clic.', 'page-veilles' ),
@@ -515,8 +524,8 @@ add_action( 'admin_init', 'brevard_releve_installer' );
  */
 function brevard_releve_menu_neuf() {
 	add_theme_page(
-		'Remettre le thème à neuf',
-		'Remettre à neuf',
+		'Portfolio : état du site et remise à neuf',
+		'Portfolio',
 		'edit_theme_options',
 		'brevard-releve-neuf',
 		'brevard_releve_page_neuf'
@@ -528,10 +537,16 @@ function brevard_releve_page_neuf() {
 	$fait = isset( $_GET['fait'] ) ? sanitize_key( wp_unslash( $_GET['fait'] ) ) : '';
 	?>
 	<div class="wrap">
-		<h1>Remettre le thème à neuf</h1>
+		<h1>Portfolio : état du site et remise à neuf</h1>
+		<?php if ( 'complete' === $fait ) : ?>
+			<div class="notice notice-success"><p>Le site est complet. Rechargez-le avec Ctrl+F5.</p></div>
+		<?php endif; ?>
 		<?php if ( 'oui' === $fait ) : ?>
 			<div class="notice notice-success"><p>C'est fait. Rechargez le site avec Ctrl+F5 pour voir le résultat.</p></div>
 		<?php endif; ?>
+		<h2>État du site</h2>
+		<?php brevard_releve_etat(); ?>
+		<h2>Remettre à neuf</h2>
 		<p>Les modifications faites dans <strong>Apparence → Éditeur</strong> sont enregistrées à part du thème : elles restent appliquées même après avoir installé une nouvelle version. Cochez ce qu'il faut remettre dans l'état livré par le thème.</p>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<input type="hidden" name="action" value="brevard_releve_neuf">
@@ -682,8 +697,135 @@ function brevard_releve_bandeau_neuf() {
 		return;
 	}
 	printf(
-		'<div class="notice notice-warning"><p><strong>Brévard — Le Relevé :</strong> d\'anciennes modifications de l\'éditeur masquent la nouvelle version du thème. <a href="%s">Remettre le thème à neuf</a></p></div>',
+		'<div class="notice notice-warning"><p><strong>Brévard — Le Relevé :</strong> d\'anciennes modifications de l\'éditeur masquent la nouvelle version du thème. <a href="%s">Apparence → Portfolio</a></p></div>',
 		esc_url( admin_url( 'themes.php?page=brevard-releve-neuf' ) )
 	);
 }
 add_action( 'admin_notices', 'brevard_releve_bandeau_neuf' );
+
+/**
+ * Dans la liste des pages, chaque page du portfolio porte le nom de sa
+ * rubrique : son titre est la phrase affichée en grand (« Accès direct »,
+ * « Ce que je surveille »), où l'on ne reconnaît pas la page Jury ou Veilles.
+ */
+function brevard_releve_etiquette_page( $etats, $post ) {
+	if ( 'page' !== $post->post_type ) {
+		return $etats;
+	}
+	$noms = brevard_releve_noms();
+	$slug = preg_replace( '/__trashed$/', '', $post->post_name );
+	if ( isset( $noms[ $slug ] ) ) {
+		$etats[ 'brevard-releve-' . $slug ] = 'Portfolio — ' . $noms[ $slug ];
+	}
+	return $etats;
+}
+add_filter( 'display_post_states', 'brevard_releve_etiquette_page', 10, 2 );
+
+/**
+ * Tableau de l'état du site : ce que le thème attend, ce qui existe, et le
+ * lien pour le voir. Accueil et Réalisations y figurent aussi, précisément
+ * parce qu'on les cherche en vain dans la liste des pages.
+ */
+function brevard_releve_etat() {
+	$lignes = array(
+		array( 'Accueil', 'Automatique : gabarit du thème, pas de page à créer.', 'ok', home_url( '/' ) ),
+	);
+
+	$fiches = get_posts( array( 'post_type' => 'realisation', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids' ) );
+	$lignes[] = array(
+		'Réalisations',
+		sprintf( 'Automatique : liste des fiches publiées (%d sur 4 attendues). Menu Réalisations.', count( $fiches ) ),
+		count( $fiches ) >= 4 ? 'ok' : 'manque',
+		brevard_releve_lien( 'realisations' ),
+	);
+
+	foreach ( brevard_releve_noms() as $slug => $nom ) {
+		$page = get_posts( array( 'name' => $slug, 'post_type' => 'page', 'post_status' => array( 'publish', 'draft', 'pending', 'private', 'future' ), 'numberposts' => 1 ) );
+		if ( $page && 'publish' === $page[0]->post_status ) {
+			$lignes[] = array( $nom, sprintf( 'Page « %s ».', get_the_title( $page[0] ) ), 'ok', get_permalink( $page[0] ) );
+		} elseif ( $page ) {
+			$lignes[] = array( $nom, 'La page existe mais n\'est pas publiée.', 'manque', get_edit_post_link( $page[0]->ID ) );
+		} else {
+			$corbeille = get_posts( array( 'name' => $slug . '__trashed', 'post_type' => 'page', 'post_status' => 'trash', 'numberposts' => 1 ) );
+			$lignes[] = array( $nom, $corbeille ? 'À la corbeille.' : 'Absente.', 'manque', '' );
+		}
+	}
+
+	$veilles  = get_posts( array( 'post_type' => 'veille', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids' ) );
+	$lignes[] = array( 'Veilles déposées', sprintf( '%d publiée(s). Menu Veilles.', count( $veilles ) ), $veilles ? 'ok' : 'manque', admin_url( 'edit.php?post_type=veille' ) );
+
+	$manque = false;
+	echo '<table class="widefat striped" style="max-width:900px"><tbody>';
+	foreach ( $lignes as $l ) {
+		$manque = $manque || 'manque' === $l[2];
+		printf(
+			'<tr><td style="width:24px">%1$s</td><td><strong>%2$s</strong></td><td>%3$s</td><td>%4$s</td></tr>',
+			'ok' === $l[2] ? '✅' : '⚠️',
+			esc_html( $l[0] ),
+			esc_html( $l[1] ),
+			$l[3] ? '<a href="' . esc_url( $l[3] ) . '">Voir</a>' : ''
+		);
+	}
+	echo '</tbody></table>';
+
+	if ( $manque ) {
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
+		echo '<input type="hidden" name="action" value="brevard_releve_completer">';
+		wp_nonce_field( 'brevard_releve_completer' );
+		echo '<p><strong>Il manque quelque chose.</strong> Ce bouton crée ce qui est absent et restaure ce qui est à la corbeille, sans toucher à ce qui existe déjà.</p>';
+		submit_button( 'Créer ce qui manque', 'primary', 'submit', false );
+		echo '</form>';
+	}
+}
+
+/**
+ * « Créer ce qui manque » : pages, réalisations et veilles absentes ou à la
+ * corbeille. L'installation automatique, elle, laisse la corbeille en paix :
+ * ici, c'est une demande explicite.
+ */
+function brevard_releve_completer() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_die( 'Action non autorisée.' );
+	}
+	check_admin_referer( 'brevard_releve_completer' );
+
+	$present = function ( $slug, $type ) {
+		return (bool) get_posts(
+			array(
+				'name'        => $slug,
+				'post_type'   => $type,
+				'post_status' => array( 'publish', 'draft', 'pending', 'private', 'future' ),
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			)
+		);
+	};
+
+	foreach ( array( 'page', 'realisation' ) as $type ) {
+		$ordre = 0;
+		foreach ( brevard_releve_contenus( $type ) as $slug => $contenu ) {
+			++$ordre;
+			if ( $present( $slug, $type ) ) {
+				continue;
+			}
+			brevard_releve_remettre( $type, $slug, $contenu );
+			if ( 'realisation' === $type ) {
+				$fiche = get_posts( array( 'name' => $slug, 'post_type' => 'realisation', 'numberposts' => 1, 'fields' => 'ids' ) );
+				if ( $fiche ) {
+					wp_update_post( array( 'ID' => $fiche[0], 'menu_order' => $ordre ) );
+				}
+			}
+		}
+	}
+
+	foreach ( brevard_releve_contenus( 'veille' ) as $slug => $veille ) {
+		if ( ! $present( $slug, 'veille' ) ) {
+			brevard_releve_importer_veille( $slug, $veille );
+		}
+	}
+
+	flush_rewrite_rules();
+	wp_safe_redirect( admin_url( 'themes.php?page=brevard-releve-neuf&fait=complete' ) );
+	exit;
+}
+add_action( 'admin_post_brevard_releve_completer', 'brevard_releve_completer' );
