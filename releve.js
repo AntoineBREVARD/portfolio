@@ -285,7 +285,30 @@ function annee(){
   if (el) el.textContent = new Date().getFullYear();
 }
 
+/* ---------- Menu déroulant mobile ----------
+   Le bouton n'est visible que sur téléphone. On referme au choix d'une
+   rubrique, à la touche Échap et au toucher en dehors de la barre. */
+function menuMobile(){
+  const rail = $(".rail"), bouton = $(".rail-menu");
+  if (!rail || !bouton) return;
+  const texte = $(".rail-menu-texte", bouton);
+  const regler = ouvert => {
+    rail.classList.toggle("est-ouvert", ouvert);
+    bouton.setAttribute("aria-expanded", String(ouvert));
+    if (texte) texte.textContent = ouvert ? "Fermer" : "Menu";
+  };
+  bouton.addEventListener("click", () => regler(!rail.classList.contains("est-ouvert")));
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && rail.classList.contains("est-ouvert")){ regler(false); bouton.focus(); }
+  });
+  document.addEventListener("click", e => {
+    if (rail.classList.contains("est-ouvert") && !rail.contains(e.target)) regler(false);
+  });
+  $$(".rail-nav a").forEach(a => a.addEventListener("click", () => regler(false)));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  menuMobile();
   chrono();
   setInterval(chrono, 1000);
   annee();
