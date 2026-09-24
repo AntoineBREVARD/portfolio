@@ -62,6 +62,10 @@
 
 <!-- wp:button {"className":"btn"} -->
 <div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/CV_Antoine_Brevard.pdf' ) ); ?>">CV — PDF</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"btn"} -->
+<div class="wp-block-button btn"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_theme_file_uri( 'assets/documents/Lettre_de_motivation_Antoine_Brevard.pdf' ) ); ?>">Lettre — PDF</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 </div>
