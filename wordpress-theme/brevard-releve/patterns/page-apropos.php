@@ -5,9 +5,9 @@
  * Categories: brevard-releve
  * Viewport Width: 1320
  *
- * Mentions légales, données personnelles et cookies. L'hébergeur du site
- * WordPress est à renseigner : la LCEN impose son nom, son adresse et son
- * téléphone.
+ * Mentions légales, données personnelles et cookies. Hébergeur : OVH SAS,
+ * via l'espace fourni par la FAB'Academy (LCEN art. 6 : nom, adresse,
+ * téléphone).
  *
  * @package brevard-releve
  */
@@ -26,7 +26,8 @@
 
 <div class="cas-etape">
   <h2>Hébergement</h2>
-  <p>[À compléter : nom de l'hébergeur, adresse postale et numéro de téléphone, comme l'exige l'article 6 de la LCEN.]</p>
+  <p>L'espace WordPress est mis à disposition par l'établissement de formation d'Antoine Brévard, la FAB'Academy du Mans, et hébergé par <strong>OVH SAS</strong>, 2 rue Kellermann, 59100 Roubaix, France. RCS Lille Métropole 424 761 419. Téléphone : 1007 (depuis la France).</p>
+<p>Sa politique de confidentialité est disponible sur <a href="https://www.ovhcloud.com/fr/personal-data-protection/">ovhcloud.com</a>.</p>
 </div>
 
 <div class="cas-etape">
