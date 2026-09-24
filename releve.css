@@ -632,7 +632,7 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   }
   .rail-nav a.est-active{border-bottom-color:var(--bleu)}
   .page{margin-left:0;padding-top:0}
-  .hero{min-height:calc(100svh - 70px)}
+  .hero{min-height:calc(100svh - 52px)}
   .hero-bas{grid-template-columns:1fr}
   .entree{grid-template-columns:52px minmax(0,1fr) auto;gap:0 16px}
   .entree-mot{grid-column:2;margin-top:10px}
@@ -640,6 +640,47 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
 }
 @media (min-width:600px) and (max-width:900px){
   .rail-nav{grid-template-columns:repeat(6,auto)}
+}
+
+/* ------------------------------------------------ menu deroulant mobile
+   Sur telephone, la barre ne montre que le monogramme et un bouton Menu ;
+   la liste des rubriques se deroule sous la barre, par-dessus la page, sans
+   la decaler. Tout est conditionne a JavaScript (scripting: enabled) : sans
+   lui, le bouton reste cache et la grille de rubriques reste affichee. */
+.rail-menu{display:none}
+@media (max-width:900px) and (scripting: enabled){
+  .rail-chrono{display:none}
+  .rail-menu{
+    display:inline-flex;order:2;align-items:center;gap:10px;margin-left:auto;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    font-variation-settings:"wdth" 87,"wght" 500;color:var(--encre);
+    background:none;border:1px solid var(--encre);padding:9px 13px;cursor:pointer;
+  }
+  .rail-menu:focus-visible{outline:2px solid var(--bleu);outline-offset:2px}
+  .rail-menu-barres{
+    width:14px;height:2px;background:currentColor;
+    box-shadow:0 -5px 0 currentColor,0 5px 0 currentColor;transition:transform .2s;
+  }
+  .rail.est-ouvert .rail-menu-barres{box-shadow:none;transform:rotate(45deg)}
+  .rail.est-ouvert .rail-menu-barres::after{
+    content:"";display:block;width:14px;height:2px;background:currentColor;transform:rotate(90deg);
+  }
+  .rail-nav{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    background:var(--sable);border-bottom:2px solid var(--encre);
+    padding:4px var(--gouttiere) 10px;
+  }
+  .rail.est-ouvert .rail-nav{display:grid;grid-template-columns:1fr;gap:0}
+  .rail-nav a{
+    justify-self:stretch;font-size:12px;padding:14px 0 12px;
+    border-bottom:1px solid var(--trait);
+  }
+  .rail-nav a:last-child{border-bottom:0}
+  .rail-nav a.est-active{border-bottom-color:var(--trait);color:var(--encre);box-shadow:inset 3px 0 0 var(--bleu);padding-left:12px}
+}
+@media (min-width:600px) and (max-width:900px) and (scripting: enabled){
+  .rail.est-ouvert .rail-nav{grid-template-columns:1fr 1fr;column-gap:24px}
+  .rail-nav a:nth-last-child(2){border-bottom:0}
 }
 @media (max-width:560px){
   .hero-releves{grid-template-columns:repeat(2,minmax(0,1fr))}

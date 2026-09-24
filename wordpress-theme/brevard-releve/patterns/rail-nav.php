@@ -10,7 +10,8 @@
  */
 ?>
 <!-- wp:html -->
-<div class="rail-nav">
+<button class="rail-menu" type="button" aria-expanded="false" aria-controls="railNav"><span class="rail-menu-barres" aria-hidden="true"></span><span class="rail-menu-texte">Menu</span></button>
+<div class="rail-nav" id="railNav">
   <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Accueil</a>
   <a href="<?php echo esc_url( brevard_releve_lien( 'realisations' ) ); ?>">Réalisations</a>
   <a href="<?php echo esc_url( brevard_releve_lien( 'veilles' ) ); ?>">Veilles</a>
