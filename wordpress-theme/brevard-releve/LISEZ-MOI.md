@@ -33,7 +33,6 @@ manque :
 | Page Veilles                | `/veilles/`              |
 | Page Grille de compétences  | `/grille-competences/`   |
 | Page Profil                 | `/profil/`               |
-| Page Jury                   | `/jury/`                 |
 | Page Entreprise             | `/entreprise/`           |
 | Page À propos (mentions légales) | `/a-propos/`        |
 | Les quatre réalisations     | `/realisation/contacts/`, `quotas`, `teams`, `maj` |
@@ -61,9 +60,9 @@ sans toucher au reste.
 
 Accueil et Réalisations ne sont pas des pages : l'accueil est un gabarit du
 thème, la liste des réalisations est produite à partir des fiches publiées.
-On ne les trouve donc pas dans **Pages**. Les quatre pages du portfolio y
-portent le titre affiché en grand (« Accès direct », « Ce que je
-surveille »…) ; l'étiquette « Portfolio — Jury », « Portfolio — Veilles »…
+On ne les trouve donc pas dans **Pages**. Les pages du portfolio y
+portent le titre affiché en grand (« Ce que je
+surveille »…) ; l'étiquette « Portfolio — Profil », « Portfolio — Veilles »…
 indique laquelle est laquelle.
 
 ## Les anciennes modifications reviennent après une mise à jour

@@ -38,15 +38,14 @@
 <!-- wp:group {"layout":{"type":"default"}} -->
 <div class="wp-block-group">
 <!-- wp:paragraph {"className":"hero-these"} -->
-<p class="hero-these">Une fois par an, un système d'information encaisse la charge d'un événement mondial. <strong>Il n'a pas le droit de tomber.</strong> C'est là que je travaille.</p>
+<p class="hero-these">Alternant technicien systèmes et réseaux, en BTS SIO option SISR. J'apprends sur le terrain, un projet à la fois, et je documente ce que je fais — <strong>y compris ce que je referais autrement.</strong></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:html -->
-<dl class="hero-releves">
+<dl class="hero-releves hero-releves--trois">
   <div class="hero-releve"><dt>Structure</dt><dd>ACO</dd></div>
   <div class="hero-releve"><dt>Réalisations</dt><dd>04</dd></div>
-  <div class="hero-releve"><dt>Fenêtre critique</dt><dd>24 h</dd></div>
-  <div class="hero-releve"><dt>Reprise possible</dt><dd>00</dd></div>
+  <div class="hero-releve"><dt>Veilles</dt><dd><?php echo esc_html( str_pad( (string) (int) wp_count_posts( 'veille' )->publish, 2, '0', STR_PAD_LEFT ) ); ?></dd></div>
 </dl>
 <!-- /wp:html -->
 </div>

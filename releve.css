@@ -305,6 +305,7 @@ p:last-child{margin-bottom:0}
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
   border-top:1px solid var(--trait);margin-top:34px;max-width:560px;
 }
+.hero-releves--trois{grid-template-columns:repeat(3,minmax(0,1fr));max-width:420px}
 .hero-releve{padding:16px 18px 0 0;border-right:1px solid var(--trait)}
 .hero-releve:last-child{border-right:0;padding-right:0}
 .hero-releve dt{
@@ -625,6 +626,10 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
   .hero-releves{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero-releve:nth-child(2n){border-right:0;padding-right:0}
   .hero-releve:nth-child(n+3){border-top:1px solid var(--trait);margin-top:14px}
+  /* trois relevés tiennent sur une ligne, même en étroit */
+  .hero-releves--trois{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-releves--trois .hero-releve{border-top:0;margin-top:0;border-right:1px solid var(--trait);padding-right:14px}
+  .hero-releves--trois .hero-releve:last-child{border-right:0;padding-right:0}
 }
 
 @media (prefers-reduced-motion:reduce){

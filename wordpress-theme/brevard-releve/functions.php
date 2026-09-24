@@ -308,7 +308,7 @@ add_action( 'init', 'brevard_releve_bloc_veilles' );
  * Version du contenu livré avec le thème. L'augmenter relance
  * l'installation, qui ne crée que ce qui manque.
  */
-const BREVARD_RELEVE_CONTENU = '4';
+const BREVARD_RELEVE_CONTENU = '5';
 
 /**
  * Le contenu livré avec le thème : pour chaque identifiant, le titre, le
@@ -320,7 +320,6 @@ function brevard_releve_noms() {
 		'grille-competences' => 'Grille de compétences',
 		'profil'             => 'Profil',
 		'entreprise'         => 'Entreprise',
-		'jury'               => 'Jury',
 		'a-propos'           => 'À propos',
 	);
 }
@@ -331,7 +330,6 @@ function brevard_releve_contenus( $type ) {
 		'grille-competences' => array( 'La grille de compétences', 'Le tableau de synthèse du référentiel BTS SIO option SISR, rempli à partir des réalisations.', 'page-grille' ),
 		'profil'             => array( 'Une PME onze mois par an, une multinationale le douzième', '', 'page-profil' ),
 		'entreprise'         => array( 'L\'Automobile Club de l\'Ouest', 'L\'organisateur des 24 Heures du Mans, où j\'effectue mon alternance au service informatique depuis septembre 2025.', 'page-entreprise' ),
-		'jury'               => array( 'Accès direct', 'Si vous évaluez ce portfolio, voici les entrées utiles — sans avoir à parcourir le site.', 'page-jury' ),
 		'a-propos'           => array( 'Mentions légales', 'Qui édite ce site, qui l\'héberge, et ce qu\'il fait de vos données : rien.', 'page-apropos' ),
 	);
 	$realisations = array(
@@ -493,18 +491,21 @@ function brevard_releve_installer() {
 		}
 	}
 
-	// L'ancienne page Compétences (la matrice) est remplacée par la grille.
-	// Elle passe en brouillon plutôt qu'à la corbeille : rien n'est perdu.
-	$ancienne = get_posts(
-		array(
-			'name'        => 'competences',
-			'post_type'   => 'page',
-			'post_status' => 'publish',
-			'numberposts' => 1,
-		)
-	);
-	if ( $ancienne ) {
-		wp_update_post( array( 'ID' => $ancienne[0]->ID, 'post_status' => 'draft' ) );
+	// Pages retirées du portfolio : Compétences (remplacée par la grille) et
+	// Jury (ses documents sont sur l'accueil, son contact en pied de page).
+	// Elles passent en brouillon plutôt qu'à la corbeille : rien n'est perdu.
+	foreach ( array( 'competences', 'jury' ) as $retiree ) {
+		$ancienne = get_posts(
+			array(
+				'name'        => $retiree,
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+				'numberposts' => 1,
+			)
+		);
+		if ( $ancienne ) {
+			wp_update_post( array( 'ID' => $ancienne[0]->ID, 'post_status' => 'draft' ) );
+		}
 	}
 
 	// les adresses des réalisations n'existent qu'après ce recalcul :
@@ -709,8 +710,8 @@ add_action( 'admin_notices', 'brevard_releve_bandeau_neuf' );
 
 /**
  * Dans la liste des pages, chaque page du portfolio porte le nom de sa
- * rubrique : son titre est la phrase affichée en grand (« Accès direct »,
- * « Ce que je surveille »), où l'on ne reconnaît pas la page Jury ou Veilles.
+ * rubrique : son titre est la phrase affichée en grand (« Ce que je
+ * surveille », « Mentions légales »), où l'on ne reconnaît pas la rubrique.
  */
 function brevard_releve_etiquette_page( $etats, $post ) {
 	if ( 'page' !== $post->post_type ) {

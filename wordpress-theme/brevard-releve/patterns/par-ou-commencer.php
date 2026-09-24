@@ -34,9 +34,9 @@
     <a href="<?php echo esc_url( brevard_releve_lien( 'grille-competences' ) ); ?>">La grille</a>
   </div>
   <div class="jury-case">
-    <dt>Épreuves E4 et E5</dt>
-    <dd>Les entrées utiles si vous évaluez ce portfolio.</dd>
-    <a href="<?php echo esc_url( brevard_releve_lien( 'jury' ) ); ?>">Accès direct</a>
+    <dt>Profil</dt>
+    <dd>Mon parcours, ma formation et ce qu'on me confie en alternance.</dd>
+    <a href="<?php echo esc_url( brevard_releve_lien( 'profil' ) ); ?>">Le parcours</a>
   </div>
 </dl>
 <!-- /wp:html -->

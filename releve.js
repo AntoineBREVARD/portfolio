@@ -177,12 +177,26 @@ function vide(cible, message){
   cible.replaceChildren(el("p", "vide", message));
 }
 
+function compteVeilles(n){
+  const el = $("#nbVeilles");
+  if (el) el.textContent = String(n).padStart(2, "0");
+}
+
 async function veilles(){
   const liste = $("#veilles");
-  if (!liste) return;
+  if (!liste){
+    // l'accueil n'a pas la liste, seulement le compte
+    if ($("#nbVeilles")){
+      lireContenu("content/veilles.json")
+        .then(({ items = [] }) => compteVeilles(items.filter(v => v && v.fichier).length))
+        .catch(() => {});
+    }
+    return;
+  }
   try {
     const { items = [] } = await lireContenu("content/veilles.json");
     const deposees = items.filter(v => v && v.fichier);
+    compteVeilles(deposees.length);
     if (!deposees.length){
       vide(liste, "Aucune veille déposée pour l'instant.");
       return;

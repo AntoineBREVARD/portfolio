@@ -17,6 +17,5 @@
   <a href="<?php echo esc_url( brevard_releve_lien( 'grille-competences' ) ); ?>">Grille</a>
   <a href="<?php echo esc_url( brevard_releve_lien( 'profil' ) ); ?>">Profil</a>
   <a href="<?php echo esc_url( brevard_releve_lien( 'entreprise' ) ); ?>">Entreprise</a>
-  <a href="<?php echo esc_url( brevard_releve_lien( 'jury' ) ); ?>">Jury</a>
 </div>
 <!-- /wp:html -->
