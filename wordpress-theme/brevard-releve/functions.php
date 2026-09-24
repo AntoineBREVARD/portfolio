@@ -308,7 +308,7 @@ add_action( 'init', 'brevard_releve_bloc_veilles' );
  * Version du contenu livré avec le thème. L'augmenter relance
  * l'installation, qui ne crée que ce qui manque.
  */
-const BREVARD_RELEVE_CONTENU = '3';
+const BREVARD_RELEVE_CONTENU = '4';
 
 /**
  * Le contenu livré avec le thème : pour chaque identifiant, le titre, le
@@ -319,7 +319,9 @@ function brevard_releve_noms() {
 		'veilles'            => 'Veilles',
 		'grille-competences' => 'Grille de compétences',
 		'profil'             => 'Profil',
+		'entreprise'         => 'Entreprise',
 		'jury'               => 'Jury',
+		'a-propos'           => 'À propos',
 	);
 }
 
@@ -328,7 +330,9 @@ function brevard_releve_contenus( $type ) {
 		'veilles'            => array( 'Ce que je surveille', 'Mes veilles technologiques, rédigées au fil de la formation. Chaque document se télécharge d\'un clic.', 'page-veilles' ),
 		'grille-competences' => array( 'La grille de compétences', 'Le tableau de synthèse du référentiel BTS SIO option SISR, rempli à partir des réalisations.', 'page-grille' ),
 		'profil'             => array( 'Une PME onze mois par an, une multinationale le douzième', '', 'page-profil' ),
+		'entreprise'         => array( 'L\'Automobile Club de l\'Ouest', 'L\'organisateur des 24 Heures du Mans, où j\'effectue mon alternance au service informatique depuis septembre 2025.', 'page-entreprise' ),
 		'jury'               => array( 'Accès direct', 'Si vous évaluez ce portfolio, voici les entrées utiles — sans avoir à parcourir le site.', 'page-jury' ),
+		'a-propos'           => array( 'Mentions légales', 'Qui édite ce site, qui l\'héberge, et ce qu\'il fait de vos données : rien.', 'page-apropos' ),
 	);
 	$realisations = array(
 		'contacts' => array( 'Microsoft allait fermer la porte', 'Tout le carnet d\'adresses de l\'entreprise reposait sur une fonctionnalité qu\'Outlook s\'apprêtait à abandonner. Aucun remplacement gratuit sur le marché.' ),
