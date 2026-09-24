@@ -503,6 +503,7 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
 }
 .renvoi p{margin:0;color:var(--encre-2);font-size:14.5px;max-width:52ch}
 .renvoi strong{color:var(--encre);font-weight:600}
+.renvoi-actions{display:flex;gap:12px;flex-wrap:wrap}
 
 .preuves{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
 .preuve-lien{
