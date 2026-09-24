@@ -83,13 +83,13 @@ regarder à quoi ressemble l'éditeur.
   description, date, fichier) ou **Grille de compétences** (un seul fichier).
   Publier suffit : les pages `veilles.html` et `grille-competences.html` lisent
   la liste au chargement.
-- **À la main** : dépose le fichier dans `documents/veilles/` (ou
+- **À la main** : dépose le fichier dans `Veilles/` (ou
   `documents/grille/`), puis ajoute-le dans `content/veilles.json` (ou
   `content/grille.json`), par exemple :
   ```json
   { "items": [
     { "titre": "L'IA et la cybersécurité", "description": "…", "date": "2026-10-01",
-      "fichier": "documents/veilles/veille-ia.pdf" }
+      "fichier": "Veilles/veille-ia.pdf" }
   ] }
   ```
   Une grille en PDF s'affiche directement dans la page ; un autre format

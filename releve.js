@@ -143,9 +143,9 @@ function revelation(){
 
 /* ---------- Documents déposés ----------
    Les veilles et la grille de compétences sont des fichiers déposés depuis
-   l'admin (/admin/). Decap CMS les range dans documents/ et tient la liste
-   dans content/*.json : la page lit ce fichier au lieu d'être réécrite à
-   chaque dépôt. */
+   l'admin (/admin/). Decap CMS les range dans Veilles/ et documents/grille/,
+   et tient la liste dans content/*.json : la page lit ce fichier au lieu
+   d'être réécrite à chaque dépôt. */
 async function lireContenu(chemin){
   // no-cache : un dépôt doit apparaître au rechargement suivant, pas après
   // l'expiration du cache de GitHub Pages

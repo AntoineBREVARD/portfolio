@@ -100,8 +100,8 @@ collections:
               - label: "Fichier à télécharger (PDF, Word, PowerPoint…)"
                 name: "fichier"
                 widget: "file"
-                media_folder: "/documents/veilles"
-                public_folder: "documents/veilles"
+                media_folder: "/Veilles"
+                public_folder: "Veilles"
                 choose_url: false
 
   - name: "grille"
