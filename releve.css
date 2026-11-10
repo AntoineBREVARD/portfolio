@@ -719,3 +719,18 @@ h1.cas-titre{font-size:clamp(31px,5vw,64px);line-height:.94}
 
 @media (min-width:1180px){.jury{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:560px){.jury{grid-template-columns:1fr}}
+
+/* ------------------------------------------------ tableau de synthese
+   Le tableau des realisations et des competences, en HTML dans la page.  */
+.grille-defile{overflow-x:auto}
+.grille-table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:760px}
+.grille-table th,.grille-table td{border:1px solid var(--trait-fort);padding:10px 12px;vertical-align:top;text-align:left}
+.grille-table thead th{background:var(--vert);color:var(--creme);font-family:var(--mono);font-size:12px;text-align:center}
+.grille-table thead th:first-child,.grille-table thead th:nth-child(2){text-align:left}
+.grille-table thead small{display:block;font-family:var(--texte);font-weight:400;font-size:11px;opacity:.8;margin-top:4px}
+.grille-table .grille-section th{background:var(--sable);font-family:var(--display);font-size:15px}
+.grille-x{text-align:center!important;color:var(--vert);font-size:16px}
+.grille-titre{font-family:var(--display);margin:48px 0 16px}
+.grille-comp dt{font-family:var(--display);font-weight:700;margin-top:22px}
+.grille-comp dd{margin:6px 0 0}
+.grille-comp ul{margin:0;padding-left:20px;max-width:var(--mesure)}
