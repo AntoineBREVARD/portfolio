@@ -253,7 +253,11 @@ p:last-child{margin-bottom:0}
 }
 .hero-these strong{
   font-weight:600;
-  box-shadow:inset 0 -.42em 0 var(--jaune);
+  /* trait jaune sous le texte, pas derriere : les lettres restent lisibles */
+  text-decoration:underline var(--jaune);
+  text-decoration-thickness:.13em;
+  text-underline-offset:.2em;
+  text-decoration-skip-ink:none;
 }
 .hero-actions{display:flex;gap:11px;flex-wrap:wrap}
 
